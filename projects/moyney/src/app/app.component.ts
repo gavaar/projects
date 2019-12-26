@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
+import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
 
 @Component({
   selector: 'moy-root',
   template: `
-    <moy-header [config]="{ title: 'Moyney' }"></moy-header>
+    <moy-header [config]="headerConfig"></moy-header>
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
@@ -26,4 +28,16 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'moyney';
+
+  headerConfig = new MoyHeaderConfig({
+    title: 'Moyney',
+    suffixButtons: [
+      new MoyButtonRound({
+        icon: 'person',
+        click() {
+          alert('opening login! :D');
+        },
+      }),
+    ],
+  });
 }

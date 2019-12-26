@@ -49,9 +49,7 @@
               "projects/moyney/src/assets",
               "projects/moyney/src/manifest.webmanifest"
             ],
-            "styles": [
-              "projects/moyney/src/styles.scss"
-            ],
+            "styles": ["projects/moyney/src/styles.scss"],
             "scripts": []
           },
           "configurations": {
@@ -91,6 +89,7 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
+            "aot": true,
             "browserTarget": "moyney:build"
           },
           "configurations": {
@@ -108,12 +107,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "projects/moyney/tsconfig.app.json",
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
+            "tsConfig": ["projects/moyney/tsconfig.app.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

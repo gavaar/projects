@@ -1,0 +1,14 @@
+.MoyHeader {
+  height: 3rem;
+  border-bottom: 1px solid black;
+  z-index: 1;
+}
+
+.MoyHeader__title {
+  margin-left: auto;
+}
+
+.MoyHeader__suffix-buttons {
+  margin-left: auto;
+  margin-right: 1rem;
+}

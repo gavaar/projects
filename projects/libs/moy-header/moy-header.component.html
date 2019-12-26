@@ -1,0 +1,6 @@
+<header class="MoyHeader full-center" *ngIf="config">
+  <span class="MoyHeader__title">{{ config.title }}</span>
+  <div class="MoyHeader__suffix-buttons">
+    <moy-button *ngFor="let button of config.suffixButtons; trackBy: suffixButtonFn" [config]="button"> </moy-button>
+  </div>
+</header>

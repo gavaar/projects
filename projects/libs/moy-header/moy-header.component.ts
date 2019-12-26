@@ -9,4 +9,6 @@ import { MoyHeaderConfig } from './moy-header.models';
 })
 export class MoyHeaderComponent {
   @Input() config: MoyHeaderConfig;
+
+  suffixButtonFn = (index: number) => index;
 }

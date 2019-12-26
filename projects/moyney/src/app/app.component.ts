@@ -1,28 +1,28 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'moy-root',
   template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>Welcome to {{ title }}!</h1>
-      <span style="display: block">{{ title }} app is running!</span>
+    <moy-header [config]="{ title: 'Moyney' }"></moy-header>
+    <div class="Moyney">
+      <router-outlet></router-outlet>
     </div>
-    <h2>Here are some links to help you start:</h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
+    <moy-footer [config]="{ message: 'Created by F. Santorelli 2019' }"></moy-footer>
   `,
-  styles: [],
+  styles: [
+    `
+      :host {
+        display: flex;
+        flex-flow: column nowrap;
+        height: 100vh;
+      }
+
+      .Moyney {
+        flex-grow: 1;
+      }
+    `,
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   title = 'moyney';

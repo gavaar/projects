@@ -5,7 +5,13 @@
     "align": false,
     "ordered-imports": true,
     "prettier": true,
-    "max-line-length": [true, 120],
+    "max-line-length": [
+      true,
+      {
+        "limit": 120,
+        "ignore-pattern": "^import |^export {(.*?)}|class [a-zA-Z]+ implements |//"
+      }
+    ],
     "variable-name": false,
     "space-before-function-paren": false,
     "ter-arrow-parens": false,

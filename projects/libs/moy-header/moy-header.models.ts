@@ -1,8 +1,8 @@
-import { MoyButton } from '../moy-button/moy-button.models';
+import { AbstractMoyButton } from '../moy-button/moy-button.models';
 
 export class MoyHeaderConfig {
   title: string;
-  suffixButtons?: MoyButton[];
+  suffixButtons?: AbstractMoyButton[];
 
   constructor(opts: Partial<MoyHeaderConfig>) {
     this.title = opts.title;

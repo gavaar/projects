@@ -1,8 +1,22 @@
 .MoyButton {
   border: 0;
+  border-radius: 0.5rem;
+  padding: 0.25rem;
+  height: 2rem;
+  width: auto;
+  background-color: transparent;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.MoyButton__text {
+  margin: auto auto auto 1rem;
+}
+
+.MoyButton.round {
   border-radius: 5rem;
   padding: 0;
-  height: 2rem;
   width: 2rem;
-  background-color: transparent;
 }

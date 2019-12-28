@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MoyButton } from './moy-button.models';
+import { MoyButton, MoyButtonType } from './moy-button.models';
 
 @Component({
   selector: 'moy-button',
@@ -9,4 +9,6 @@ import { MoyButton } from './moy-button.models';
 })
 export class MoyButtonComponent {
   @Input() config: MoyButton;
+
+  MoyButtonType = MoyButtonType;
 }

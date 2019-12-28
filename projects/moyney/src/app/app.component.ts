@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
+import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'moy-root',
@@ -29,13 +31,15 @@ import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
 export class AppComponent {
   title = 'moyney';
 
+  constructor(public dialog: MatDialog) {}
+
   headerConfig = new MoyHeaderConfig({
     title: 'Moyney',
     suffixButtons: [
       new MoyButtonRound({
         icon: 'person',
-        click() {
-          alert('opening login! :D');
+        click: () => {
+          this.dialog.open(LoginComponent);
         },
       }),
     ],

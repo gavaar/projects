@@ -13,7 +13,6 @@ export abstract class Store<T> implements OnDestroy {
     state.state$.pipe(takeUntil(this._destroy$)).subscribe(v => {
       this._state = v;
       this.cdf.markForCheck();
-      console.log(this);
     });
   }
 

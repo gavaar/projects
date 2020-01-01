@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 import { MoyButton, MoyButtonType } from './moy-button.models';
 
 @Component({
@@ -9,6 +9,11 @@ import { MoyButton, MoyButtonType } from './moy-button.models';
 })
 export class MoyButtonComponent {
   @Input() config: MoyButton;
+  @Output() click = new EventEmitter();
 
   MoyButtonType = MoyButtonType;
+
+  onClick() {
+    this.click.emit();
+  }
 }

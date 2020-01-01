@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
+import { AbstractMoyButton, MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
 import { LoginComponent } from './login/login.component';
 
 @Component({
   selector: 'moy-root',
   template: `
-    <moy-header [config]="headerConfig"></moy-header>
+    <moy-header [config]="headerConfig" (buttonClick)="onButtonClick($event)"></moy-header>
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
@@ -44,4 +44,8 @@ export class AppComponent {
       }),
     ],
   });
+
+  onButtonClick(b: AbstractMoyButton) {
+    b.click();
+  }
 }

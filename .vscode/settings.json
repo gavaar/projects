@@ -4,7 +4,6 @@
   "editor.tabSize": 2,
   "css.lint.idSelector": "error",
   "editor.formatOnSave": true,
-  "html.format.wrapAttributes": "aligned-multiple",
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
   "editor.formatOnPaste": true,

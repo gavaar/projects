@@ -1,0 +1,25 @@
+<div class="MoyCard">
+  <span class="MoyCard__title">
+    <span class="MoyCard__title-text">
+      {{ config.title }}
+    </span>
+
+    <div class="MoyCard__title-buttons">
+      <moy-button *ngFor="let button of config.suffixButtons; trackBy: suffixBtnFn" [config]="button"></moy-button>
+    </div>
+
+    <mat-icon
+      *ngIf="config.type === MoyCardType.Expandable"
+      class="MoyCard__title-expandicon"
+      [class.content-show]="config.showContent"
+      (click)="config.toggleView()"
+      >expand_more
+    </mat-icon>
+  </span>
+
+  <div class="MoyCard__body" *ngIf="config.type !== MoyCardType.Expandable || config.showContent; else singleLine">
+    <ng-content></ng-content>
+  </div>
+
+  <ng-template #singleLine> <hr class="MoyCard__divider"/></ng-template>
+</div>

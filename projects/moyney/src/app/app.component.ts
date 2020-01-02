@@ -46,6 +46,6 @@ export class AppComponent {
   });
 
   onButtonClick(b: AbstractMoyButton) {
-    b.click();
+    // b.click();
   }
 }

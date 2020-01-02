@@ -1,5 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { MoyButton, MoyButtonType } from './moy-button.models';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AbstractMoyButton, MoyButtonType } from './moy-button.models';
 
 @Component({
   selector: 'moy-button',
@@ -8,12 +8,11 @@ import { MoyButton, MoyButtonType } from './moy-button.models';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoyButtonComponent {
-  @Input() config: MoyButton;
-  @Output() click = new EventEmitter();
+  @Input() config: AbstractMoyButton;
 
   MoyButtonType = MoyButtonType;
 
   onClick() {
-    this.click.emit();
+    this.config.click();
   }
 }

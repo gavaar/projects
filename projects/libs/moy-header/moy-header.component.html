@@ -4,7 +4,6 @@
     <moy-button
       *ngFor="let button of config.suffixButtons; trackBy: suffixButtonFn; let index = index"
       [config]="button"
-      (click)="onButtonClick(index)"
     >
     </moy-button>
   </div>

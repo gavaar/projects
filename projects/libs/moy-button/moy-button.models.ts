@@ -6,18 +6,13 @@ export abstract class AbstractMoyButton {
   icon?: string;
   svgIcon?: string;
   click?: () => any;
-
-  get type(): MoyButtonType {
-    return this._type;
-  }
+  readonly type: MoyButtonType;
 
   constructor(opts: Partial<AbstractMoyButton>) {
     this.icon = opts.icon || '';
     this.svgIcon = opts.svgIcon || '';
     this.click = opts.click || (() => {});
   }
-
-  protected _type: MoyButtonType;
 }
 
 export class MoyButton extends AbstractMoyButton {
@@ -30,8 +25,9 @@ export class MoyButton extends AbstractMoyButton {
 }
 
 export class MoyButtonRound extends AbstractMoyButton {
+  type = MoyButtonType.Round;
+
   constructor(opts: Partial<MoyButtonRound>) {
     super(opts);
-    this._type = MoyButtonType.Round;
   }
 }

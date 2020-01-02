@@ -6,9 +6,11 @@ export enum MoyCardType {
 
 export abstract class AbstractMoyCard {
   title: string;
-  suffixButtons?: AbstractMoyButton[] = [];
-
   readonly type: MoyCardType;
+
+  suffixButtons?: AbstractMoyButton[] = [];
+  showContent?: boolean | null;
+  toggleView?(): void | null;
 
   constructor(config: Partial<AbstractMoyCard>) {
     this.title = config.title || '';

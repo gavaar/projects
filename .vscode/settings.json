@@ -1,1 +1,18 @@
-{}
+{
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "window.zoomLevel": 0,
+  "editor.tabSize": 2,
+  "css.lint.idSelector": "error",
+  "editor.formatOnSave": true,
+  "javascript.preferences.quoteStyle": "single",
+  "typescript.preferences.quoteStyle": "single",
+  "editor.formatOnPaste": true,
+  "prettier.singleQuote": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true
+  },
+  "workbench.editor.openPositioning": "last",
+  "workbench.editor.enablePreview": false,
+  "javascript.implicitProjectConfig.experimentalDecorators": true
+}

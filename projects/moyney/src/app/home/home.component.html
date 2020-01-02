@@ -1,5 +1,9 @@
-<section class="full-center">
-  Hello this is home!!
+<section class="Home">
+  <moy-card [config]="cards.first" (buttonClick)="$event.click()">
+    Hello this is home!!
+  </moy-card>
 
-  <div class="full-center" *ngIf="store.state.token">Hey, you just logged in with {{ store.state.token }}</div>
+  <moy-card *ngIf="store.state.token" [config]="cards.second">
+    Hey, you just logged in with {{ store.state.token }}
+  </moy-card>
 </section>

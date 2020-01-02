@@ -1,9 +1,9 @@
 <ng-container [ngSwitch]="config.type">
-  <button *ngSwitchCase="MoyButtonType.Round" class="MoyButton round" (click)="config.click()">
+  <button *ngSwitchCase="MoyButtonType.Round" class="MoyButton round" (click)="onClick()">
     <mat-icon [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
   </button>
 
-  <button *ngSwitchDefault class="MoyButton" (click)="config.click()">
+  <button *ngSwitchDefault class="MoyButton" (click)="onClick()">
     <mat-icon [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
     <span class="MoyButton__text">{{ config.text }}</span>
   </button>

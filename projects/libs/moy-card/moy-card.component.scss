@@ -1,0 +1,45 @@
+.MoyCard {
+  margin: 0.5rem;
+}
+
+.MoyCard__title {
+  display: grid;
+  margin: 0;
+  padding-bottom: 0.25rem;
+  grid-template-columns: 50% auto 2rem;
+  grid-template-areas: 'title icons expandicon';
+  align-items: center;
+}
+
+.MoyCard__title-text {
+  grid-area: title;
+  margin-left: 0.5rem;
+}
+
+.MoyCard__title-buttons {
+  grid-area: icons;
+  justify-self: flex-end;
+  display: flex;
+  flex-flow: row nowrap;
+}
+
+.MoyCard__title-expandicon {
+  grid-area: expandicon;
+  transition: transform 0.4s;
+  justify-self: center;
+
+  &.content-show {
+    transform: rotate(-180deg);
+  }
+}
+
+.MoyCard__divider {
+  margin: 0;
+  border-top: 1px solid lightgrey;
+}
+
+.MoyCard__body {
+  box-shadow: 0 0 5px darkgrey;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}

@@ -1,9 +1,11 @@
 <section class="Home">
-  <moy-card [config]="cards.first" (buttonClick)="$event.click()">
-    Hello this is home!!
-  </moy-card>
+  <moy-card [config]="cards.first">Holis</moy-card>
 
-  <moy-card *ngIf="store.state.token" [config]="cards.second">
-    Hey, you just logged in with {{ store.state.token }}
+  <moy-card [config]="cards.second">
+    <div class="Home__transaction-add">
+      <moy-input [config]="inputs.title"></moy-input>
+      <moy-input [config]="inputs.test"></moy-input>
+      <moy-input [config]="inputs.test2"></moy-input>
+    </div>
   </moy-card>
 </section>

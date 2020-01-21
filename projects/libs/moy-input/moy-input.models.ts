@@ -1,17 +1,23 @@
 import { FormControl } from '@angular/forms';
 
+enum InputTypes {
+  Text = 'text',
+  Number = 'number',
+}
+
 interface InputInterface<T> {
   value?: T;
   placeholder?: string;
   label?: string;
 }
 
-export abstract class AbstractMoyInput<T> {
+abstract class AbstractMoyInput<T> {
   control?: FormControl;
   placeholder?: string;
   label?: string;
-
   floatingLabel = false;
+
+  readonly type: InputTypes;
 
   constructor(p: Partial<InputInterface<T>> = {}) {
     this.control = new FormControl(p.value);
@@ -29,4 +35,12 @@ export abstract class AbstractMoyInput<T> {
   }
 }
 
-export class MoyInput extends AbstractMoyInput<string> {}
+class MoyInput extends AbstractMoyInput<string> {
+  type = InputTypes.Text;
+}
+
+class MoyInputNumber extends AbstractMoyInput<number> {
+  type = InputTypes.Number;
+}
+
+export { InputTypes, AbstractMoyInput, MoyInput, MoyInputNumber };

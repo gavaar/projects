@@ -2,8 +2,8 @@
   <label class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">{{ config.label }}</label>
   <input
     class="MoyInput__input"
-    type="text"
-    [placeholder]="config.placeholder"
+    [type]="config.type"
+    [placeholder]="config.floatingLabel || !config.label ? config.placeholder : ''"
     [formControl]="config.control"
     (focus)="config.onFocus()"
     (blur)="config.onBlur()"

@@ -3,9 +3,9 @@
 
   <moy-card [config]="cards.second">
     <div class="Home__transaction-add">
-      <moy-input [config]="inputs.title"></moy-input>
-      <moy-input [config]="inputs.test"></moy-input>
-      <moy-input [config]="inputs.test2"></moy-input>
+      <moy-input class="Home__transaction-add--description" [config]="inputs.description"></moy-input>
+      <moy-input class="Home__transaction-add--amount" [config]="inputs.amount"></moy-input>
+      <moy-input class="Home__transaction-add--tags" [config]="inputs.tags"></moy-input>
     </div>
   </moy-card>
 </section>

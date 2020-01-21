@@ -5,6 +5,7 @@ export enum MoyButtonType {
 export abstract class AbstractMoyButton {
   icon?: string;
   svgIcon?: string;
+  text?: string;
   click?: () => any;
   readonly type: MoyButtonType;
 

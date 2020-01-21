@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { cards } from './home.config';
+import { cards, inputs } from './home.config';
 import { HomeStore } from './home.store';
 
 @Component({
@@ -11,6 +11,7 @@ import { HomeStore } from './home.store';
 })
 export class HomeComponent {
   cards = cards;
+  inputs = inputs;
 
   constructor(public store: HomeStore) {}
 }

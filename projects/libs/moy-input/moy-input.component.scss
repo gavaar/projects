@@ -1,0 +1,43 @@
+.MoyInput {
+  position: relative;
+  display: flex;
+  box-shadow: none;
+  border: 0;
+  border-bottom: 1px solid black;
+  height: 1.4rem;
+  padding-top: 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.MoyInput__label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1rem;
+  margin: 0 0 0 0.5rem;
+  padding-top: 0.5rem;
+  width: fit-content;
+  transition: 0.2s;
+
+  &.floating {
+    top: 0;
+    left: 0;
+    font-size: 0.7rem;
+    margin: -0.7rem 0.5rem 0 0.2rem;
+    transition: 0.2s;
+    opacity: 0.45;
+  }
+}
+
+.MoyInput__input {
+  height: 1rem;
+  padding: 0.2rem;
+  flex-grow: 1;
+  border: 0;
+  z-index: 1;
+  background: transparent;
+
+  &:focus {
+    outline: none;
+  }
+}

@@ -11,7 +11,7 @@ import { LoginComponent } from './login/login.component';
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
-    <moy-footer [config]="{ message: 'Created by F. Santorelli 2019' }"></moy-footer>
+    <moy-footer [config]="{ message: 'Created by F. Santorelli ' + currentYear }"></moy-footer>
   `,
   styles: [
     `
@@ -30,6 +30,7 @@ import { LoginComponent } from './login/login.component';
 })
 export class AppComponent {
   title = 'moyney';
+  currentYear = new Date().getFullYear();
 
   constructor(public dialog: MatDialog) {}
 

@@ -1,3 +1,9 @@
+interface MoyButtonConfig {
+  icon?: string;
+  svgIcon?: string;
+  click?: () => any;
+}
+
 export enum MoyButtonType {
   Round = 'round',
 }
@@ -9,7 +15,7 @@ export abstract class AbstractMoyButton {
   click?: () => any;
   readonly type: MoyButtonType;
 
-  constructor(opts: Partial<AbstractMoyButton>) {
+  constructor(opts: MoyButtonConfig) {
     this.icon = opts.icon || '';
     this.svgIcon = opts.svgIcon || '';
     this.click = opts.click || (() => {});
@@ -19,7 +25,7 @@ export abstract class AbstractMoyButton {
 export class MoyButton extends AbstractMoyButton {
   text?: string;
 
-  constructor(opts: Partial<MoyButton>) {
+  constructor(opts: { text: string } & MoyButtonConfig) {
     super(opts);
     this.text = opts.text;
   }
@@ -28,7 +34,7 @@ export class MoyButton extends AbstractMoyButton {
 export class MoyButtonRound extends AbstractMoyButton {
   type = MoyButtonType.Round;
 
-  constructor(opts: Partial<MoyButtonRound>) {
+  constructor(opts: MoyButtonConfig) {
     super(opts);
   }
 }

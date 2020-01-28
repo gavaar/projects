@@ -23,4 +23,8 @@ const inputs = {
   tags: new MoyInput({ label: 'Tags', placeholder: 'rent, july, madrid' }),
 };
 
-export { cards, inputs };
+const buttons = {
+  addFinance: new MoyButtonRound({ icon: 'add_circle_outline' }),
+};
+
+export { cards, inputs, buttons };

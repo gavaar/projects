@@ -14,10 +14,13 @@ export class TransactionAddComponent {
 
   private _form = new FormArray(Object.values(this.inputs).map(i => i.control));
 
+  get formValid(): boolean {
+    return this._form.valid;
+  }
+
   onAdd() {
-    if (!this._form.valid) {
-      this._form.controls.forEach(control => control.markAsDirty());
-      console.log(this._form);
+    if (this.formValid) {
+      console.log(this._form, 'is valid');
     }
   }
 }

@@ -1,4 +1,4 @@
-<div class="MoyInput">
+<div class="MoyInput" [ngClass]="{ error: config.control.invalid && config.control.dirty }">
   <label class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">{{ config.label }}</label>
   <input
     class="MoyInput__input"

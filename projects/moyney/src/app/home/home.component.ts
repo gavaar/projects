@@ -12,14 +12,6 @@ import { HomeStore } from './home.store';
 })
 export class HomeComponent {
   cards = config.cards;
-  inputs = config.inputs;
-  buttons = config.buttons;
-
-  private form = new FormArray(Object.values(this.inputs).map(i => i.control));
 
   constructor(public store: HomeStore) {}
-
-  onAdd() {
-    console.log(this.form.value);
-  }
 }

@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
 import { MoyButton } from '@libs/moy-button/moy-button.models';
 import { loginButtons } from './login.config';
+import { AuthType } from './login.models';
 import { LoginService } from './login.service';
 import { LoginStore } from './login.store';
 
@@ -12,13 +14,31 @@ import { LoginStore } from './login.store';
   providers: [LoginStore, LoginService],
 })
 export class LoginComponent {
+  authType = AuthType;
   buttons: { [button: string]: MoyButton };
 
-  constructor(private store: LoginStore, private service: LoginService) {
+  constructor(
+    private store: LoginStore,
+    private service: LoginService,
+    private dialogRef: MatDialogRef<LoginComponent>,
+  ) {
     this.buttons = loginButtons;
   }
 
-  onLogin(token: string) {
-    this.service.setToken(token);
+  onLogin(provider: AuthType) {
+    this.service.auth(provider).subscribe((user: firebase.auth.UserCredential) => {
+      this.setUserData(user);
+      this.dialogRef.close();
+    });
+  }
+
+  private setUserData(user: firebase.auth.UserCredential) {
+    const { displayName, uid, photoURL } = user.user;
+    const accessToken = user.credential['accessToken'];
+
+    this.store.state = {
+      user: { uid, displayName, photoURL },
+      token: accessToken,
+    };
   }
 }

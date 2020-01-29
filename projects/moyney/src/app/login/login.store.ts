@@ -3,6 +3,7 @@ import { Store } from '../store';
 
 interface LoginState {
   token: string;
+  user: { uid: string; displayName: string; photoURL: string };
 }
 
 @Injectable()

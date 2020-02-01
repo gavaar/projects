@@ -1,8 +1,13 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { AbstractMoyButton, MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
+import { Store } from './store';
+
+@Injectable()
+export class AppStore extends Store<{ user: { uid: string } }> {}
 
 @Component({
   selector: 'moy-root',
@@ -27,12 +32,20 @@ import { LoginComponent } from './login/login.component';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [AppStore],
 })
 export class AppComponent {
+  @HostListener('window:beforeunload', ['$event'])
+  saveBeforeClosing(event: any): void {
+    localStorage.setItem('state', JSON.stringify(this.store.state));
+  }
+
   title = 'moyney';
   currentYear = new Date().getFullYear();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private store: AppStore) {
+    this.store.state = JSON.parse(localStorage.getItem('state'));
+  }
 
   headerConfig = new MoyHeaderConfig({
     title: 'Moyney',
@@ -40,13 +53,14 @@ export class AppComponent {
       new MoyButtonRound({
         icon: 'person',
         click: () => {
-          this.dialog.open(LoginComponent);
+          const component = this.store.state.user && this.store.state.user.uid ? ProfileComponent : LoginComponent;
+          this.dialog.open(<any>component);
         },
       }),
     ],
   });
 
   onButtonClick(b: AbstractMoyButton) {
-    // b.click();
+    // b.click(); might delete as object already handles click
   }
 }

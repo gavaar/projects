@@ -14,6 +14,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
+import { ProfileComponent } from './profile/profile.component';
+import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,8 +32,9 @@ import { LoginModule } from './login/login.module';
     MoyHeaderModule,
     MoyFooterModule,
     LoginModule,
+    ProfileModule,
   ],
-  entryComponents: [LoginComponent],
+  entryComponents: [LoginComponent, ProfileComponent],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent],
 })

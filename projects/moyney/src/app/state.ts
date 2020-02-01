@@ -3,6 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 export class State {
   private _state$ = new BehaviorSubject({});
 
+  constructor() {}
+
   get state() {
     return this._state$.getValue();
   }

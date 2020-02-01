@@ -27,18 +27,18 @@ export class LoginComponent {
 
   onLogin(provider: AuthType) {
     this.service.auth(provider).subscribe((user: firebase.auth.UserCredential) => {
-      this.setUserData(user);
+      this.store.state = parseUserData(user);
       this.dialogRef.close();
     });
   }
+}
 
-  private setUserData(user: firebase.auth.UserCredential) {
-    const { displayName, uid, photoURL } = user.user;
-    const accessToken = user.credential['accessToken'];
+function parseUserData(user: firebase.auth.UserCredential) {
+  const { displayName, uid, photoURL } = user.user;
+  const accessToken = user.credential['accessToken'];
 
-    this.store.state = {
-      user: { uid, displayName, photoURL },
-      token: accessToken,
-    };
-  }
+  return {
+    user: { uid, displayName, photoURL },
+    token: accessToken,
+  };
 }

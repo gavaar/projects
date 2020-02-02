@@ -5,7 +5,7 @@
   "background_color": "#fafafa",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "https://gavaar.github.io/projects/home",
+  "start_url": "https://moyney-balancer.web.app/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

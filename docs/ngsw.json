@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1580656735015,
+  "timestamp": 1580656927205,
   "index": "https://gavaar.github.io/projects/index.html",
   "assetGroups": [
     {
@@ -88,7 +88,7 @@
     "https://gavaar.github.io/projects/index.html": "00aacb5ffdc61b1ba80c740cb0f1c7b0171899db",
     "https://gavaar.github.io/projects/main-es2015.0001df4283a8ee61807e.js": "f88bfe7ef225e65471660d070b7d55806707e621",
     "https://gavaar.github.io/projects/main-es5.0001df4283a8ee61807e.js": "fbcdcc05003cea9c85d298d38e6f78572d637e40",
-    "https://gavaar.github.io/projects/manifest.webmanifest": "f2949c2fafc8d1bc95bd71933376c60beef9cd01",
+    "https://gavaar.github.io/projects/manifest.webmanifest": "de0497c1d01c45ad7ac01ccfc06e5c5304416359",
     "https://gavaar.github.io/projects/polyfills-es2015.10f8fb96d0162f55db71.js": "9c8b3b7485a10309134b233b3d17b60574039d2a",
     "https://gavaar.github.io/projects/polyfills-es5.346678e30d918a677e2d.js": "4e9dfa88c1dccdf3eda9d691ab38227c61eadbb7",
     "https://gavaar.github.io/projects/runtime-es2015.8ea6f9c300bc57d838b9.js": "4928b008da5f42d62a794b493ac0f5f77f420e2e",

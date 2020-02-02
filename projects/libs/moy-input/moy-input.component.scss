@@ -7,6 +7,18 @@
   height: 1.4rem;
   padding-top: 0.5rem;
   margin: 0.5rem 0;
+
+  &.error {
+    border-bottom: 1px solid darkred;
+
+    .MoyInput__label {
+      color: darkred;
+    }
+
+    .MoyInput__input::placeholder {
+      color: darkred;
+    }
+  }
 }
 
 .MoyInput__label {

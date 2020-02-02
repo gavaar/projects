@@ -1,4 +1,4 @@
-import { FormControl } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 enum InputTypes {
   Text = 'text',
@@ -9,6 +9,9 @@ interface InputInterface<T> {
   value?: T;
   placeholder?: string;
   label?: string;
+  controlOptions?: {
+    required?: boolean;
+  };
 }
 
 abstract class AbstractMoyInput<T> {
@@ -20,7 +23,7 @@ abstract class AbstractMoyInput<T> {
   readonly type: InputTypes;
 
   constructor(p: Partial<InputInterface<T>> = {}) {
-    this.control = new FormControl(p.value);
+    this.control = new FormControl(p.value, p.controlOptions.required ? [Validators.required] : []);
     this.label = p.label;
     this.placeholder = p.placeholder || '';
     this.floatingLabel = p.value != null;

@@ -1,17 +1,19 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
-import { AbstractMoyButton, MoyButtonRound } from '@libs/moy-button/moy-button.models';
+import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
+import { Auth } from './auth';
 import { LoginComponent } from './login/login.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @Component({
   selector: 'moy-root',
   template: `
-    <moy-header [config]="headerConfig" (buttonClick)="onButtonClick($event)"></moy-header>
+    <moy-header [config]="headerConfig"></moy-header>
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
-    <moy-footer [config]="{ message: 'Created by F. Santorelli 2019' }"></moy-footer>
+    <moy-footer [config]="{ message: 'Created by F. Santorelli ' + currentYear }"></moy-footer>
   `,
   styles: [
     `
@@ -27,11 +29,20 @@ import { LoginComponent } from './login/login.component';
     `,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [Auth],
 })
 export class AppComponent {
-  title = 'moyney';
+  @HostListener('window:beforeunload')
+  saveBeforeClosing(): void {
+    localStorage.setItem('state', JSON.stringify(this.store.state));
+  }
 
-  constructor(public dialog: MatDialog) {}
+  title = 'moyney';
+  currentYear = new Date().getFullYear();
+
+  constructor(public dialog: MatDialog, private store: Auth) {
+    this.store.state = JSON.parse(localStorage.getItem('state'));
+  }
 
   headerConfig = new MoyHeaderConfig({
     title: 'Moyney',
@@ -39,13 +50,10 @@ export class AppComponent {
       new MoyButtonRound({
         icon: 'person',
         click: () => {
-          this.dialog.open(LoginComponent);
+          const component = this.store.state.user && this.store.state.user.uid ? ProfileComponent : LoginComponent;
+          this.dialog.open(<any>component);
         },
       }),
     ],
   });
-
-  onButtonClick(b: AbstractMoyButton) {
-    // b.click();
-  }
 }

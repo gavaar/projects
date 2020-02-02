@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { cards, inputs } from './home.config';
+import { FormArray } from '@angular/forms';
+import * as config from './home.config';
 import { HomeStore } from './home.store';
 
 @Component({
@@ -10,8 +11,7 @@ import { HomeStore } from './home.store';
   providers: [HomeStore],
 })
 export class HomeComponent {
-  cards = cards;
-  inputs = inputs;
+  cards = config.cards;
 
   constructor(public store: HomeStore) {}
 }

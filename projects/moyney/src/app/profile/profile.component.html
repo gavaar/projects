@@ -1,0 +1,7 @@
+<section class="Profile">
+  <p class="full-center">Welcome {{ store.state.user.displayName }}</p>
+  <img class="Profile__image" [src]="store.state.user.photoURL" />
+  <p class="Profile__log-out small-text right" (click)="onLogout()">
+    {{ confirmLogout ? 'You sure?' : 'Log out' }}
+  </p>
+</section>

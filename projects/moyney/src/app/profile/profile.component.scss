@@ -1,0 +1,16 @@
+.Profile {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.Profile__image {
+  max-height: 25vh;
+  max-width: 80%;
+  border-radius: 50%;
+}
+
+.Profile__log-out {
+  width: 75%;
+  opacity: 0.8;
+}

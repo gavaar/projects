@@ -3,18 +3,3 @@
   flex-flow: column nowrap;
   align-items: stretch;
 }
-
-.Home__transaction-add {
-  display: flex;
-  flex-flow: row wrap;
-}
-
-.Home__transaction-add--description {
-  flex-grow: 1;
-}
-.Home__transaction-add--amount {
-  flex-grow: 1;
-}
-.Home__transaction-add--tags {
-  flex-grow: 2;
-}

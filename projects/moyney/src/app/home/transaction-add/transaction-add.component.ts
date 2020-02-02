@@ -1,7 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import * as config from './transaction-add.config';
 import { TransactionAddService } from './transaction-add.service';
+
+export interface Income {
+  description: string;
+  amount: number;
+  tags: string;
+}
 
 @Component({
   selector: 'moy-transaction-add',
@@ -14,7 +20,12 @@ export class TransactionAddComponent {
   inputs = config.inputs;
   buttons = config.buttons;
 
-  private _form = new FormArray(Object.values(this.inputs).map(i => i.control));
+  private _form = new FormGroup(
+    Object.keys(this.inputs).reduce((group, i) => {
+      group[i] = this.inputs[i].control;
+      return group;
+    }, {}),
+  );
 
   get formValid(): boolean {
     return this._form.valid;
@@ -24,8 +35,7 @@ export class TransactionAddComponent {
 
   onAdd() {
     if (this.formValid) {
-      console.log(this._form, 'is valid');
-      this.service.getTransactions();
+      this.service.submitTransaction(this._form.value);
     }
   }
 }

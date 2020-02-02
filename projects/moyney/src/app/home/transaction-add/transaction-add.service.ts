@@ -1,40 +1,52 @@
-import { Inject } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Auth } from '../../auth';
+import { Income } from './transaction-add.component';
 
-@Inject({})
+@Injectable()
 export class TransactionAddService {
-  constructor(private afs: AngularFirestore) {}
+  constructor(private auth: Auth, private db: AngularFirestore) {}
 
-  getTransactions() {
-    this.afs
-      .doc('movements/FTewAdozWNPcWuuQTa9kezfzMBG2')
-      .get()
-      .subscribe(_ => console.log(_));
+  submitTransaction({ amount, description, tags: _tags }: Income) {
+    const uid = this.auth.uid;
+    const tags = _tags.split(',').map(t => t.trim());
+    const incomesRef = this.db.doc(`incomes/${uid}`);
 
-    this.submitTransaction();
+    incomesRef
+      .collection('income')
+      .add({
+        amount,
+        description,
+        date_added: new Date(),
+        tags: tags.reduce((g, t) => {
+          g[t] = true;
+          return g;
+        }, {}),
+      })
+      .then(incomeId => {
+        this.addIncomeToTags(tags, incomeId.id);
+        this.addIncomeToYearly(incomeId.id);
+      });
   }
 
-  submitTransaction() {
-    this.afs
-      .doc('movements/FTewAdozWNPcWuuQTa9kezfzMBG2')
-      .collection('invoices')
-      .add({
-        amount: 10,
-        date_added: new Date(),
-        description: 'testing it',
-        tags: { test_tag_1: true, test_tag_2: true },
-      })
-      .then(invoice => {
-        this.afs
-          .doc('users/FTewAdozWNPcWuuQTa9kezfzMBG2')
-          .get()
-          .subscribe(user => {
-            const invoices = user.data().invoices;
+  private addIncomeToTags(_tags: string[], incomeId: string): void {
+    const uid = this.auth.uid;
+    const incomeTagRef = this.db.doc(`incomes/${uid}`).collection('tag');
 
-            invoices[invoice.id] = true;
+    _tags.forEach(tag => {
+      incomeTagRef.doc(tag).set({ [incomeId]: true }, { merge: true });
+    });
+  }
 
-            this.afs.doc('users/FTewAdozWNPcWuuQTa9kezfzMBG2').update({ invoices });
-          });
-      });
+  private addIncomeToYearly(incomeId: string) {
+    const uid = this.auth.uid;
+    const date = new Date();
+    this.db
+      .doc(`incomes/${uid}`)
+      .collection('yearly')
+      .doc(`${date.getFullYear()}`)
+      .collection('monthly')
+      .doc(`${date.getMonth()}`)
+      .set({ [incomeId]: true }, { merge: true });
   }
 }

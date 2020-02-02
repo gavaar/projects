@@ -18,18 +18,20 @@ export class LoginService {
     return from(this.afAuth.auth.signInWithPopup(provider)).pipe(
       tap(
         user => {
-          if (this._pending) linkUser(user, this._pending.credential).subscribe();
+          if (this._pending) {
+            linkUser(user, this._pending.credential).subscribe();
+            alert('Both accounts are linked now. You can login with any of them!');
+          }
 
-          const dbUserRef = this.db.doc(`users/${user.user.uid}`);
+          const dbUserRef = this.db.doc(`user/${user.user.uid}`);
 
           dbUserRef.get().subscribe(userSnapShot => {
             if (!userSnapShot.exists) {
               dbUserRef.set({
-                invoices: {},
+                last_invoices: [],
                 joined: new Date(),
                 name: user.user.displayName,
                 picture: user.user.photoURL,
-                tags: {},
               });
             }
           });
@@ -55,6 +57,7 @@ function linkUser(user: firebase.auth.UserCredential, credential: firebase.auth.
 
 function handleLoginError(error: firebase.auth.AuthError): PendingAuth {
   if (error.code === 'auth/account-exists-with-different-credential') {
+    alert('Account already exists with another provider. Login with the correct one to link both');
     const { credential, message } = error;
     const newType = credential.providerId === 'facebook.com' ? AuthType.Google : AuthType.Fb;
 

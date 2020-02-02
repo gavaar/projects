@@ -22,7 +22,9 @@ export class ProfileComponent {
   onLogout() {
     if (this.confirmLogout) {
       this.service.logout().subscribe();
-      this.store.state = { user: null };
+      this.dialogRef.afterClosed().subscribe(() => {
+        this.store.state = { user: null };
+      });
       this.dialogRef.close();
     } else {
       this.confirmLogout = true;

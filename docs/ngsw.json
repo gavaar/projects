@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1580654346314,
+  "timestamp": 1580655470881,
   "index": "https://moyney-balancer.firebaseapp.com/index.html",
   "assetGroups": [
     {
@@ -88,7 +88,7 @@
     "https://moyney-balancer.firebaseapp.com/index.html": "845433f7ca0f892b6c85e283895e7ec527f685b3",
     "https://moyney-balancer.firebaseapp.com/main-es2015.0001df4283a8ee61807e.js": "f88bfe7ef225e65471660d070b7d55806707e621",
     "https://moyney-balancer.firebaseapp.com/main-es5.0001df4283a8ee61807e.js": "fbcdcc05003cea9c85d298d38e6f78572d637e40",
-    "https://moyney-balancer.firebaseapp.com/manifest.webmanifest": "ac731f9785dcc38f31fd06c8ac5d0c1c22837d0d",
+    "https://moyney-balancer.firebaseapp.com/manifest.webmanifest": "f2949c2fafc8d1bc95bd71933376c60beef9cd01",
     "https://moyney-balancer.firebaseapp.com/polyfills-es2015.10f8fb96d0162f55db71.js": "9c8b3b7485a10309134b233b3d17b60574039d2a",
     "https://moyney-balancer.firebaseapp.com/polyfills-es5.346678e30d918a677e2d.js": "4e9dfa88c1dccdf3eda9d691ab38227c61eadbb7",
     "https://moyney-balancer.firebaseapp.com/runtime-es2015.8ea6f9c300bc57d838b9.js": "4928b008da5f42d62a794b493ac0f5f77f420e2e",

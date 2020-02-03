@@ -3,6 +3,10 @@
 @import './assets/iconfont/material-icons';
 @import '../../libs/styles/moy-styles.scss';
 
+* {
+  outline: none;
+}
+
 section {
   height: 100%;
   max-width: 64rem;

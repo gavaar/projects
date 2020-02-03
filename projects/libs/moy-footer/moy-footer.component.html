@@ -1,1 +1,11 @@
-<footer class="MoyFooter full-center">{{ config.message }}</footer>
+<footer class="MoyFooter full-center">
+  <span>{{ config.message }}</span>
+  <span class="MoyFooter__hyperlinks full-center">
+    <span
+      *ngFor="let link of config.links; trackBy: linkFn"
+      class="MoyFooter__hyperlink-single"
+      [routerLink]="link.link"
+      >{{ link.label }}</span
+    >
+  </span>
+</footer>

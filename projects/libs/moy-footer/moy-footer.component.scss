@@ -2,4 +2,14 @@
   height: 2.5rem;
   border-top: 1px solid black;
   z-index: 1;
+  flex-flow: column;
+}
+
+.MoyFooter__hyperlinks {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.MoyFooter__hyperlink-single {
+  padding: 0 1rem;
 }

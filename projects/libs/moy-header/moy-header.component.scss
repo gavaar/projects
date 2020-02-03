@@ -6,6 +6,13 @@
 
 .MoyHeader__title {
   margin-left: auto;
+  display: inline-flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+}
+
+.MoyHeader__title-icon {
+  padding-right: 0.5rem;
 }
 
 .MoyHeader__suffix-buttons {

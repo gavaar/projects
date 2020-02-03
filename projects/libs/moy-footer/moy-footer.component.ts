@@ -9,4 +9,6 @@ import { MoyFooterConfig } from './moy-footer.models';
 })
 export class MoyFooterComponent {
   @Input() config: MoyFooterConfig;
+
+  linkFn = index => index;
 }

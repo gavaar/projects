@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material';
+import { Router } from '@angular/router';
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
 import { Auth } from './auth';
@@ -13,7 +14,7 @@ import { ProfileComponent } from './profile/profile.component';
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
-    <moy-footer [config]="{ message: 'Created by F. Santorelli ' + currentYear }"></moy-footer>
+    <moy-footer [config]="{ message: 'Created by F. Santorelli ' + currentYear, links: footerLinks }"></moy-footer>
   `,
   styles: [
     `
@@ -39,13 +40,18 @@ export class AppComponent {
 
   title = 'moyney';
   currentYear = new Date().getFullYear();
+  footerLinks = [{ label: 'privacy', link: '/privacy' }];
 
-  constructor(public dialog: MatDialog, private store: Auth) {
+  constructor(public dialog: MatDialog, private store: Auth, private router: Router) {
     this.store.state = JSON.parse(localStorage.getItem('state'));
   }
 
   headerConfig = new MoyHeaderConfig({
     title: 'Moyney',
+    titleIcon: 'home',
+    onTitleClick: () => {
+      this.router.navigateByUrl('');
+    },
     suffixButtons: [
       new MoyButtonRound({
         icon: 'person',

@@ -1,5 +1,8 @@
 <header class="MoyHeader full-center" *ngIf="config">
-  <span class="MoyHeader__title">{{ config.title }}</span>
+  <span class="MoyHeader__title" (click)="config.onTitleClick()">
+    <mat-icon class="MoyHeader__title-icon" *ngIf="config.titleIcon">{{ config.titleIcon }}</mat-icon>
+    {{ config.title }}
+  </span>
   <div class="MoyHeader__suffix-buttons">
     <moy-button
       *ngFor="let button of config.suffixButtons; trackBy: suffixButtonFn; let index = index"

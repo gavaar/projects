@@ -10,6 +10,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { MoyFooterModule } from '@libs/moy-footer/moy-footer.module';
 import { MoyHeaderModule } from '@libs/moy-header/moy-header.module';
 import { environment } from '../environments/environment';
+import { StaticModule } from './_static/static.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -33,6 +34,7 @@ import { ProfileModule } from './profile/profile.module';
     MoyFooterModule,
     LoginModule,
     ProfileModule,
+    StaticModule,
   ],
   entryComponents: [LoginComponent, ProfileComponent],
   providers: [AngularFireAuth],

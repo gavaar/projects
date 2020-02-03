@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1580681705804,
+  "timestamp": 1580762698213,
   "index": "https://gavaar.github.io/projects/index.html",
   "assetGroups": [
     {
@@ -8,18 +8,18 @@
       "installMode": "prefetch",
       "updateMode": "prefetch",
       "urls": [
-        "https://gavaar.github.io/projects/0-es2015.ee4ff57e45bbe5c7f662.js",
-        "https://gavaar.github.io/projects/0-es5.ee4ff57e45bbe5c7f662.js",
+        "https://gavaar.github.io/projects/0-es2015.a06101516192aa503d61.js",
+        "https://gavaar.github.io/projects/0-es5.a06101516192aa503d61.js",
         "https://gavaar.github.io/projects/favicon.ico",
         "https://gavaar.github.io/projects/index.html",
-        "https://gavaar.github.io/projects/main-es2015.d506810e9f49fcbe977c.js",
-        "https://gavaar.github.io/projects/main-es5.d506810e9f49fcbe977c.js",
+        "https://gavaar.github.io/projects/main-es2015.40c502f176fde8673f91.js",
+        "https://gavaar.github.io/projects/main-es5.40c502f176fde8673f91.js",
         "https://gavaar.github.io/projects/manifest.webmanifest",
         "https://gavaar.github.io/projects/polyfills-es2015.6cbb295387299f5f9ce1.js",
         "https://gavaar.github.io/projects/polyfills-es5.3de328b1c85fdb56323a.js",
-        "https://gavaar.github.io/projects/runtime-es2015.e02e697fff8c89e70df3.js",
-        "https://gavaar.github.io/projects/runtime-es5.e02e697fff8c89e70df3.js",
-        "https://gavaar.github.io/projects/styles.ebfe972501223652e1fd.css"
+        "https://gavaar.github.io/projects/runtime-es2015.0df2c536a7b4cddb23d0.js",
+        "https://gavaar.github.io/projects/runtime-es5.0df2c536a7b4cddb23d0.js",
+        "https://gavaar.github.io/projects/styles.04c23953e08787931ca3.css"
       ],
       "patterns": []
     },
@@ -50,6 +50,7 @@
         "https://gavaar.github.io/projects/assets/icons/icon-512x512.png",
         "https://gavaar.github.io/projects/assets/icons/icon-72x72.png",
         "https://gavaar.github.io/projects/assets/icons/icon-96x96.png",
+        "https://gavaar.github.io/projects/assets/static-html/privacy-policy.html",
         "https://gavaar.github.io/projects/assets/svg-icons/facebook.svg",
         "https://gavaar.github.io/projects/assets/svg-icons/google.svg"
       ],
@@ -58,8 +59,8 @@
   ],
   "dataGroups": [],
   "hashTable": {
-    "https://gavaar.github.io/projects/0-es2015.ee4ff57e45bbe5c7f662.js": "f51ea0a483085e840e180a808e2fabcbf958ec35",
-    "https://gavaar.github.io/projects/0-es5.ee4ff57e45bbe5c7f662.js": "63f4c7db6930246267f145b2097fb4b84ffd6dc8",
+    "https://gavaar.github.io/projects/0-es2015.a06101516192aa503d61.js": "2bb3f4828aa6dcb7fef9832a5c25373ae03fbeed",
+    "https://gavaar.github.io/projects/0-es5.a06101516192aa503d61.js": "3cd4d2361bc5b70c7983011f735bb922715f15bd",
     "https://gavaar.github.io/projects/MaterialIcons-Regular.012cf6a10129e2275d79.woff": "c6c953c2ccb2ca9abb21db8dbf473b5a435f0082",
     "https://gavaar.github.io/projects/MaterialIcons-Regular.570eb83859dc23dd0eec.woff2": "09963592e8c953cc7e14e3fb0a5b05d5042e8435",
     "https://gavaar.github.io/projects/MaterialIcons-Regular.a37b0c01c0baf1888ca8.ttf": "fc05de31234e0090f7ddc28ce1b23af4026cb1da",
@@ -82,18 +83,19 @@
     "https://gavaar.github.io/projects/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "https://gavaar.github.io/projects/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://gavaar.github.io/projects/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
+    "https://gavaar.github.io/projects/assets/static-html/privacy-policy.html": "c4b8691e21e0282de7d712a428fc536328b804c2",
     "https://gavaar.github.io/projects/assets/svg-icons/facebook.svg": "2ce015415fc0e1ab15056f464644c26e221e8488",
     "https://gavaar.github.io/projects/assets/svg-icons/google.svg": "68e00c3af9befd6f197cdfc4e9d856637ab29711",
     "https://gavaar.github.io/projects/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://gavaar.github.io/projects/index.html": "e30a8c419f9ed19e7084c305d0108f850a9425bd",
-    "https://gavaar.github.io/projects/main-es2015.d506810e9f49fcbe977c.js": "e7ea730b4ad1ec056715f752a701e284563dd977",
-    "https://gavaar.github.io/projects/main-es5.d506810e9f49fcbe977c.js": "119ce62eb8dd6cbd1c26d0a9ce8ebbe6658333df",
+    "https://gavaar.github.io/projects/index.html": "cda2c21bbe595dc388b933db8d0bc02e39481064",
+    "https://gavaar.github.io/projects/main-es2015.40c502f176fde8673f91.js": "06a2e88b2dd4774d5f5e2578c74c937f31937aea",
+    "https://gavaar.github.io/projects/main-es5.40c502f176fde8673f91.js": "0f832cb5bd3b0b793c8f8f21e9bfbcf283c2d424",
     "https://gavaar.github.io/projects/manifest.webmanifest": "de0497c1d01c45ad7ac01ccfc06e5c5304416359",
     "https://gavaar.github.io/projects/polyfills-es2015.6cbb295387299f5f9ce1.js": "3c23592b7d619c694fc0ba627324ca3a416840f6",
     "https://gavaar.github.io/projects/polyfills-es5.3de328b1c85fdb56323a.js": "717dec82435d842142e3be84068a153042035ae3",
-    "https://gavaar.github.io/projects/runtime-es2015.e02e697fff8c89e70df3.js": "caca2541df1466a110aecc2a8a181eff2adb41ad",
-    "https://gavaar.github.io/projects/runtime-es5.e02e697fff8c89e70df3.js": "15db7155beb04b6215e600aa60f0d6cf2721e14b",
-    "https://gavaar.github.io/projects/styles.ebfe972501223652e1fd.css": "7b79d82ec5daa1961c7d026438324f2adb1a5e04"
+    "https://gavaar.github.io/projects/runtime-es2015.0df2c536a7b4cddb23d0.js": "cd973cf30c4b22c22fe547f1b1656c3b2e69c2ac",
+    "https://gavaar.github.io/projects/runtime-es5.0df2c536a7b4cddb23d0.js": "d5564d7dbcd0d67acfc50e89b6e601f8e02013ec",
+    "https://gavaar.github.io/projects/styles.04c23953e08787931ca3.css": "16eb22e4ff47a487f1a84e75409ac2dcdb210d9b"
   },
   "navigationUrls": [
     {

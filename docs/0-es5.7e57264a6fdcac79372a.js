@@ -1,5 +1,13 @@
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -980,43 +988,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/common */
+    "../../node_modules/@angular/common/fesm2015/common.js");
+    /* harmony import */
+
+
+    var _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./transaction-add/transaction-add.component.ngfactory */
     "./src/app/home/transaction-add/transaction-add.component.ngfactory.js");
     /* harmony import */
 
 
-    var _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
+    var _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
     /*! ./transaction-add/transaction-add.service */
     "./src/app/home/transaction-add/transaction-add.service.ts");
     /* harmony import */
 
 
-    var _auth__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    var _auth__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
     /*! ../auth */
     "./src/app/auth.ts");
     /* harmony import */
 
 
-    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(
+    var _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
     /*! @angular/fire/firestore */
     "../../node_modules/@angular/fire/firestore/es2015/index.js");
     /* harmony import */
 
 
-    var _transaction_add_transaction_add_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(
+    var _transaction_add_transaction_add_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
     /*! ./transaction-add/transaction-add.component */
     "./src/app/home/transaction-add/transaction-add.component.ts");
     /* harmony import */
 
 
-    var _home_store__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(
+    var _home_store__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
     /*! ./home.store */
     "./src/app/home/home.store.ts");
     /* harmony import */
 
 
-    var _home_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(
+    var _home_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(
     /*! ./home.component */
     "./src/app/home/home.component.ts");
     /**
@@ -1037,12 +1051,61 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       data: {}
     });
 
+    function View_HomeComponent_2(_l) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 6, "div", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](1, 0, null, null, 1, "p", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](2, null, ["", ""])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](3, 0, null, null, 3, "p", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, null, 1, "strong", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](5, null, ["", ""])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](6, null, [" ", " "]))], null, function (_ck, _v) {
+        var currVal_0 = _v.context.$implicit.description;
+
+        _ck(_v, 2, 0, currVal_0);
+
+        var currVal_1 = _v.context.$implicit.amount;
+
+        _ck(_v, 5, 0, currVal_1);
+
+        var currVal_2 = _v.context.$implicit.tags;
+
+        _ck(_v, 6, 0, currVal_2);
+      });
+    }
+
+    function View_HomeComponent_1(_l) {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 4, "moy-card", [], null, null, null, _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_MoyCardComponent_0"], _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_MoyCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 49152, null, 0, _libs_moy_card_moy_card_component__WEBPACK_IMPORTED_MODULE_3__["MoyCardComponent"], [], {
+        config: [0, "config"]
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, null, 0, 2, "div", [["class", "full-center"], ["style", "max-height: 100px; overflow-y: auto;"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_HomeComponent_2)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](4, 278528, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgForOf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["IterableDiffers"]], {
+        ngForOf: [0, "ngForOf"],
+        ngForTrackBy: [1, "ngForTrackBy"]
+      }, null)], function (_ck, _v) {
+        var _co = _v.component;
+        var currVal_0 = _co.cards.recently_added;
+
+        _ck(_v, 1, 0, currVal_0);
+
+        var currVal_1 = _co.recentlyAdded;
+        var currVal_2 = _co.recentFn;
+
+        _ck(_v, 4, 0, currVal_1, currVal_2);
+      }, null);
+    }
+
     function View_HomeComponent_0(_l) {
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](2, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 8, "section", [["class", "Home"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](1, 0, null, null, 2, "moy-card", [], null, null, null, _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_MoyCardComponent_0"], _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_MoyCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](2, 49152, null, 0, _libs_moy_card_moy_card_component__WEBPACK_IMPORTED_MODULE_3__["MoyCardComponent"], [], {
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](2, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 10, "section", [["class", "Home"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](1, 0, null, null, 2, "moy-card", [], null, null, null, _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_MoyCardComponent_0"], _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_MoyCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](2, 49152, null, 0, _libs_moy_card_moy_card_component__WEBPACK_IMPORTED_MODULE_3__["MoyCardComponent"], [], {
         config: [0, "config"]
       }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](-1, 0, ["Holis"])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, null, 4, "moy-card", [], null, null, null, _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["View_MoyCardComponent_0"], _libs_moy_card_moy_card_component_ngfactory__WEBPACK_IMPORTED_MODULE_2__["RenderType_MoyCardComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](5, 49152, null, 0, _libs_moy_card_moy_card_component__WEBPACK_IMPORTED_MODULE_3__["MoyCardComponent"], [], {
         config: [0, "config"]
-      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](6, 0, null, 0, 2, "moy-transaction-add", [], null, null, null, _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["View_TransactionAddComponent_0"], _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_4__["RenderType_TransactionAddComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](512, null, _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_5__["TransactionAddService"], _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_5__["TransactionAddService"], [_auth__WEBPACK_IMPORTED_MODULE_6__["Auth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_7__["AngularFirestore"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](8, 49152, null, 0, _transaction_add_transaction_add_component__WEBPACK_IMPORTED_MODULE_8__["TransactionAddComponent"], [_transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_5__["TransactionAddService"]], null, null)], function (_ck, _v) {
+      }, null), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](6, 0, null, 0, 2, "moy-transaction-add", [], null, [[null, "incomeAdded"]], function (_v, en, $event) {
+        var ad = true;
+        var _co = _v.component;
+
+        if ("incomeAdded" === en) {
+          var pd_0 = _co.pushToRecentlyAdded($event) !== false;
+          ad = pd_0 && ad;
+        }
+
+        return ad;
+      }, _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_5__["View_TransactionAddComponent_0"], _transaction_add_transaction_add_component_ngfactory__WEBPACK_IMPORTED_MODULE_5__["RenderType_TransactionAddComponent"])), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](512, null, _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_6__["TransactionAddService"], _transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_6__["TransactionAddService"], [_auth__WEBPACK_IMPORTED_MODULE_7__["Auth"], _angular_fire_firestore__WEBPACK_IMPORTED_MODULE_8__["AngularFirestore"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](8, 49152, null, 0, _transaction_add_transaction_add_component__WEBPACK_IMPORTED_MODULE_9__["TransactionAddComponent"], [_transaction_add_transaction_add_service__WEBPACK_IMPORTED_MODULE_6__["TransactionAddService"]], null, {
+        incomeAdded: "incomeAdded"
+      }), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_HomeComponent_1)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](10, 16384, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_4__["NgIf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]], {
+        ngIf: [0, "ngIf"]
+      }, null)], function (_ck, _v) {
         var _co = _v.component;
         var currVal_0 = _co.cards.first;
 
@@ -1051,16 +1114,20 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         var currVal_1 = _co.cards.second;
 
         _ck(_v, 5, 0, currVal_1);
+
+        var currVal_2 = _co.recentlyAdded.length;
+
+        _ck(_v, 10, 0, currVal_2);
       }, null);
     }
 
     function View_HomeComponent_Host_0(_l) {
-      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 2, "moy-home", [], null, null, null, View_HomeComponent_0, RenderType_HomeComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](131584, null, _home_store__WEBPACK_IMPORTED_MODULE_9__["HomeStore"], _home_store__WEBPACK_IMPORTED_MODULE_9__["HomeStore"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](2, 49152, null, 0, _home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"], [_home_store__WEBPACK_IMPORTED_MODULE_9__["HomeStore"]], null, null)], null, null);
+      return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 2, "moy-home", [], null, null, null, View_HomeComponent_0, RenderType_HomeComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵprd"](131584, null, _home_store__WEBPACK_IMPORTED_MODULE_10__["HomeStore"], _home_store__WEBPACK_IMPORTED_MODULE_10__["HomeStore"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ChangeDetectorRef"]]), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](2, 49152, null, 0, _home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"], [_home_store__WEBPACK_IMPORTED_MODULE_10__["HomeStore"]], null, null)], null, null);
     }
 
     var HomeComponentNgFactory =
     /*@__PURE__*/
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("moy-home", _home_component__WEBPACK_IMPORTED_MODULE_10__["HomeComponent"], View_HomeComponent_Host_0, {}, {}, []);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("moy-home", _home_component__WEBPACK_IMPORTED_MODULE_11__["HomeComponent"], View_HomeComponent_Host_0, {}, {}, []);
     /***/
 
   },
@@ -1128,12 +1195,36 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /*! ./home.store */
     "./src/app/home/home.store.ts");
 
-    var HomeComponent = function HomeComponent(store) {
-      _classCallCheck(this, HomeComponent);
+    var HomeComponent =
+    /*#__PURE__*/
+    function () {
+      function HomeComponent(store) {
+        _classCallCheck(this, HomeComponent);
 
-      this.store = store;
-      this.cards = _home_config__WEBPACK_IMPORTED_MODULE_0__["cards"];
-    };
+        this.store = store;
+        this.cards = _home_config__WEBPACK_IMPORTED_MODULE_0__["cards"];
+        this.recentlyAdded = [];
+
+        this.recentFn = function (index) {
+          return index;
+        };
+      }
+
+      _createClass(HomeComponent, [{
+        key: "pushToRecentlyAdded",
+        value: function pushToRecentlyAdded(income) {
+          this.recentlyAdded = [].concat(_toConsumableArray(this.recentlyAdded), [income]);
+
+          if (this.recentlyAdded.length > 5) {
+            this.recentlyAdded.shift();
+          }
+
+          alert("successfully added ".concat(income.description));
+        }
+      }]);
+
+      return HomeComponent;
+    }();
     /***/
 
   },
@@ -1182,6 +1273,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }),
       second: new _libs_moy_card_moy_card_models__WEBPACK_IMPORTED_MODULE_1__["MoyCard"]({
         title: 'Add Income'
+      }),
+      recently_added: new _libs_moy_card_moy_card_models__WEBPACK_IMPORTED_MODULE_1__["ExpandableMoyCard"]({
+        title: 'Recent Movements'
       })
     };
     /***/
@@ -1577,7 +1671,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     var TransactionAddComponentNgFactory =
     /*@__PURE__*/
-    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("moy-transaction-add", _transaction_add_component__WEBPACK_IMPORTED_MODULE_10__["TransactionAddComponent"], View_TransactionAddComponent_Host_0, {}, {}, []);
+    _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("moy-transaction-add", _transaction_add_component__WEBPACK_IMPORTED_MODULE_10__["TransactionAddComponent"], View_TransactionAddComponent_Host_0, {}, {
+      incomeAdded: "incomeAdded"
+    }, []);
     /***/
 
   },
@@ -1635,19 +1731,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_forms__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! @angular/core */
+    "../../node_modules/@angular/core/fesm2015/core.js");
+    /* harmony import */
+
+
+    var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
     /*! @angular/forms */
     "../../node_modules/@angular/forms/fesm2015/forms.js");
     /* harmony import */
 
 
-    var _transaction_add_config__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var _transaction_add_config__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! ./transaction-add.config */
     "./src/app/home/transaction-add/transaction-add.config.ts");
     /* harmony import */
 
 
-    var _transaction_add_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _transaction_add_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! ./transaction-add.service */
     "./src/app/home/transaction-add/transaction-add.service.ts");
 
@@ -1660,9 +1762,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         _classCallCheck(this, TransactionAddComponent);
 
         this.service = service;
-        this.inputs = _transaction_add_config__WEBPACK_IMPORTED_MODULE_1__["inputs"];
-        this.buttons = _transaction_add_config__WEBPACK_IMPORTED_MODULE_1__["buttons"];
-        this._form = new _angular_forms__WEBPACK_IMPORTED_MODULE_0__["FormGroup"](Object.keys(this.inputs).reduce(function (group, i) {
+        this.incomeAdded = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.inputs = _transaction_add_config__WEBPACK_IMPORTED_MODULE_2__["inputs"];
+        this.buttons = _transaction_add_config__WEBPACK_IMPORTED_MODULE_2__["buttons"];
+        this._form = new _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormGroup"](Object.keys(this.inputs).reduce(function (group, i) {
           group[i] = _this5.inputs[i].control;
           return group;
         }, {}));
@@ -1671,8 +1774,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(TransactionAddComponent, [{
         key: "onAdd",
         value: function onAdd() {
+          var _this6 = this;
+
           if (this.formValid) {
-            this.service.submitTransaction(this._form.value);
+            this.service.submitTransaction(this._form.value).subscribe(function () {
+              _this6.incomeAdded.emit(_this6._form.value);
+
+              _this6._form.reset();
+            });
           }
         }
       }, {
@@ -1800,6 +1909,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     __webpack_require__.d(__webpack_exports__, "TransactionAddService", function () {
       return TransactionAddService;
     });
+    /* harmony import */
+
+
+    var rxjs__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! rxjs */
+    "../../node_modules/rxjs/_esm2015/index.js");
 
     var TransactionAddService =
     /*#__PURE__*/
@@ -1814,7 +1929,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       _createClass(TransactionAddService, [{
         key: "submitTransaction",
         value: function submitTransaction(_ref) {
-          var _this6 = this;
+          var _this7 = this;
 
           var amount = _ref.amount,
               description = _ref.description,
@@ -1826,19 +1941,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           });
 
           var incomesRef = this.db.doc("incomes/".concat(uid));
+          var result = new rxjs__WEBPACK_IMPORTED_MODULE_0__["Subject"]();
           incomesRef.collection('income').add({
             amount: amount,
             description: description,
+            currency: 'euro',
             date_added: new Date(),
             tags: tags.reduce(function (g, t) {
               g[t] = true;
               return g;
             }, {})
-          }).then(function (incomeId) {
-            _this6.addIncomeToTags(tags, incomeId.id);
+          }).then(function (income) {
+            _this7.addIncomeToTags(tags, income.id);
 
-            _this6.addIncomeToYearly(incomeId.id);
+            _this7.addIncomeToYearly(income.id);
+
+            result.next();
+          })["catch"](function (e) {
+            return result.error(e);
           });
+          return result.asObservable();
         }
       }, {
         key: "addIncomeToTags",

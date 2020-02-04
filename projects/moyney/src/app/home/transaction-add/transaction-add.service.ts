@@ -1,32 +1,39 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable, Subject } from 'rxjs';
 import { Auth } from '../../auth';
-import { Income } from './transaction-add.component';
+import { Income } from '../home-models';
 
 @Injectable()
 export class TransactionAddService {
   constructor(private auth: Auth, private db: AngularFirestore) {}
 
-  submitTransaction({ amount, description, tags: _tags }: Income) {
+  submitTransaction({ amount, description, tags: _tags }: Income): Observable<unknown> {
     const uid = this.auth.uid;
     const tags = _tags.split(',').map(t => t.trim());
     const incomesRef = this.db.doc(`incomes/${uid}`);
+    const result = new Subject();
 
     incomesRef
       .collection('income')
       .add({
         amount,
         description,
+        currency: 'euro',
         date_added: new Date(),
         tags: tags.reduce((g, t) => {
           g[t] = true;
           return g;
         }, {}),
       })
-      .then(incomeId => {
-        this.addIncomeToTags(tags, incomeId.id);
-        this.addIncomeToYearly(incomeId.id);
-      });
+      .then(income => {
+        this.addIncomeToTags(tags, income.id);
+        this.addIncomeToYearly(income.id);
+        result.next();
+      })
+      .catch(e => result.error(e));
+
+    return result.asObservable();
   }
 
   private addIncomeToTags(_tags: string[], incomeId: string): void {

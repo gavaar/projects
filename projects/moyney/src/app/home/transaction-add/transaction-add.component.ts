@@ -1,13 +1,8 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { Income } from '../home-models';
 import * as config from './transaction-add.config';
 import { TransactionAddService } from './transaction-add.service';
-
-export interface Income {
-  description: string;
-  amount: number;
-  tags: string;
-}
 
 @Component({
   selector: 'moy-transaction-add',
@@ -17,6 +12,8 @@ export interface Income {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TransactionAddComponent {
+  @Output() incomeAdded = new EventEmitter<Income>();
+
   inputs = config.inputs;
   buttons = config.buttons;
 
@@ -35,7 +32,10 @@ export class TransactionAddComponent {
 
   onAdd() {
     if (this.formValid) {
-      this.service.submitTransaction(this._form.value);
+      this.service.submitTransaction(this._form.value).subscribe(() => {
+        this.incomeAdded.emit(this._form.value);
+        this._form.reset();
+      });
     }
   }
 }

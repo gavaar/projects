@@ -14,6 +14,7 @@ const cards: { [card: string]: AbstractMoyCard } = {
     ],
   }),
   second: new MoyCard({ title: 'Add Income' }),
+  recently_added: new ExpandableMoyCard({ title: 'Recent Movements' }),
 };
 
 export { cards };

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { FormArray } from '@angular/forms';
+import { Income } from './home-models';
 import * as config from './home.config';
 import { HomeStore } from './home.store';
 
@@ -12,6 +12,17 @@ import { HomeStore } from './home.store';
 })
 export class HomeComponent {
   cards = config.cards;
+  recentlyAdded = [];
 
   constructor(public store: HomeStore) {}
+
+  recentFn = index => index;
+
+  pushToRecentlyAdded(income: Income): void {
+    this.recentlyAdded = [...this.recentlyAdded, income];
+    if (this.recentlyAdded.length > 5) {
+      this.recentlyAdded.shift();
+    }
+    alert(`successfully added ${income.description}`);
+  }
 }

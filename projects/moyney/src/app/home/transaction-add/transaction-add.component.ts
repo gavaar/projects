@@ -28,11 +28,11 @@ export class TransactionAddComponent {
     return this._form.valid;
   }
 
-  constructor(private service: TransactionAddService) {}
+  constructor(private _service: TransactionAddService) {}
 
   onAdd() {
     if (this.formValid) {
-      this.service.submitTransaction(this._form.value).subscribe(() => {
+      this._service.submitTransaction(this._form.value).subscribe(() => {
         this.incomeAdded.emit(this._form.value);
         this._form.reset();
       });

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { MatDialogModule, MatIconRegistry } from '@angular/material';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatDialogModule, MatIconRegistry, MatSnackBarModule } from '@angular/material';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -30,6 +30,7 @@ import { ProfileModule } from './profile/profile.module';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     BrowserAnimationsModule,
     MatDialogModule,
+    MatSnackBarModule,
     MoyHeaderModule,
     MoyFooterModule,
     LoginModule,
@@ -37,7 +38,7 @@ import { ProfileModule } from './profile/profile.module';
     StaticModule,
   ],
   entryComponents: [LoginComponent, ProfileComponent],
-  providers: [AngularFireAuth],
+  providers: [AngularFireAuth, { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500 } }],
   bootstrap: [AppComponent],
 })
 export class AppModule {

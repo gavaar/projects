@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
 import { Income } from './home-models';
 import * as config from './home.config';
 import { HomeStore } from './home.store';
@@ -14,7 +15,7 @@ export class HomeComponent {
   cards = config.cards;
   recentlyAdded = [];
 
-  constructor(public store: HomeStore) {}
+  constructor(public store: HomeStore, private _snack: MatSnackBar) {}
 
   recentFn = index => index;
 
@@ -23,6 +24,6 @@ export class HomeComponent {
     if (this.recentlyAdded.length > 5) {
       this.recentlyAdded.shift();
     }
-    alert(`successfully added ${income.description}`);
+    this._snack.open(`successfully added ${income.description}`);
   }
 }

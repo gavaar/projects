@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { MatSnackBar } from '@angular/material';
 import * as firebase from 'firebase/app';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -10,7 +11,7 @@ import { AuthType, PendingAuth } from './login.models';
 export class LoginService {
   private _pending: PendingAuth;
 
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore, private _snack: MatSnackBar) {}
 
   auth(type: AuthType): Observable<firebase.auth.UserCredential> {
     const provider = providerBuilder(type);
@@ -20,7 +21,7 @@ export class LoginService {
         user => {
           if (this._pending) {
             linkUser(user, this._pending.credential).subscribe();
-            alert('Both accounts are linked now. You can login with any of them!');
+            this._snack.open('Both accounts are linked now. You can login with any of them!');
           }
 
           const dbUserRef = this.db.doc(`user/${user.user.uid}`);
@@ -57,7 +58,7 @@ function linkUser(user: firebase.auth.UserCredential, credential: firebase.auth.
 
 function handleLoginError(error: firebase.auth.AuthError): PendingAuth {
   if (error.code === 'auth/account-exists-with-different-credential') {
-    alert('Account already exists with another provider. Login with the correct one to link both');
+    this._snack.open('Account already exists with another provider. Login with the correct one to link both');
     const { credential, message } = error;
     const newType = credential.providerId === 'facebook.com' ? AuthType.Google : AuthType.Fb;
 

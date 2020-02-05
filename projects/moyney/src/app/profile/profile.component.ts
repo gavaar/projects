@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { ProfileService } from './profile.service';
 import { ProfileStore } from './profile.store';
 
@@ -15,17 +15,19 @@ export class ProfileComponent {
 
   constructor(
     public store: ProfileStore,
-    private service: ProfileService,
-    private dialogRef: MatDialogRef<ProfileComponent>,
+    private _service: ProfileService,
+    private _dialogRef: MatDialogRef<ProfileComponent>,
+    private _snack: MatSnackBar,
   ) {}
 
   onLogout() {
     if (this.confirmLogout) {
-      this.service.logout().subscribe();
-      this.dialogRef.afterClosed().subscribe(() => {
+      this._service.logout().subscribe();
+      this._dialogRef.afterClosed().subscribe(() => {
         this.store.state = { user: null };
+        this._snack.open('Logged out');
       });
-      this.dialogRef.close();
+      this._dialogRef.close();
     } else {
       this.confirmLogout = true;
     }

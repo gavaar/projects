@@ -13,7 +13,13 @@ import { HomeStore } from './home.store';
 })
 export class HomeComponent {
   cards = config.cards;
-  recentlyAdded = [];
+  recentlyAdded = [
+    {
+      description: 'Version 1',
+      tags: 'hello, friend',
+      amount: 12,
+    },
+  ];
 
   constructor(public store: HomeStore, private _snack: MatSnackBar) {}
 

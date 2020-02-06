@@ -6,13 +6,6 @@
   </moy-card>
 
   <moy-card [config]="cards.recently_added" *ngIf="recentlyAdded.length">
-    <div style="max-height: 100px; overflow-y: auto;" class="full-center">
-      <div *ngFor="let movement of recentlyAdded; trackBy: recentFn">
-        <p>{{ movement.description }}</p>
-        <p>
-          <strong>{{ movement.amount }}</strong> {{ movement.tags }}
-        </p>
-      </div>
-    </div>
+    <moy-table [config]="recentlyAdded"></moy-table>
   </moy-card>
 </section>

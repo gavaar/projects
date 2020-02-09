@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { AbstractMoyTable } from './moy-table.models';
 
 @Component({
   selector: 'moy-table',
@@ -7,9 +8,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoyTableComponent {
-  @Input() config;
+  @Input() config: AbstractMoyTable<any>;
 
-  ngOnInit() {
-    console.log(this.config);
-  }
+  columnFn = (index: number) => index;
+  isPair = index => index % 2 === 0;
+  isNotPair = index => index % 2 !== 0;
 }

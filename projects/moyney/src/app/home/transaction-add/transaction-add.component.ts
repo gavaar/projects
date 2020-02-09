@@ -33,7 +33,8 @@ export class TransactionAddComponent {
   onAdd() {
     if (this.formValid) {
       this._service.submitTransaction(this._form.value).subscribe(() => {
-        this.incomeAdded.emit(this._form.value);
+        const date = `${new Date().getDate()}/${+new Date().getMonth() + 1}/${new Date().getFullYear()}`;
+        this.incomeAdded.emit({ ...this._form.value, date });
         this._form.reset();
       });
     }

@@ -5,7 +5,7 @@
     <moy-transaction-add (incomeAdded)="pushToRecentlyAdded($event)"></moy-transaction-add>
   </moy-card>
 
-  <moy-card [config]="cards.recently_added" *ngIf="recentlyAdded.length">
+  <moy-card [config]="cards.recently_added" *ngIf="recentlyAdded.matrix.length">
     <moy-table [config]="recentlyAdded"></moy-table>
   </moy-card>
 </section>

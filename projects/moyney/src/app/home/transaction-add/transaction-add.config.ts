@@ -4,8 +4,8 @@ import { MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 const controlOptions = { required: true };
 
 const inputs = {
-  description: new MoyInput({ controlOptions, label: 'Description', placeholder: 'Rent July' }),
-  amount: new MoyInputNumber({ controlOptions, label: 'Amount', placeholder: '17.45' }),
+  description: new MoyInput({ controlOptions, label: 'Description', placeholder: 'Rent July', autofocus: true }),
+  amount: new MoyInputNumber({ controlOptions, label: 'Amount', placeholder: `${(Math.random() * 100).toFixed(2)}` }),
   tags: new MoyInput({ controlOptions, label: 'Tags', placeholder: 'rent, july, madrid' }),
 };
 

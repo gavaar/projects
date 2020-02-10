@@ -1,7 +1,10 @@
 <article class="MoyInput" [ngClass]="{ error: config.control.invalid && config.control.dirty }">
-  <label class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">{{ config.label }}</label>
+  <label *ngIf="config.label" class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">
+    {{ config.label }}
+  </label>
   <input
     class="MoyInput__input"
+    [attr.autofocus]="config.autofocus ? '' : null"
     [type]="config.type"
     [placeholder]="config.floatingLabel || !config.label ? error || config.placeholder : ''"
     [formControl]="config.control"

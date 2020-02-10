@@ -15,7 +15,7 @@ import { HomeStore } from './home.store';
 export class HomeComponent {
   cards = config.cards;
   recentlyAdded = new MoyTable<Income>({
-    columnsToShow: ['description', 'amount', 'tags', 'date'],
+    columnsToShow: ['description', 'amount', 'date'],
     editableRows: true,
   });
 

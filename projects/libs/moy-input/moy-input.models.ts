@@ -9,6 +9,7 @@ interface InputInterface<T> {
   value?: T;
   placeholder?: string;
   label?: string;
+  autofocus?: boolean;
   controlOptions?: {
     required?: boolean;
   };
@@ -19,14 +20,16 @@ abstract class AbstractMoyInput<T> {
   placeholder?: string;
   label?: string;
   floatingLabel = false;
+  autofocus = false;
 
   readonly type: InputTypes;
 
   constructor(p: Partial<InputInterface<T>> = {}) {
-    this.control = new FormControl(p.value, p.controlOptions.required ? [Validators.required] : []);
+    this.control = new FormControl(p.value, (p.controlOptions || {}).required ? [Validators.required] : []);
     this.label = p.label;
     this.placeholder = p.placeholder || '';
     this.floatingLabel = p.value != null;
+    this.autofocus = p.autofocus;
   }
 
   onFocus() {

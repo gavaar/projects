@@ -1,5 +1,16 @@
 .MoyTable {
   width: 100%;
+
+  ::ng-deep .MoyInput {
+    border: 0;
+    padding: 0;
+    height: auto;
+    margin: 0;
+
+    .MoyInput__input {
+      padding: 0;
+    }
+  }
 }
 
 .MoyTable .mat-header-row {
@@ -26,8 +37,8 @@
   }
 
   .mat-cell {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
 
     &:first-of-type {
       padding-left: 0.5rem;

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { parseDateReadable } from '../../_common/transform';
 import { Income } from '../home-models';
 import * as config from './transaction-add.config';
 import { TransactionAddService } from './transaction-add.service';
@@ -33,8 +34,7 @@ export class TransactionAddComponent {
   onAdd() {
     if (this.formValid) {
       this._service.submitTransaction(this._form.value).subscribe(() => {
-        const date = `${new Date().getDate()}/${+new Date().getMonth() + 1}/${new Date().getFullYear()}`;
-        this.incomeAdded.emit({ ...this._form.value, date });
+        this.incomeAdded.emit({ ...this._form.value, date: parseDateReadable(new Date()) });
         this._form.reset();
       });
     }

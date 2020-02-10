@@ -1,23 +1,31 @@
+import { MoyInput } from '@libs/moy-input/moy-input.models';
 import { BehaviorSubject, Observable } from 'rxjs';
-
-type MoyMatrix<T> = { [column: string]: T[keyof T] }[];
 
 interface MoyTableConfig {
   columnsToShow: string[];
   editableRows?: boolean;
 }
 
+type Cell<T> = { [column: string]: MoyInput };
+
+function transformRowToMoyInput<T>(row: T): Cell<T> {
+  return Object.keys(row).reduce((input, k) => {
+    input[k] = new MoyInput({ value: row[k] });
+    return input;
+  }, {});
+}
+
 export class AbstractMoyTable<T extends { [key: string]: any }> {
   columns: (keyof T)[];
 
-  private _matrix = new BehaviorSubject<MoyMatrix<T>>([]);
+  private _matrix = new BehaviorSubject<Cell<T>[]>([]);
   private _editableRows: boolean;
 
-  get matrix(): MoyMatrix<T> {
+  get matrix(): Cell<T>[] {
     return this._matrix.getValue();
   }
 
-  get matrix$(): Observable<MoyMatrix<T>> {
+  get matrix$(): Observable<Cell<T>[]> {
     return this._matrix.asObservable();
   }
 
@@ -31,7 +39,7 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
   }
 
   addRows(rows: T[]): void {
-    this._matrix.next([...this.matrix, ...rows]);
+    this._matrix.next([...this._matrix.value, ...rows.map<Cell<T>>(row => transformRowToMoyInput<T>(row))]);
   }
 }
 

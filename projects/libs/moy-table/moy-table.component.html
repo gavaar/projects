@@ -3,7 +3,7 @@
   <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
     <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
 
-    <td mat-cell *matCellDef="let row">{{ row[column] }}</td>
+    <td mat-cell *matCellDef="let row"><moy-input [config]="row[column]"></moy-input></td>
   </ng-container>
 
   <!-- Row Defs -->

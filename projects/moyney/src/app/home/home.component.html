@@ -1,11 +1,9 @@
 <section class="Home">
-  <moy-card [config]="cards.first">Holis</moy-card>
-
-  <moy-card [config]="cards.second">
+  <moy-card [config]="cards.add">
     <moy-transaction-add (incomeAdded)="pushToRecentlyAdded($event)"></moy-transaction-add>
   </moy-card>
 
-  <moy-card [config]="cards.recently_added" *ngIf="recentlyAdded.matrix.length">
+  <moy-card [config]="cards.recently_added">
     <moy-table [config]="recentlyAdded"></moy-table>
   </moy-card>
 </section>

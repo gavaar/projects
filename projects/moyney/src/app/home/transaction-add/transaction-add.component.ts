@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { parseDateReadable } from '../../_common/transform';
-import { Income } from '../home-models';
+import { Income } from '../home.models';
 import * as config from './transaction-add.config';
 import { TransactionAddService } from './transaction-add.service';
 

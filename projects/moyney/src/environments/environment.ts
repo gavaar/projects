@@ -11,7 +11,7 @@ export const environment = {
     projectId: 'moyney-balancer',
     storageBucket: 'moyney-balancer.appspot.com',
     messagingSenderId: '550325569702',
-    appId: '1:550325569702:web:37f5101754f65ddd',
+    appId: '1:550325569702:web:a754709ef754372e9bcc67',
   },
 };
 

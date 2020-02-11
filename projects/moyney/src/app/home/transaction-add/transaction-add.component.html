@@ -1,4 +1,4 @@
-<div class="TransactionAdd">
+<div class="TransactionAdd" (keyup.enter)="onAdd()">
   <moy-input class="TransactionAdd__description" [config]="inputs.description"></moy-input>
   <moy-input class="TransactionAdd__amount" [config]="inputs.amount"></moy-input>
   <moy-input class="TransactionAdd__tags" [config]="inputs.tags"></moy-input>

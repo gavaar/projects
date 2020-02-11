@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable, Subject } from 'rxjs';
 import { Auth } from '../../auth';
-import { Income } from '../home-models';
+import { Income } from '../home.models';
 
 @Injectable()
 export class TransactionAddService {

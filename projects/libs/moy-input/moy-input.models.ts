@@ -1,6 +1,6 @@
 import { FormControl, Validators } from '@angular/forms';
 
-enum InputTypes {
+enum InputType {
   Text = 'text',
   Number = 'number',
 }
@@ -12,6 +12,7 @@ interface InputInterface<T> {
   autofocus?: boolean;
   controlOptions?: {
     required?: boolean;
+    disabled?: boolean;
   };
 }
 
@@ -22,10 +23,13 @@ abstract class AbstractMoyInput<T> {
   floatingLabel = false;
   autofocus = false;
 
-  readonly type: InputTypes;
+  readonly type: InputType;
 
   constructor(p: Partial<InputInterface<T>> = {}) {
-    this.control = new FormControl(p.value, (p.controlOptions || {}).required ? [Validators.required] : []);
+    const options = p.controlOptions || {};
+    const controlValue = { value: p.value, disabled: options.disabled };
+    const validators = options.required ? [Validators.required] : [];
+    this.control = new FormControl(controlValue, validators);
     this.label = p.label;
     this.placeholder = p.placeholder || '';
     this.floatingLabel = p.value != null;
@@ -42,11 +46,11 @@ abstract class AbstractMoyInput<T> {
 }
 
 class MoyInput extends AbstractMoyInput<string> {
-  type = InputTypes.Text;
+  type = InputType.Text;
 }
 
 class MoyInputNumber extends AbstractMoyInput<number> {
-  type = InputTypes.Number;
+  type = InputType.Number;
 }
 
-export { InputTypes, AbstractMoyInput, MoyInput, MoyInputNumber };
+export { InputType, AbstractMoyInput, MoyInput, MoyInputNumber };

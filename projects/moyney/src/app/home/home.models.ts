@@ -1,6 +1,7 @@
 import { parseDateReadable } from '../_common/transform';
 
 export interface CollectionIncome {
+  id: string;
   amount: number;
   currency: string;
   date_added: { seconds: number; nanoseconds: number };
@@ -9,6 +10,7 @@ export interface CollectionIncome {
 }
 
 export class Income {
+  id: string;
   description: string;
   amount: number;
   tags: string;
@@ -18,6 +20,7 @@ export class Income {
     const date = new Date(i.date_added.seconds * 1000);
 
     return {
+      id: i.id,
       description: i.description,
       amount: i.amount,
       tags: Object.keys(i).join(', '),

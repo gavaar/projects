@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Auth } from '../auth';
 import { CollectionIncome, Income } from './home.models';
@@ -12,7 +12,7 @@ export class HomeService {
   getTableData(): Observable<Income[]> {
     return this.db
       .collection<CollectionIncome>(`incomes/${this.auth.uid}/income`, i => i.orderBy('date_added', 'desc'))
-      .valueChanges()
+      .valueChanges({ idField: 'id' })
       .pipe(
         take(1),
         map(incomes => {
@@ -20,4 +20,13 @@ export class HomeService {
         }),
       );
   }
+
+  updateIncome = ({ id, description, date, amount, tags }: Income): Observable<Income> => {
+    return from(
+      this.db
+        .collection(`incomes/${this.auth.uid}/income/`)
+        .doc(id)
+        .update({ description, date, amount }),
+    ).pipe(map(_ => ({ id, description, date, amount, tags })));
+  };
 }

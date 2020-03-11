@@ -33,7 +33,7 @@ export class TransactionAddComponent {
 
   onAdd() {
     if (this.formValid) {
-      this._service.submitTransaction(this._form.value).subscribe(() => {
+      this._service.submit(this._form.value).subscribe(() => {
         this.incomeAdded.emit({ ...this._form.value, date: parseDateReadable(new Date()) });
         this._form.reset();
       });

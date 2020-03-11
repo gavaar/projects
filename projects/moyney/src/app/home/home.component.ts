@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { InputType } from '@libs/moy-input/moy-input.models';
-import { MoyTable } from '@libs/moy-table/moy-table.models';
+import { debounceTime, switchMap } from 'rxjs/operators';
 import * as config from './home.config';
 import { Income } from './home.models';
 import { HomeService } from './home.service';
@@ -16,19 +15,16 @@ import { HomeStore } from './home.store';
 })
 export class HomeComponent {
   cards = config.cards;
-  recentlyAdded = new MoyTable<Income>({
-    columnsToShow: {
-      description: InputType.Text,
-      amount: InputType.Number,
-      date: InputType.Text,
-    },
-    editableRows: true,
-  });
+  recentlyAdded = config.table;
 
   constructor(public store: HomeStore, private service: HomeService, private _snack: MatSnackBar) {}
 
   ngOnInit() {
-    this.service.getTableData().subscribe(recentlyAdded => this.recentlyAdded.addRows(recentlyAdded));
+    this.service.getTableData().subscribe(recentRows => this.recentlyAdded.addRows(recentRows));
+    this.recentlyAdded
+      .rowChanges()
+      .pipe(debounceTime(500), switchMap(this.service.updateIncome))
+      .subscribe(income => this._snack.open(`successfully updated ${income.description}`));
   }
 
   recentFn = index => index;

@@ -4,6 +4,7 @@
   </label>
   <input
     class="MoyInput__input"
+    autocapitalize="none"
     [attr.autofocus]="config.autofocus ? '' : null"
     [type]="config.type"
     [placeholder]="config.floatingLabel || !config.label ? error || config.placeholder : ''"

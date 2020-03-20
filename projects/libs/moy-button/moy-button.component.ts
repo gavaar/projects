@@ -15,4 +15,7 @@ export class MoyButtonComponent {
   onClick() {
     this.config.click();
   }
+  onBlur() {
+    this.config.blur();
+  }
 }

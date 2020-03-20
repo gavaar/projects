@@ -1,12 +1,12 @@
-import { parseDateReadable } from '../_common/transform';
+import { parseDateReadable } from '@common/transform';
 
 export interface CollectionIncome {
-  id: string;
   amount: number;
   currency: string;
   date_added: { seconds: number; nanoseconds: number };
   description: string;
   tags: { [tag: string]: true };
+  id?: string;
 }
 
 export class Income {
@@ -15,6 +15,7 @@ export class Income {
   amount: number;
   tags: string;
   date?: string;
+  originalDate?: Date;
 
   constructor(i: CollectionIncome) {
     const date = new Date(i.date_added.seconds * 1000);
@@ -23,8 +24,9 @@ export class Income {
       id: i.id,
       description: i.description,
       amount: i.amount,
-      tags: Object.keys(i).join(', '),
+      tags: Object.keys(i.tags).join(', '),
       date: parseDateReadable(date),
+      originalDate: date,
     };
   }
 }

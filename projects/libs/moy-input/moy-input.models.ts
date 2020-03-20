@@ -1,8 +1,8 @@
 import { FormControl, Validators } from '@angular/forms';
 
 enum InputType {
-  Text = 'text',
-  Number = 'number',
+  Text = 'input_text',
+  Number = 'input_number',
 }
 
 interface InputInterface<T> {
@@ -53,4 +53,4 @@ class MoyInputNumber extends AbstractMoyInput<number> {
   type = InputType.Number;
 }
 
-export { InputType, AbstractMoyInput, MoyInput, MoyInputNumber };
+export { InputType, InputInterface, AbstractMoyInput, MoyInput, MoyInputNumber };

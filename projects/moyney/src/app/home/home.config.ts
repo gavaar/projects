@@ -1,8 +1,8 @@
-import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
+import { MoyButtonRound, MoyButtonType } from '@libs/moy-button/moy-button.models';
 import { AbstractMoyCard, ExpandableMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
-import { InputType } from '@libs/moy-input/moy-input.models';
+import { InputType, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 import { MoyTable } from '@libs/moy-table/moy-table.models';
-import { Income } from './home.models';
+import { Income } from './transaction/transaction.models';
 
 const cards: { [card: string]: AbstractMoyCard } = {
   add: new MoyCard({ title: 'Add Income' }),
@@ -19,14 +19,29 @@ const cards: { [card: string]: AbstractMoyCard } = {
   }),
 };
 
-const table = new MoyTable<Income>({
-  columnsToShow: {
-    description: InputType.Text,
-    amount: InputType.Number,
-    date: InputType.Text,
-  },
-  editableRows: true,
-  maxRows: 10,
-});
+const table = delCallback =>
+  new MoyTable<Income>({
+    columns: {
+      description: { type: MoyInput },
+      amount: { type: MoyInputNumber },
+      date: { type: MoyInput },
+      delete: {
+        type: MoyButtonRound,
+        config: {
+          icon: 'delete',
+          click() {
+            if (this.icon === 'delete') this.icon = 'delete_forever';
+            else delCallback(this.__rowContext__);
+          },
+          blur() {
+            this.icon = 'delete';
+          },
+        },
+      },
+    },
+    customColumnText: { delete: ' ' },
+    editableRows: true,
+    maxRows: 10,
+  });
 
 export { cards, table };

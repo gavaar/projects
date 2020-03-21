@@ -56,8 +56,14 @@ export class AppComponent {
       new MoyButtonRound({
         icon: 'person',
         click: () => {
+          const prevUser = this.store.state.user.uid;
           const component = this.store.state.user.uid !== '~~default~~' ? ProfileComponent : LoginComponent;
-          this.dialog.open(<any>component);
+          this.dialog
+            .open(<any>component)
+            .afterClosed()
+            .subscribe(_ => {
+              if (this.store.state.user.uid !== prevUser) location.reload();
+            });
         },
       }),
     ],

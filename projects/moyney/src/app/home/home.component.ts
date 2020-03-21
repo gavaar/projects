@@ -27,7 +27,7 @@ export class HomeComponent {
     });
     this.recentlyAdded
       .rowChanges()
-      .pipe(debounceTime(500), switchMap(this._service.patch))
+      .pipe(debounceTime(1500), switchMap(this._service.patch))
       .subscribe(income => this._snack.open(`successfully updated ${income.description}`));
   }
 

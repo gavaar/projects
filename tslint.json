@@ -16,6 +16,7 @@
     "space-before-function-paren": false,
     "ter-arrow-parens": false,
     "trailing-comma": [true, { "multiline": "always", "singleline": "never" }],
-    "semicolon": false
+    "semicolon": false,
+    "prefer-array-literal": false
   }
 }

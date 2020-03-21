@@ -1,6 +1,6 @@
 import { AbstractMoyButton, MoyButtonConfig, MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { AbstractMoyInput, InputInterface, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
 import { debounceTime, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
 
 // prettier-ignore
@@ -14,8 +14,8 @@ type Column = {
   type: typeof MoyButtonRound;
   config?: MoyButtonConfig;
 };
+// prettier-ignore
 type Cell<T> = {
-  // prettier-ignore
   [column: string]: AbstractMoyInput<T[keyof T]>
     | (AbstractMoyButton & {
       __rowContext__?: { [key: string]: any };
@@ -34,6 +34,7 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
   customColumnText?: { [column: string]: string };
 
   private destroy$ = new Subject();
+  private _loadingRows: Cell<T>[];
   private _config: { [column: string]: Column } = {};
   private _matrix = new BehaviorSubject<Cell<T>[]>([]);
   private _rowChanges = new Subject<T>();
@@ -56,6 +57,13 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
     this._rowLimit = config.maxRows;
   }
 
+  setLoading() {
+    if (!this._loadingRows) {
+      this._loadingRows = Array.from(new Array(5), _ => ({ ...this.buildLoading() }));
+    }
+    this._matrix.next(this._loadingRows);
+  }
+
   destroyTable() {
     this.destroy$.next();
     this.destroy$.complete();
@@ -75,6 +83,14 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
     return this._rowChanges.asObservable();
   }
 
+  private buildLoading(): Cell<T> {
+    const _loadingRow = this.columns.reduce((rowT, column) => {
+      rowT[column] = <any>{ type: 'table_loading' };
+      return rowT;
+    }, <Cell<T>>{});
+    return _loadingRow;
+  }
+
   private transformRowToMoyInput = (row: T): Cell<T> => {
     return this.columns.reduce((input, column) => {
       const _config = this._config[column].config || {};
@@ -89,7 +105,7 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
           .pipe(takeUntil(this.destroy$), debounceTime(500), startWith(_input.control.value), pairwise())
           .subscribe(([prev, next]) => {
             row[column as keyof T] = next;
-            this._rowChanges.next(<any>{ ...row, __changedProp__: column, __prev__: prev });
+            this._rowChanges.next({ ...row, __changedProp__: column, __prev__: prev });
           });
       }
       return input;

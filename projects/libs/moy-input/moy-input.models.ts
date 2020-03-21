@@ -1,8 +1,8 @@
 import { FormControl, Validators } from '@angular/forms';
 
 enum InputType {
-  Text = 'input_text',
-  Number = 'input_number',
+  Text = 'text',
+  Number = 'number',
 }
 
 interface InputInterface<T> {

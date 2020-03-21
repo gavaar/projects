@@ -15,6 +15,10 @@
       <ng-container *ngSwitchCase="MoyButtonType.Round">
         <moy-button [config]="row[column]"></moy-button>
       </ng-container>
+
+      <ng-container *ngSwitchCase="'table_loading'">
+        <div class="loading-effect">{{ config.customColumnText[column] ? 'O' : column }}</div>
+      </ng-container>
     </td>
   </ng-container>
 

@@ -21,7 +21,10 @@ export class HomeComponent {
   constructor(public store: HomeStore, private _service: TransactionService, private _snack: MatSnackBar) {}
 
   ngOnInit() {
-    this._service.get().subscribe(recentRows => this.recentlyAdded.addRows(recentRows));
+    this.recentlyAdded.setLoading();
+    this._service.get().subscribe(recentRows => {
+      this.recentlyAdded.addRows(recentRows);
+    });
     this.recentlyAdded
       .rowChanges()
       .pipe(debounceTime(500), switchMap(this._service.patch))

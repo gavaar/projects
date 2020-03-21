@@ -1,10 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { debounceTime, switchMap } from 'rxjs/operators';
+import { Income } from '../transaction/transaction.models';
+import { TransactionService } from '../transaction/transaction.service';
 import * as config from './home.config';
 import { HomeStore } from './home.store';
-import { Income } from './transaction/transaction.models';
-import { TransactionService } from './transaction/transaction.service';
 
 @Component({
   selector: 'moy-home',

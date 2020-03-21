@@ -8,7 +8,7 @@ import {
 import * as firebase from 'firebase/app';
 import { from, Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
-import { Auth } from '../../auth';
+import { Auth } from '../auth';
 import { CollectionIncome, Income } from './transaction.models';
 
 class IncomeRefs {

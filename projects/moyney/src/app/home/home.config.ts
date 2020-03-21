@@ -2,7 +2,7 @@ import { MoyButtonRound, MoyButtonType } from '@libs/moy-button/moy-button.model
 import { AbstractMoyCard, ExpandableMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
 import { InputType, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 import { MoyTable } from '@libs/moy-table/moy-table.models';
-import { Income } from './transaction/transaction.models';
+import { Income } from '../transaction/transaction.models';
 
 const cards: { [card: string]: AbstractMoyCard } = {
   add: new MoyCard({ title: 'Add Income' }),

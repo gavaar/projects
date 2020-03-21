@@ -41,11 +41,6 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
   private _rowLimit: number;
   private _rowDataList: T[] = [];
 
-  get matrix(): Cell<T>[] {
-    const matrix = this._matrix.getValue();
-    if (this._rowLimit && matrix.length > this._rowLimit) matrix.length = this._rowLimit;
-    return matrix;
-  }
   get matrix$(): Observable<Cell<T>[]> {
     return this._matrix.asObservable().pipe(map(m => (this._rowLimit ? m.slice(0, this._rowLimit) : m)));
   }

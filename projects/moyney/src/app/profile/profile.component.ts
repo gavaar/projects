@@ -24,7 +24,7 @@ export class ProfileComponent {
     if (this.confirmLogout) {
       this._service.logout().subscribe();
       this._dialogRef.afterClosed().subscribe(() => {
-        this.store.state = { user: null };
+        this.store.state = { user: { uid: null, photoURL: '', displayName: '' } };
         this._snack.open('Logged out');
       });
       this._dialogRef.close();

@@ -5,6 +5,8 @@
 
   <moy-card [config]="cards.recently_added">
     <moy-table [config]="recentlyAdded"></moy-table>
-    <aside *ngIf="!recentlyAdded.matrix.length" class="Home__empty-list">Hey! you haven't added anything yet!</aside>
+    <aside *ngIf="!(recentlyAdded.matrix$ | async).length" class="Home__empty-list">
+      Hey! you haven't added anything yet!
+    </aside>
   </moy-card>
 </section>

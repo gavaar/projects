@@ -68,7 +68,19 @@ export class TransactionService {
     batch.set(dateRef, { [incomeRef.id]: true }, { merge: true });
     tags.map(_tag => batch.set(this.refs.tag.doc(_tag).ref, { [incomeRef.id]: true }, { merge: true }));
 
-    return from(batch.commit()).pipe(map(_ => ({ ...newIncome, id: incomeRef.id, tags: _tags })));
+    return from(batch.commit()).pipe(
+      map(
+        () =>
+          new Income({
+            ...newIncome,
+            id: incomeRef.id,
+            date_added: {
+              seconds: newIncome.date_added.getTime() / 1000,
+              nanoseconds: newIncome.date_added.getTime() * 1000000,
+            },
+          }),
+      ),
+    );
   }
 
   patch = (income: Income & { __changedProp__: string; __prev__: Income[keyof Income] }): Observable<Income> => {

@@ -35,7 +35,7 @@ export class TransactionAddComponent {
     if (this.formValid) {
       const formValue = { ...this._form.value };
       this._service.create(formValue).subscribe(
-        id => this.incomeAdded.emit({ ...formValue, id, date: parseDateReadable(new Date()) }),
+        newIncome => this.incomeAdded.emit(newIncome),
         err => {
           this._form.patchValue(formValue);
           console.log({ err });

@@ -1,0 +1,66 @@
+.MoyTable {
+  width: 100%;
+
+  ::ng-deep .MoyInput {
+    border: 0;
+    padding: 0;
+    height: auto;
+    margin: 0;
+
+    .MoyInput__input {
+      padding: 0;
+    }
+  }
+
+  ::ng-deep .MoyButton {
+    height: 1rem;
+    width: 1rem;
+    opacity: 0.1;
+
+    .mat-icon {
+      font-size: 1rem;
+    }
+  }
+}
+
+.MoyTable .mat-header-row {
+  height: 1rem;
+
+  .mat-header-cell {
+    color: black;
+
+    &:first-of-type {
+      padding-left: 0.5rem;
+    }
+
+    &:last-of-type {
+      padding-right: 0.5rem;
+    }
+  }
+}
+
+.MoyTable .mat-row {
+  height: 1rem;
+
+  &.pair {
+    background-color: rgb(0, 0, 0, 0.05);
+  }
+
+  .mat-cell {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+
+    &:first-of-type {
+      padding-left: 0.5rem;
+    }
+
+    &:last-of-type {
+      padding-right: 0.5rem;
+    }
+  }
+
+  &:hover ::ng-deep .MoyButton {
+    opacity: 1;
+    transition: 0.25s;
+  }
+}

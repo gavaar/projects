@@ -2,10 +2,10 @@
   "name": "Moyney",
   "short_name": "Moy",
   "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "background_color": "#000",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "https://gavaar.github.io/projects/",
+  "start_url": "https://moyney.web.app/",
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

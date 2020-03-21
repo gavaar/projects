@@ -14,7 +14,8 @@
     "target": "es2015",
     "typeRoots": ["node_modules/@types"],
     "paths": {
-      "@libs/*": ["./projects/libs/*"]
+      "@libs/*": ["./projects/libs/*"],
+      "@common/*": ["./projects/moyney/src/app/_common/*"]
     },
     "lib": ["es2018", "dom"],
     "allowJs": true

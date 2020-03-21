@@ -2,27 +2,30 @@ interface MoyButtonConfig {
   icon?: string;
   svgIcon?: string;
   click?: () => any;
+  blur?: () => any;
 }
 
-export enum MoyButtonType {
-  Round = 'round',
+enum MoyButtonType {
+  Round = 'button_round',
 }
 
-export abstract class AbstractMoyButton {
+abstract class AbstractMoyButton {
   icon?: string;
   svgIcon?: string;
   text?: string;
   click?: () => any;
+  blur?: () => any;
   readonly type: MoyButtonType;
 
   constructor(opts: MoyButtonConfig) {
     this.icon = opts.icon || '';
     this.svgIcon = opts.svgIcon || '';
     this.click = opts.click || (() => {});
+    this.blur = opts.blur || (() => {});
   }
 }
 
-export class MoyButton extends AbstractMoyButton {
+class MoyButton extends AbstractMoyButton {
   text?: string;
 
   constructor(opts: { text: string } & MoyButtonConfig) {
@@ -31,10 +34,12 @@ export class MoyButton extends AbstractMoyButton {
   }
 }
 
-export class MoyButtonRound extends AbstractMoyButton {
+class MoyButtonRound extends AbstractMoyButton {
   type = MoyButtonType.Round;
 
   constructor(opts: MoyButtonConfig) {
     super(opts);
   }
 }
+
+export { MoyButtonConfig, MoyButtonType, AbstractMoyButton, MoyButton, MoyButtonRound };

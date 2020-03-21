@@ -1,7 +1,7 @@
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export class State {
-  private _state$ = new BehaviorSubject({});
+  private _state$ = new BehaviorSubject<any>({});
 
   constructor() {}
 
@@ -13,7 +13,7 @@ export class State {
     this._state$.next({ ...this.state, ...newState });
   }
 
-  get state$() {
+  get state$(): Observable<any> {
     return this._state$.asObservable();
   }
 }

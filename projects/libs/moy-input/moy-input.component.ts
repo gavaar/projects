@@ -21,13 +21,7 @@ export class MoyInputComponent implements OnInit, OnDestroy {
       if (status === 'INVALID') {
         this.error = (() => {
           const errorKey = Object.keys(this.config.control.errors)[0];
-
-          switch (errorKey) {
-            case 'required':
-              return 'Field is required';
-            default:
-              return '';
-          }
+          return errors[errorKey];
         })();
       }
     });
@@ -38,3 +32,7 @@ export class MoyInputComponent implements OnInit, OnDestroy {
     this._destroy$.complete();
   }
 }
+
+const errors = {
+  required: 'Field is required',
+};

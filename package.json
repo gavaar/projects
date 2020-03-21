@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-docs": "ng b --prod --baseHref=https://moyney-balancer.firebaseapp.com/ --outputPath=./docs/ --optimization=false",
-    "build-ghp": "ng b --prod --baseHref=https://gavaar.github.io/projects/ --outputPath=./docs/ --optimization=false"
+    "deploy": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ --optimization=false && firebase deploy"
   },
   "private": true,
   "dependencies": {

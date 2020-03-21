@@ -43,7 +43,7 @@ export class AppComponent {
   footerLinks = [{ label: 'privacy', link: '/privacy' }];
 
   constructor(public dialog: MatDialog, private store: Auth, private router: Router) {
-    this.store.state = JSON.parse(localStorage.getItem('state'));
+    this.store.state = JSON.parse(localStorage.getItem('state')) || { user: { uid: '~~default~~' } };
   }
 
   headerConfig = new MoyHeaderConfig({
@@ -56,8 +56,14 @@ export class AppComponent {
       new MoyButtonRound({
         icon: 'person',
         click: () => {
-          const component = this.store.state.user && this.store.state.user.uid ? ProfileComponent : LoginComponent;
-          this.dialog.open(<any>component);
+          const prevUser = this.store.state.user.uid;
+          const component = this.store.state.user.uid !== '~~default~~' ? ProfileComponent : LoginComponent;
+          this.dialog
+            .open(<any>component)
+            .afterClosed()
+            .subscribe(_ => {
+              if (this.store.state.user.uid !== prevUser) location.reload();
+            });
         },
       }),
     ],

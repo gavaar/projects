@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material';
-import { Income } from './home-models';
+import { debounceTime, switchMap } from 'rxjs/operators';
+import { Income } from '../transaction/transaction.models';
+import { TransactionService } from '../transaction/transaction.service';
 import * as config from './home.config';
 import { HomeStore } from './home.store';
 
@@ -10,20 +12,34 @@ import { HomeStore } from './home.store';
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [HomeStore],
+  viewProviders: [TransactionService],
 })
 export class HomeComponent {
   cards = config.cards;
-  recentlyAdded = [];
+  recentlyAdded = config.table(row => this.onDelete(row));
 
-  constructor(public store: HomeStore, private _snack: MatSnackBar) {}
+  constructor(public store: HomeStore, private _service: TransactionService, private _snack: MatSnackBar) {}
+
+  ngOnInit() {
+    this.recentlyAdded.setLoading();
+    this._service.get().subscribe(recentRows => {
+      this.recentlyAdded.addRows(recentRows);
+    });
+    this.recentlyAdded
+      .rowChanges()
+      .pipe(debounceTime(1500), switchMap(this._service.patch))
+      .subscribe(income => this._snack.open(`successfully updated ${income.description}`));
+  }
 
   recentFn = index => index;
 
   pushToRecentlyAdded(income: Income): void {
-    this.recentlyAdded = [...this.recentlyAdded, income];
-    if (this.recentlyAdded.length > 5) {
-      this.recentlyAdded.shift();
-    }
+    this.recentlyAdded.addRows([income]);
     this._snack.open(`successfully added ${income.description}`);
+  }
+
+  onDelete(income: Income) {
+    this.recentlyAdded.removeRows([income]);
+    this._service.delete(income).subscribe(_ => this._snack.open(`deleted ${income.description}`));
   }
 }

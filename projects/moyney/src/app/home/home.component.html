@@ -1,18 +1,12 @@
 <section class="Home">
-  <moy-card [config]="cards.first">Holis</moy-card>
-
-  <moy-card [config]="cards.second">
+  <moy-card [config]="cards.add">
     <moy-transaction-add (incomeAdded)="pushToRecentlyAdded($event)"></moy-transaction-add>
   </moy-card>
 
-  <moy-card [config]="cards.recently_added" *ngIf="recentlyAdded.length">
-    <div style="max-height: 100px; overflow-y: auto;" class="full-center">
-      <div *ngFor="let movement of recentlyAdded; trackBy: recentFn">
-        <p>{{ movement.description }}</p>
-        <p>
-          <strong>{{ movement.amount }}</strong> {{ movement.tags }}
-        </p>
-      </div>
-    </div>
+  <moy-card [config]="cards.recently_added">
+    <moy-table [config]="recentlyAdded"></moy-table>
+    <aside *ngIf="!(recentlyAdded.matrix$ | async).length" class="Home__empty-list">
+      Hey! you haven't added anything yet!
+    </aside>
   </moy-card>
 </section>

@@ -30,7 +30,7 @@ export class LoginComponent {
     this._service.auth(provider).subscribe((user: firebase.auth.UserCredential) => {
       this._store.state = parseUserData(user);
       this._dialogRef.afterClosed().subscribe(() => {
-        this._snack.open('Logged out');
+        this._snack.open(`Welcome ${user.user.displayName}`);
       });
       this._dialogRef.close();
     });

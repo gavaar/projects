@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule } from '@angular/material/table';
 import { MoyButtonModule } from '@libs/moy-button/moy-button.module';
 import { MoyInputModule } from '@libs/moy-input/moy-input.module';
 import { MoyTableComponent } from './moy-table.component';

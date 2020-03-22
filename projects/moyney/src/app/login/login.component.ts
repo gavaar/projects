@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MoyButton } from '@libs/moy-button/moy-button.models';
 import { loginButtons } from './login.config';
 import { AuthType } from './login.models';

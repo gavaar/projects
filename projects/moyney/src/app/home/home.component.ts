@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { debounceTime, switchMap } from 'rxjs/operators';
 import { Income } from '../transaction/transaction.models';
 import { TransactionService } from '../transaction/transaction.service';

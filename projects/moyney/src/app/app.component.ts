@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';

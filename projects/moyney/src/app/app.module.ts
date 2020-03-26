@@ -39,7 +39,6 @@ import { ProfileModule } from './profile/profile.module';
     ProfileModule,
     StaticModule,
   ],
-  entryComponents: [LoginComponent, ProfileComponent],
   providers: [
     AngularFireAuth,
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } },

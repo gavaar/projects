@@ -37,7 +37,7 @@ export class TransactionService {
 
   constructor(private auth: Auth, private db: AngularFirestore) {}
 
-  get(id?: string): Observable<Income[]> {
+  get(): Observable<Income[]> {
     return this.refs.income_ordered.valueChanges({ idField: 'id' }).pipe(
       take(1),
       map(incomes => incomes.map(i => new Income(i))),

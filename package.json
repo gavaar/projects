@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ --optimization=false && firebase deploy"
+    "deploy": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ && firebase deploy"
   },
   "private": true,
   "dependencies": {

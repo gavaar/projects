@@ -1,6 +1,6 @@
 import { AbstractMoyButton, MoyButtonConfig, MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { AbstractMoyInput, InputInterface, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { debounceTime, map, pairwise, startWith, takeUntil } from 'rxjs/operators';
 
 // prettier-ignore
@@ -14,15 +14,45 @@ type Column = {
   type: typeof MoyButtonRound;
   config?: MoyButtonConfig;
 };
+
+type RowOptions<T> = {
+  columns: string[];
+  config: { [column: string]: Column };
+  row: T;
+  destroy$: Subject<unknown>;
+  changes: Subject<T>;
+};
 // prettier-ignore
-type Cell<T> = {
-  [column: string]: AbstractMoyInput<T[keyof T]>
+class Cell<T> {
+  [column: string]:
+    | AbstractMoyInput<T[keyof T]>
     | (AbstractMoyButton & {
       __rowContext__?: { [key: string]: any };
     });
-};
 
-interface MoyTableConfig<T> {
+  constructor({ columns, config, row, destroy$, changes }: RowOptions<T>) {
+    return columns.reduce((input, column) => {
+      const _config = config[column].config || {};
+      const _class = config[column].type;
+      _config['value'] = row[column];
+      input[column] = new _class(<any>_config);
+      const _input = input[column] as AbstractMoyInput<any>;
+      _input['__rowContext__'] = { ...row };
+
+      if (_input.control) {
+        _input.control.valueChanges
+          .pipe(takeUntil(destroy$), debounceTime(500), startWith(_input.control.value), pairwise())
+          .subscribe(([prev, next]) => {
+            row[column as keyof T] = next;
+            changes.next({ ...row, __changedProp__: column, __prev__: prev });
+          });
+      }
+      return input;
+    }, {} as Cell<T>);
+  }
+}
+
+interface MoyTableConfig {
   columns: { [column: string]: Column };
   customColumnText?: { [column: string]: string };
   editableRows?: boolean;
@@ -45,7 +75,7 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
     return this._matrix.asObservable().pipe(map(m => (this._rowLimit ? m.slice(0, this._rowLimit) : m)));
   }
 
-  constructor(config: MoyTableConfig<Partial<T>>) {
+  constructor(config: MoyTableConfig) {
     this.columns = Object.keys(config.columns);
     this._config = config.columns;
     this.customColumnText = config.customColumnText || {};
@@ -66,12 +96,12 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
 
   addRows(rows: T[]): void {
     this._rowDataList.unshift(...rows);
-    this._matrix.next(this._rowDataList.map(this.transformRowToMoyInput));
+    this._matrix.next(this._rowDataList.map(this.transformToMoyInput));
   }
 
   removeRows(rows: T[]): void {
     this._rowDataList = this._rowDataList.filter(r => rows.find(rowToDel => rowToDel.id === r.id) == null);
-    this._matrix.next(this._rowDataList.map(this.transformRowToMoyInput));
+    this._matrix.next(this._rowDataList.map(this.transformToMoyInput));
   }
 
   rowChanges(): Observable<T> {
@@ -86,25 +116,14 @@ export class AbstractMoyTable<T extends { [key: string]: any }> {
     return _loadingRow;
   }
 
-  private transformRowToMoyInput = (row: T): Cell<T> => {
-    return this.columns.reduce((input, column) => {
-      const _config = this._config[column].config || {};
-      const _class = this._config[column].type;
-      _config['value'] = row[column];
-      input[column] = new _class(<any>_config);
-      const _input = input[column] as AbstractMoyInput<any>;
-      _input['__rowContext__'] = { ...row };
-
-      if (_input.control) {
-        _input.control.valueChanges
-          .pipe(takeUntil(this.destroy$), debounceTime(500), startWith(_input.control.value), pairwise())
-          .subscribe(([prev, next]) => {
-            row[column as keyof T] = next;
-            this._rowChanges.next({ ...row, __changedProp__: column, __prev__: prev });
-          });
-      }
-      return input;
-    }, {} as Cell<T>);
+  private transformToMoyInput = (row: T): Cell<T> => {
+    return new Cell({
+      row,
+      columns: this.columns,
+      config: this._config,
+      changes: this._rowChanges,
+      destroy$: this.destroy$,
+    });
   };
 }
 

@@ -3,17 +3,17 @@
   <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
     <th mat-header-cell *matHeaderCellDef>{{ config.customColumnText[column] || column | titlecase }}</th>
 
-    <td mat-cell *matCellDef="let row" [ngSwitch]="row[column].type">
+    <td mat-cell *matCellDef="let row" [ngSwitch]="row.cellMap[column].type">
       <ng-container *ngSwitchCase="InputType.Text">
-        <moy-input [config]="row[column]"></moy-input>
+        <moy-input [config]="row.cellMap[column]"></moy-input>
       </ng-container>
 
       <ng-container *ngSwitchCase="InputType.Number">
-        <moy-input [config]="row[column]"></moy-input>
+        <moy-input [config]="row.cellMap[column]"></moy-input>
       </ng-container>
 
       <ng-container *ngSwitchCase="MoyButtonType.Round">
-        <moy-button [config]="row[column]"></moy-button>
+        <moy-button [config]="row.cellMap[column]"></moy-button>
       </ng-container>
 
       <ng-container *ngSwitchCase="'table_loading'">
@@ -24,6 +24,9 @@
 
   <!-- Row Defs -->
   <tr mat-header-row *matHeaderRowDef="config.columns; sticky: true"></tr>
-  <tr class="pair" mat-row *matRowDef="let row; columns: config.columns; when: isPair"></tr>
-  <tr class="not-pair" mat-row *matRowDef="let row; columns: config.columns; when: isNotPair"></tr>
+  <tr
+    mat-row
+    [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }"
+    *matRowDef="let row; let index = index; columns: config.columns"
+  ></tr>
 </table>

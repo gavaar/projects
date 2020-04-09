@@ -31,7 +31,7 @@ const table = delCallback =>
           icon: 'delete',
           click() {
             if (this.icon === 'delete') this.icon = 'delete_forever';
-            else delCallback(this.__rowContext__);
+            else delCallback(this.__originalRow__);
           },
           blur() {
             this.icon = 'delete';

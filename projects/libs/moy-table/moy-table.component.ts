@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { MoyButtonType } from '@libs/moy-button/moy-button.models';
 import { InputType } from '@libs/moy-input/moy-input.models';
 import { AbstractMoyTable } from './moy-table.abstract';
+import { RowType } from './row/row.abstract';
 
 @Component({
   selector: 'moy-table',
@@ -14,6 +15,7 @@ export class MoyTableComponent {
   @Output() rowChanges = new EventEmitter<{ change: any; id: string }>();
 
   InputType = InputType;
+  RowType = RowType;
   MoyButtonType = MoyButtonType;
 
   columnFn = (index: number) => index;

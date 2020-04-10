@@ -64,3 +64,8 @@
     transition: 0.25s;
   }
 }
+
+.MoyTable__expandable ::ng-deep.MoyInput__input {
+  font-weight: 700;
+  color: black;
+}

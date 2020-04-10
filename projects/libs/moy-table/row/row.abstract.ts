@@ -1,17 +1,21 @@
-import { AbstractMoyButton } from '@libs/moy-button/moy-button.models';
-import { AbstractMoyInput } from '@libs/moy-input/moy-input.models';
+import { AbstractMoyButton, MoyButtonConfig } from '@libs/moy-button/moy-button.models';
+import { AbstractMoyInput, InputInterface, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { Column, RowChanges } from '../moy-table.abstract';
 
+type Column = {
+  type: typeof MoyInput | typeof MoyInputNumber | typeof AbstractMoyButton;
+  config?: Column['type'] extends typeof AbstractMoyInput ? InputInterface<any> : MoyButtonConfig;
+};
+type RowChanges<T> = Partial<T> & { id: string; __prevState__: T };
 enum RowType {
-  default = 'row_default',
-  expandable = 'row_expandable',
+  Default = 'row_default',
+  Expandable = 'row_expandable',
 }
 
 interface RowOptions<T> {
   row: T;
-  config?: { [column: string]: Column };
+  config: { [column: string]: Column };
 }
 
 class AbstractRow<T> {
@@ -55,4 +59,4 @@ class AbstractRow<T> {
   }
 }
 
-export { AbstractRow, RowType, RowOptions };
+export { AbstractRow, Column, RowType, RowChanges, RowOptions };

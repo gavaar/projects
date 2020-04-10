@@ -3,21 +3,15 @@
   <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
     <th mat-header-cell *matHeaderCellDef>{{ config.customColumnText[column] || column | titlecase }}</th>
 
-    <td mat-cell *matCellDef="let row" [ngSwitch]="row.cellMap[column].type">
-      <ng-container *ngSwitchCase="InputType.Text">
-        <moy-input [config]="row.cellMap[column]"></moy-input>
-      </ng-container>
+    <td mat-cell *matCellDef="let row">
+      <ng-container [ngSwitch]="row.type">
+        <ng-container *ngSwitchCase="RowType.Expandable">
+          <ng-container *ngTemplateOutlet="expandableRow; context: { row: row, column: column }"></ng-container>
+        </ng-container>
 
-      <ng-container *ngSwitchCase="InputType.Number">
-        <moy-input [config]="row.cellMap[column]"></moy-input>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="MoyButtonType.Round">
-        <moy-button [config]="row.cellMap[column]"></moy-button>
-      </ng-container>
-
-      <ng-container *ngSwitchCase="'table_loading'">
-        <div class="loading-effect">{{ config.customColumnText[column] ? 'O' : column }}</div>
+        <ng-container *ngSwitchDefault>
+          <ng-container *ngTemplateOutlet="defaultRow; context: { row: row, column: column }"></ng-container>
+        </ng-container>
       </ng-container>
     </td>
   </ng-container>
@@ -30,3 +24,31 @@
     *matRowDef="let row; let index = index; columns: config.columns"
   ></tr>
 </table>
+
+<!-- Expandable Row -->
+<ng-template #expandableRow let-row="row" let-column="column">
+  <ng-container *ngIf="row.cellMap[column].control">
+    <moy-input class="MoyTable__expandable" [config]="row.cellMap[column]"></moy-input>
+  </ng-container>
+</ng-template>
+
+<!-- Default Row-->
+<ng-template #defaultRow let-row="row" let-column="column">
+  <ng-container [ngSwitch]="row.cellMap[column].type">
+    <ng-container *ngSwitchCase="InputType.Text">
+      <moy-input [config]="row.cellMap[column]"></moy-input>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="InputType.Number">
+      <moy-input [config]="row.cellMap[column]"></moy-input>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="MoyButtonType.Round">
+      <moy-button [config]="row.cellMap[column]"></moy-button>
+    </ng-container>
+
+    <ng-container *ngSwitchCase="'table_loading'">
+      <div class="loading-effect">{{ config.customColumnText[column] ? 'O' : column }}</div>
+    </ng-container>
+  </ng-container>
+</ng-template>

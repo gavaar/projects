@@ -16,11 +16,11 @@ interface MoyTableConfig<T> {
 class AbstractMoyTable<T extends { [key: string]: any }> {
   columns: string[];
   customColumnText?: { [column: string]: string };
+  mergeStrategy: { pivot: string; config: MergeStrategyConfig<T> };
 
   private destroy$ = new Subject();
   private _loadingRows: AbstractRow<T>[];
   private _columnConfig: { [column: string]: Column } = {};
-  private _mergeStrategy: { pivot: string; config: MergeStrategyConfig<T> };
   private _rowLimit: number;
   private _rowDataList: T[] = [];
   private _matrix = new BehaviorSubject<AbstractRow<T>[]>([]);
@@ -36,7 +36,7 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
     this.customColumnText = config.customColumnText || {};
     this._rowLimit = config.maxRows;
     if (config.mergeStrategy) {
-      this._mergeStrategy = {
+      this.mergeStrategy = {
         pivot: Object.keys(config.mergeStrategy).find(key => config.mergeStrategy[key] === MergeStrategy.Pivot),
         config: config.mergeStrategy,
       };
@@ -81,8 +81,8 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
   }
 
   private transformToMoyInputList(rows: T[]): AbstractRow<T>[] {
-    if (this._mergeStrategy) {
-      const { pivot, config: _mergeConfig } = this._mergeStrategy;
+    if (this.mergeStrategy) {
+      const { pivot, config: _mergeConfig } = this.mergeStrategy;
       const rowsByPivot = rows.reduce((_byPivot, row: T) => {
         const _currentPivotValue = row[pivot];
         if (!_byPivot[_currentPivotValue]) _byPivot[_currentPivotValue] = [];

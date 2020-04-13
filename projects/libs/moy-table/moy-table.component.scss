@@ -53,6 +53,7 @@
   .mat-cell {
     padding-top: 0.2rem;
     padding-bottom: 0.2rem;
+    position: relative;
 
     &:first-of-type {
       padding-left: 0.5rem;
@@ -88,4 +89,22 @@
 .MoyTable__expandable ::ng-deep.MoyInput__input {
   font-weight: 700;
   color: black;
+}
+
+.MoyTable__expandable-counter {
+  position: absolute;
+  left: -0.8rem;
+  bottom: 0;
+  top: 0;
+  margin: auto;
+  height: 1rem;
+  padding: 0.1rem;
+  box-shadow: 0 0 1px black;
+  background-color: white;
+  font-size: 0.7rem;
+  color: black;
+  font-weight: 700;
+  border-radius: 50%;
+  width: 1rem;
+  text-align: center;
 }

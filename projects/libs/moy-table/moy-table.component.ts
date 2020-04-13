@@ -21,8 +21,4 @@ export class MoyTableComponent {
   MoyButtonType = MoyButtonType;
 
   columnFn = (index: number) => index;
-
-  onRowClick(row) {
-    console.log(row);
-  }
 }

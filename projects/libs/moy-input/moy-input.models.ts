@@ -50,11 +50,6 @@ class MoyInput extends AbstractMoyInput<string> {
 }
 
 class MoyInputNumber extends AbstractMoyInput<number> {
-  constructor(opts: InputInterface<number>) {
-    super(opts);
-    console.log(this.control);
-  }
-
   type = InputType.Number;
 }
 

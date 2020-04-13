@@ -1,6 +1,10 @@
 .MoyTable {
   width: 100%;
 
+  ::ng-deep .mat-table {
+    background-color: transparent;
+  }
+
   ::ng-deep .MoyInput {
     border: 0;
     padding: 0;
@@ -59,10 +63,26 @@
     }
   }
 
+  &.MoyTable__expandable-content {
+    height: 0;
+
+    .mat-cell {
+      padding: 0;
+      height: 0;
+      border: 0;
+      min-height: 0;
+    }
+  }
+
   &:hover ::ng-deep .MoyButton {
     opacity: 1;
     transition: 0.25s;
   }
+}
+
+.MoyTable__row-content {
+  padding: 0.2rem 0.5rem;
+  background-color: #5f9ea03b;
 }
 
 .MoyTable__expandable ::ng-deep.MoyInput__input {

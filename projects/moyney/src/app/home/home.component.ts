@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { debounceTime, switchMap } from 'rxjs/operators';
+import { debounceTime, filter, switchMap } from 'rxjs/operators';
 import { Income } from '../transaction/transaction.models';
 import { TransactionService } from '../transaction/transaction.service';
 import * as config from './home.config';
@@ -27,8 +27,24 @@ export class HomeComponent {
     });
     this.recentlyAdded
       .rowChanges()
-      .pipe(debounceTime(1500), switchMap(this._service.patch))
-      .subscribe(income => this._snack.open(`successfully updated ${income.description}`));
+      .pipe(
+        debounceTime(1000),
+        filter(changes => {
+          const emptyValues = Object.values(changes).filter(value => !value);
+          if (emptyValues.length) {
+            this._snack.open(`Can't update: don't leave blank values for ${changes.__prevState__.description}`);
+            return false;
+          }
+          return true;
+        }),
+        switchMap(this._service.patch),
+      )
+      .subscribe(income => {
+        console.log('before', { ...this.recentlyAdded });
+        this.recentlyAdded.addRows([]);
+        this._snack.open(`successfully updated ${income.description}`);
+        console.log('after', { ...this.recentlyAdded });
+      });
   }
 
   recentFn = index => index;

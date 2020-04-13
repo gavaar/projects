@@ -6,7 +6,7 @@ import {
   CollectionReference,
 } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Auth } from '../auth';
 import { CollectionIncome, Income } from './transaction.models';
@@ -85,6 +85,7 @@ export class TransactionService {
 
   patch = (income: Income & { __prevState__: Income }): Observable<Income> => {
     const { id, description, date, amount, tags } = income;
+
     const batch = this.db.firestore.batch();
     const updates = <Partial<Income>>{ id };
     const incomeRef = this.refs.income.ref.doc(id);
@@ -104,7 +105,6 @@ export class TransactionService {
       alert('this feature is not enabled yet, sorry');
     }
     batch.set(incomeRef, updates, { merge: true });
-
     return from(batch.commit()).pipe(map(_ => ({ ...income.__prevState__, ...updates })));
   };
 

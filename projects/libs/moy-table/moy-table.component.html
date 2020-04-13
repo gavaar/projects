@@ -1,4 +1,4 @@
-<table class="MoyTable" mat-table [dataSource]="config.matrix$">
+<table class="MoyTable" mat-table multiTemplateDataRows [dataSource]="config.matrix$">
   <!-- Column Defs -->
   <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
     <th mat-header-cell *matHeaderCellDef>{{ config.customColumnText[column] || column | titlecase }}</th>
@@ -6,13 +6,21 @@
     <td mat-cell *matCellDef="let row">
       <ng-container [ngSwitch]="row.type">
         <ng-container *ngSwitchCase="RowType.Expandable">
-          <ng-container *ngTemplateOutlet="expandableRow; context: { row: row, column: column }"></ng-container>
+          <ng-container *ngTemplateOutlet="expandableCell; context: { row: row, column: column }"></ng-container>
         </ng-container>
 
         <ng-container *ngSwitchDefault>
-          <ng-container *ngTemplateOutlet="defaultRow; context: { row: row, column: column }"></ng-container>
+          <ng-container *ngTemplateOutlet="defaultCell; context: { row: row, column: column }"></ng-container>
         </ng-container>
       </ng-container>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="__rowContent__">
+    <td mat-cell *matCellDef="let innerRow" [attr.colspan]="config.columns.length">
+      <ng-container
+        *ngTemplateOutlet="expandedInnerCell; context: { row: innerRow, columns: config.columns }"
+      ></ng-container>
     </td>
   </ng-container>
 
@@ -21,19 +29,14 @@
   <tr
     mat-row
     [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }"
+    (click)="row.click()"
     *matRowDef="let row; let index = index; columns: config.columns"
   ></tr>
+  <tr mat-row *matRowDef="let row; columns: ['__rowContent__']" class="MoyTable__expandable-content"></tr>
 </table>
 
-<!-- Expandable Row -->
-<ng-template #expandableRow let-row="row" let-column="column">
-  <ng-container *ngIf="row.cellMap[column].control">
-    <moy-input class="MoyTable__expandable" [config]="row.cellMap[column]"></moy-input>
-  </ng-container>
-</ng-template>
-
 <!-- Default Row-->
-<ng-template #defaultRow let-row="row" let-column="column">
+<ng-template #defaultCell let-row="row" let-column="column">
   <ng-container [ngSwitch]="row.cellMap[column].type">
     <ng-container *ngSwitchCase="InputType.Text">
       <moy-input [config]="row.cellMap[column]"></moy-input>
@@ -51,4 +54,25 @@
       <div class="loading-effect">{{ config.customColumnText[column] ? 'O' : column }}</div>
     </ng-container>
   </ng-container>
+</ng-template>
+
+<!-- Expandable Row -->
+<ng-template #expandableCell let-row="row" let-column="column">
+  <ng-container *ngIf="row.cellMap[column].control">
+    <moy-input class="MoyTable__expandable" [config]="row.cellMap[column]"></moy-input>
+  </ng-container>
+</ng-template>
+
+<!-- Inner Row -->
+<ng-template #expandedInnerCell let-row="row" let-columns="columns">
+  <div class="MoyTable__row-content" [@verticalExpandCollapse] *ngIf="row.expanded">
+    <table mat-table [dataSource]="row.innerRows">
+      <ng-container [matColumnDef]="_column" *ngFor="let _column of columns">
+        <td mat-cell *matCellDef="let innerRow">
+          <ng-container *ngTemplateOutlet="defaultCell; context: { row: innerRow, column: _column }"></ng-container>
+        </td>
+      </ng-container>
+      <tr mat-row *matRowDef="let innerRow; columns: columns"></tr>
+    </table>
+  </div>
 </ng-template>

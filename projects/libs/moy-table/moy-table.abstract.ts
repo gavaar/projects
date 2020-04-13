@@ -95,7 +95,6 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
         return new ExpandableRow({ innerRows: rows, mergeStrategy: _mergeConfig, config: this._columnConfig });
       });
 
-      console.log({ parentRows });
       return parentRows;
     }
 

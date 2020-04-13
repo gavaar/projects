@@ -50,6 +50,7 @@ const disableControlsFromConfig = <T>(cellMap: { [column: string]: AbstractMoyIn
 class ExpandableRow<T> extends AbstractRow<T> {
   type = RowType.Expandable;
   innerRows: Row<T>[];
+  expanded = false;
 
   constructor(opts: ExpandableRowOptions<T>) {
     super({
@@ -61,6 +62,10 @@ class ExpandableRow<T> extends AbstractRow<T> {
     });
     this.innerRows = opts.innerRows;
     disableControlsFromConfig(this.cellMap as { [column: string]: AbstractMoyInput<T> });
+  }
+
+  click() {
+    this.expanded = !this.expanded;
   }
 }
 

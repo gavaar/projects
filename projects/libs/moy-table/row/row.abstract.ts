@@ -1,12 +1,11 @@
-import { AbstractMoyButton, MoyButtonConfig } from '@libs/moy-button/moy-button.models';
+import { AbstractMoyButton, MoyButton, MoyButtonConfig } from '@libs/moy-button/moy-button.models';
 import { AbstractMoyInput, InputInterface, MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 import { Observable, Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
-type Column = {
-  type: typeof MoyInput | typeof MoyInputNumber | typeof AbstractMoyButton;
-  config?: Column['type'] extends typeof AbstractMoyInput ? InputInterface<any> : MoyButtonConfig;
-};
+type InputColumn = { type: typeof MoyInput | typeof MoyInputNumber; config?: InputInterface<any> };
+type ButtonColumn = { type: typeof MoyButton; config?: MoyButtonConfig };
+type Column = InputColumn | ButtonColumn;
 type RowChanges<T> = Partial<T> & { id: string; __prevState__: T };
 enum RowType {
   Default = 'row_default',
@@ -39,7 +38,7 @@ class AbstractRow<T> {
       const _class = config[cellColumn].type;
       const _cellConfig = config[cellColumn].config;
 
-      _cellMap[cellColumn] = new _class(_cellConfig);
+      _cellMap[cellColumn] = new _class(<any>_cellConfig);
       _cellMap[cellColumn].__originalRow__ = { ...this._rowData };
 
       const _control = (<AbstractMoyInput<T>>_cellMap[cellColumn]).control;
@@ -57,6 +56,8 @@ class AbstractRow<T> {
       return _cellMap;
     }, {} as AbstractRow<T>['cellMap']);
   }
+
+  click() {}
 }
 
 export { AbstractRow, Column, RowType, RowChanges, RowOptions };

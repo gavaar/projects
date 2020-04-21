@@ -52,6 +52,8 @@ class ExpandableRow<T> extends AbstractRow<T> {
   innerRows: Row<T>[];
   expanded = false;
 
+  private _mergeStrat: ExpandableRowOptions<T>['mergeStrategy'];
+
   constructor(opts: ExpandableRowOptions<T>) {
     super({
       row: getRowFromRowList(
@@ -61,6 +63,17 @@ class ExpandableRow<T> extends AbstractRow<T> {
       config: opts.config,
     });
     this.innerRows = opts.innerRows;
+    this._mergeStrat = opts.mergeStrategy;
+    disableControlsFromConfig(this.cellMap as { [column: string]: AbstractMoyInput<T> });
+  }
+
+  addRow(row: Row<T>) {
+    this.innerRows = [row, ...this.innerRows];
+    this._rowData = getRowFromRowList(
+      this.innerRows.map(r => r.rowData),
+      this._mergeStrat,
+    );
+    this.cellMap = this.buildCellMap();
     disableControlsFromConfig(this.cellMap as { [column: string]: AbstractMoyInput<T> });
   }
 

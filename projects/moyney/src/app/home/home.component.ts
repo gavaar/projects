@@ -23,7 +23,7 @@ export class HomeComponent {
   ngOnInit() {
     this.recentlyAdded.setLoading();
     this._service.get().subscribe(recentRows => {
-      this.recentlyAdded.addRows(recentRows);
+      this.recentlyAdded.addRows(recentRows.reverse());
     });
     this.recentlyAdded
       .rowChanges()

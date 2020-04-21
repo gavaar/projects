@@ -53,6 +53,7 @@
     "singleQuote": true,
     "trailingComma": "all",
     "arrowParens": "avoid",
-    "jsxBracketSameLine": true
+    "jsxBracketSameLine": true,
+    "endOfLine": "auto"
   }
 }

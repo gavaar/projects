@@ -20,8 +20,9 @@ interface RowOptions<T> {
 class AbstractRow<T> {
   cellMap: { [column: string]: (AbstractMoyInput<T[keyof T]> | AbstractMoyButton) & { __originalRow__?: T } };
 
-  private _rowData: T;
+  protected _rowData: T;
   private _rowChanges = new Subject<RowChanges<T>>();
+  private _config: RowOptions<T>['config'];
 
   get rowData(): T {
     return this._rowData;
@@ -34,9 +35,16 @@ class AbstractRow<T> {
 
   constructor({ row: rowValues, config }: RowOptions<T>) {
     this._rowData = rowValues;
-    this.cellMap = Object.keys(config).reduce((_cellMap, cellColumn) => {
-      const _class = config[cellColumn].type;
-      const _cellConfig = config[cellColumn].config;
+    this._config = config;
+    this.cellMap = this.buildCellMap();
+  }
+
+  click() {}
+
+  protected buildCellMap() {
+    return Object.keys(this._config).reduce((_cellMap, cellColumn) => {
+      const _class = this._config[cellColumn].type;
+      const _cellConfig = this._config[cellColumn].config;
 
       _cellMap[cellColumn] = new _class(<any>_cellConfig);
       _cellMap[cellColumn].__originalRow__ = { ...this._rowData };
@@ -44,7 +52,7 @@ class AbstractRow<T> {
       const _control = (<AbstractMoyInput<T>>_cellMap[cellColumn]).control;
 
       if (_control) {
-        _control.setValue(rowValues[cellColumn]);
+        _control.setValue(this._rowData[cellColumn]);
         _control.valueChanges.pipe(debounceTime(500), distinctUntilChanged()).subscribe((newValue: T[keyof T]) => {
           const id: string = this._rowData['id'];
           const __prevState__ = { ...this._rowData };
@@ -56,8 +64,6 @@ class AbstractRow<T> {
       return _cellMap;
     }, {} as AbstractRow<T>['cellMap']);
   }
-
-  click() {}
 }
 
 export { AbstractRow, Column, RowType, RowChanges, RowOptions };

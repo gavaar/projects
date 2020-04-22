@@ -73,11 +73,11 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
         );
       } else {
         const _expandable = this._rowMap.get(_pivot) as ExpandableRow<T>;
-        const _previousInner = _expandable.innerRows;
-        const _newExpandable = new ExpandableRow({
-          mergeStrategy: this.mergeStrategy.config,
+        const _innerRows = [_newRow, ..._expandable.innerRows];
+        const _newExpandable = new ExpandableRow<T>({
           config: this._columnConfig,
-          innerRows: [_newRow, ..._previousInner],
+          mergeStrategy: this.mergeStrategy.config,
+          innerRows: _innerRows,
         });
         _newExpandable.expanded = _expandable.expanded;
         this._rowMap.delete(_pivot);
@@ -97,21 +97,14 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
       } else {
         const _expandable = this._rowMap.get(_pivot) as ExpandableRow<T>;
         const _deletingRowIds = rows.map(r => r.id);
-        const _newInner = _expandable.innerRows.filter(({ rowData }) => !_deletingRowIds.includes(rowData.id));
-        const _newExpandable = (() => {
-          if (_newInner.length > 1) {
-            const __expandable = new ExpandableRow({
-              mergeStrategy: this.mergeStrategy.config,
-              config: this._columnConfig,
-              innerRows: [..._newInner],
-            });
-            __expandable.expanded = _expandable.expanded;
-            return __expandable;
-          }
-          return new Row({ row: _newInner[0].rowData, config: this._columnConfig });
-        })();
-        this._rowMap.delete(_pivot);
-        this._rowMap.set(_pivot, _newExpandable);
+        _expandable.innerRows = _expandable.innerRows.filter(({ rowData }) => !_deletingRowIds.includes(rowData.id));
+
+        if (_expandable.innerRows.length <= 1) {
+          this._rowMap.set(_pivot, new Row({ row: _expandable.innerRows[0].rowData, config: this._columnConfig }));
+        } else {
+          _expandable.refreshValues();
+          this._rowMap.set(_pivot, _expandable);
+        }
       }
     });
 
@@ -133,7 +126,7 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
 
   private transformToMoyInput = (row: T): AbstractRow<T> => {
     const newRow = new Row({ row, config: this._columnConfig });
-    newRow.rowChanges.pipe(takeUntil(this.destroy$)).subscribe(change => {
+    newRow.cellChanges.pipe(takeUntil(this.destroy$)).subscribe(change => {
       this._rowChanges.next(<RowChanges<T>>change);
     });
     return newRow;

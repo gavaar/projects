@@ -21,14 +21,14 @@ class AbstractRow<T> {
   cellMap: { [column: string]: (AbstractMoyInput<T[keyof T]> | AbstractMoyButton) & { __originalRow__?: T } };
 
   protected _rowData: T;
-  private _rowChanges = new Subject<RowChanges<T>>();
+  private _cellChanges = new Subject<RowChanges<T>>();
   private _config: RowOptions<T>['config'];
 
   get rowData(): T {
     return this._rowData;
   }
-  get rowChanges(): Observable<RowChanges<T>> {
-    return this._rowChanges.asObservable();
+  get cellChanges(): Observable<RowChanges<T>> {
+    return this._cellChanges.asObservable();
   }
 
   readonly type: RowType;
@@ -57,7 +57,7 @@ class AbstractRow<T> {
           const id: string = this._rowData['id'];
           const __prevState__ = { ...this._rowData };
           this._rowData[cellColumn] = newValue;
-          this._rowChanges.next(<RowChanges<T>>{ id, __prevState__, [cellColumn]: newValue });
+          this._cellChanges.next(<RowChanges<T>>{ id, __prevState__, [cellColumn]: newValue });
         });
       }
 

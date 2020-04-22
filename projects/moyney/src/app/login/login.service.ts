@@ -45,7 +45,6 @@ export class LoginService {
 }
 
 function providerBuilder(type: AuthType) {
-  console.log(firebase);
   switch (type) {
     case AuthType.Fb:
       return new firebase.auth.FacebookAuthProvider();

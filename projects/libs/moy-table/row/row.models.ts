@@ -1,4 +1,5 @@
 import { AbstractMoyInput } from '@libs/moy-input/moy-input.models';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { AbstractRow, Column, RowType } from './row.abstract';
 
 /* ROW */
@@ -49,9 +50,19 @@ const disableControlsFromConfig = <T>(cellMap: { [column: string]: AbstractMoyIn
 
 class ExpandableRow<T> extends AbstractRow<T> {
   type = RowType.Expandable;
-  innerRows: Row<T>[];
   expanded = false;
 
+  get innerRows(): Row<T>[] {
+    return this._innerRows.getValue();
+  }
+  set innerRows(rows: Row<T>[]) {
+    this._innerRows.next(rows);
+  }
+  get innerRows$(): Observable<Row<T>[]> {
+    return this._innerRows.asObservable();
+  }
+
+  private _innerRows = new BehaviorSubject<Row<T>[]>([]);
   private _mergeStrat: ExpandableRowOptions<T>['mergeStrategy'];
 
   constructor(opts: ExpandableRowOptions<T>) {
@@ -62,13 +73,17 @@ class ExpandableRow<T> extends AbstractRow<T> {
       ),
       config: opts.config,
     });
-    this.innerRows = opts.innerRows;
+    this._innerRows.next(opts.innerRows);
     this._mergeStrat = opts.mergeStrategy;
     disableControlsFromConfig(this.cellMap as { [column: string]: AbstractMoyInput<T> });
   }
 
   addRow(row: Row<T>) {
-    this.innerRows = [row, ...this.innerRows];
+    this._innerRows.next([row, ...this.innerRows]);
+    this.refreshValues();
+  }
+
+  refreshValues() {
     this._rowData = getRowFromRowList(
       this.innerRows.map(r => r.rowData),
       this._mergeStrat,

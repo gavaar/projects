@@ -68,7 +68,7 @@
 
 <!-- Inner Row -->
 <ng-template #expandedInnerCell let-row="row" let-columns="columns">
-  <div class="MoyTable__row-content" [@verticalExpandCollapse] *ngIf="row.expanded">
+  <div class="MoyTable__row-content" [@verticalExpandCollapse]="row.expanded ? 'expanded' : 'collapsed'">
     <table mat-table [dataSource]="row.innerRows">
       <ng-container [matColumnDef]="_column" *ngFor="let _column of columns; trackBy: columnFn">
         <td mat-cell *matCellDef="let innerRow">

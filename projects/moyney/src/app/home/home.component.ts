@@ -40,10 +40,8 @@ export class HomeComponent {
         switchMap(this._service.patch),
       )
       .subscribe(income => {
-        console.log('before', { ...this.recentlyAdded });
         this.recentlyAdded.addRows([]);
-        this._snack.open(`successfully updated ${income.description}`);
-        console.log('after', { ...this.recentlyAdded });
+        this._snack.open(`Successfully updated ${income.description}`);
       });
   }
 
@@ -51,11 +49,11 @@ export class HomeComponent {
 
   pushToRecentlyAdded(income: Income): void {
     this.recentlyAdded.addRows([income]);
-    this._snack.open(`successfully added ${income.description}`);
+    this._snack.open(`Successfully added ${income.description}`);
   }
 
   onDelete(income: Income) {
     this.recentlyAdded.removeRows([income]);
-    this._service.delete(income).subscribe(_ => this._snack.open(`deleted ${income.description}`));
+    this._service.delete(income).subscribe(_ => this._snack.open(`Deleted ${income.description}`));
   }
 }

@@ -3,6 +3,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import * as firebase from 'firebase/app';
+import 'firebase/auth';
 import { from, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { AuthType, PendingAuth } from './login.models';
@@ -16,7 +17,7 @@ export class LoginService {
   auth(type: AuthType): Observable<firebase.auth.UserCredential> {
     const provider = providerBuilder(type);
 
-    return from(this.afAuth.auth.signInWithPopup(provider)).pipe(
+    return from(this.afAuth.signInWithPopup(provider)).pipe(
       tap(
         user => {
           if (this._pending) {

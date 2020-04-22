@@ -6,7 +6,7 @@ import {
   CollectionReference,
 } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of, throwError } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { Auth } from '../auth';
 import { CollectionIncome, Income } from './transaction.models';
@@ -83,25 +83,29 @@ export class TransactionService {
     );
   }
 
-  patch = (income: Income & { __changedProp__: string; __prev__: Income[keyof Income] }): Observable<Income> => {
-    const { id, description, date, amount, tags, __prev__: prev, __changedProp__: changed } = income;
+  patch = (income: Income & { __prevState__: Income }): Observable<Income> => {
+    const { id, description, date, amount, tags } = income;
+
     const batch = this.db.firestore.batch();
+    const updates = <Partial<Income>>{ id };
     const incomeRef = this.refs.income.ref.doc(id);
 
-    batch.set(incomeRef, { description, date, amount }, { merge: true });
-    switch (changed) {
-      case 'description':
-        const descriptionPrev = this.refs.description.ref.doc(prev as string);
-        const descriptionNext = this.refs.description.ref.doc(description);
-        batch.update(descriptionPrev, { [id]: firebase.firestore.FieldValue.delete() });
-        batch.set(descriptionNext, { [id]: true }, { merge: true });
-        break;
-      case 'date':
-        alert('this feature is not entabled yet');
-        break;
+    if (description) {
+      updates.description = description;
+      const _prevDescription = income.__prevState__.description;
+      const _prevDescriptionRef = this.refs.description.doc(_prevDescription).ref;
+      const _newDescriptionREf = this.refs.description.doc(description).ref;
+      batch.update(_prevDescriptionRef, { [id]: firebase.firestore.FieldValue.delete() });
+      batch.set(_newDescriptionREf, { [id]: true }, { merge: true });
     }
-
-    return from(batch.commit()).pipe(map(_ => ({ id, description, date, amount, tags })));
+    if (amount) {
+      updates.amount = amount;
+    }
+    if (date || tags) {
+      alert('this feature is not enabled yet, sorry');
+    }
+    batch.set(incomeRef, updates, { merge: true });
+    return from(batch.commit()).pipe(map(_ => ({ ...income.__prevState__, ...updates })));
   };
 
   delete(income: Income): Observable<void> {

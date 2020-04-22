@@ -7,6 +7,6 @@ export class ProfileService {
   constructor(private afAuth: AngularFireAuth) {}
 
   logout() {
-    return from(this.afAuth.auth.signOut());
+    return from(this.afAuth.signOut());
   }
 }

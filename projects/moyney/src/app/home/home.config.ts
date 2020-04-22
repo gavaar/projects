@@ -1,6 +1,7 @@
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { AbstractMoyCard, ExpandableMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
 import { MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
+import { MergeStrategy } from '@libs/moy-table/moy-table.abstract';
 import { MoyTable } from '@libs/moy-table/moy-table.models';
 import { Income } from '../transaction/transaction.models';
 
@@ -31,13 +32,18 @@ const table = delCallback =>
           icon: 'delete',
           click() {
             if (this.icon === 'delete') this.icon = 'delete_forever';
-            else delCallback(this.__rowContext__);
+            else delCallback(this.__originalRow__);
           },
           blur() {
             this.icon = 'delete';
           },
         },
       },
+    },
+    mergeStrategy: {
+      description: MergeStrategy.Pivot,
+      amount: MergeStrategy.Sum,
+      date: MergeStrategy.Last,
     },
     customColumnText: { delete: ' ' },
     editableRows: true,

@@ -23,7 +23,7 @@ const cards: { [card: string]: AbstractMoyCard } = {
 const table = delCallback =>
   new MoyTable<Income>({
     columns: {
-      description: { type: MoyInput },
+      description: { type: MoyInput, config: { controlOptions: { updateOn: 'blur' } } },
       amount: { type: MoyInputNumber },
       date: { type: MoyInput },
       delete: {

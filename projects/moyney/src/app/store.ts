@@ -5,6 +5,7 @@ import { State } from './state';
 
 const state = new State();
 
+// TODO: Add Angular decorator.
 export abstract class Store<T> implements OnDestroy {
   private _state = {};
   private _destroy$ = new Subject();

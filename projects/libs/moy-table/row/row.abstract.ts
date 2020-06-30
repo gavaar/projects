@@ -7,6 +7,7 @@ type InputColumn = { type: typeof MoyInput | typeof MoyInputNumber; config?: Inp
 type ButtonColumn = { type: typeof MoyButton; config?: MoyButtonConfig };
 type Column = InputColumn | ButtonColumn;
 type RowChanges<T> = Partial<T> & { id: string; __prevState__: T };
+type CellMap<T> = { [column: string]: (AbstractMoyInput<T[keyof T]> | AbstractMoyButton) & { __originalRow__?: T } };
 enum RowType {
   Default = 'row_default',
   Expandable = 'row_expandable',
@@ -18,7 +19,7 @@ interface RowOptions<T> {
 }
 
 class AbstractRow<T> {
-  cellMap: { [column: string]: (AbstractMoyInput<T[keyof T]> | AbstractMoyButton) & { __originalRow__?: T } };
+  cellMap: CellMap<T>;
 
   protected _rowData: T;
   private _cellChanges = new Subject<RowChanges<T>>();
@@ -41,12 +42,12 @@ class AbstractRow<T> {
 
   click() {}
 
-  protected buildCellMap() {
+  protected buildCellMap(): CellMap<T> {
     return Object.keys(this._config).reduce((_cellMap, cellColumn) => {
       const _class = this._config[cellColumn].type;
       const _cellConfig = this._config[cellColumn].config;
 
-      _cellMap[cellColumn] = new _class(<any>_cellConfig);
+      _cellMap[cellColumn] = this.cellMap ? this.cellMap[cellColumn] : new _class(<any>_cellConfig);
       _cellMap[cellColumn].__originalRow__ = { ...this._rowData };
 
       const _control = (<AbstractMoyInput<T>>_cellMap[cellColumn]).control;

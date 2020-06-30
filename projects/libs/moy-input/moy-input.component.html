@@ -5,6 +5,7 @@
   <input
     class="MoyInput__input"
     autocapitalize="none"
+    (keydown.enter)="config.control.updateOn === 'blur' && $event.target.blur()"
     [attr.autofocus]="config.autofocus ? '' : null"
     [type]="config.type"
     [placeholder]="config.floatingLabel || !config.label ? error || config.placeholder : ''"

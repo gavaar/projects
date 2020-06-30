@@ -83,7 +83,7 @@ class ExpandableRow<T> extends AbstractRow<T> {
     this.refreshValues();
   }
 
-  refreshValues() {
+  refreshValues(): void {
     this._rowData = getRowFromRowList(
       this.innerRows.map(r => r.rowData),
       this._mergeStrat,

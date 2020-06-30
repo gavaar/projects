@@ -1,4 +1,4 @@
-import { FormControl, Validators } from '@angular/forms';
+import { AbstractControlOptions, FormControl, Validators } from '@angular/forms';
 
 enum InputType {
   Text = 'text',
@@ -13,6 +13,7 @@ interface InputInterface<T> {
   controlOptions?: {
     required?: boolean;
     disabled?: boolean;
+    updateOn?: AbstractControlOptions['updateOn'];
   };
 }
 
@@ -29,7 +30,8 @@ abstract class AbstractMoyInput<T> {
     const options = p.controlOptions || {};
     const controlValue = { value: p.value, disabled: options.disabled };
     const validators = options.required ? [Validators.required] : [];
-    this.control = new FormControl(controlValue, validators);
+    const updateOn = options.updateOn || 'change';
+    this.control = new FormControl(controlValue, { validators, updateOn });
     this.label = p.label;
     this.placeholder = p.placeholder || '';
     this.floatingLabel = p.value != null;

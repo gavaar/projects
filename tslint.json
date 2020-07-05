@@ -3,6 +3,9 @@
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "align": false,
+    "deprecation": {
+      "severity": "warning"
+    },
     "ordered-imports": true,
     "prettier": true,
     "max-line-length": [

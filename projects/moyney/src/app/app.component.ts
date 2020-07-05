@@ -7,7 +7,7 @@ import { Auth } from './auth';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 
-const MOYNEY_VERSION = '0.15.5';
+const MOYNEY_VERSION = '0.16.0';
 
 @Component({
   selector: 'moy-root',

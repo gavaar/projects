@@ -1,5 +1,5 @@
 <article class="MoyCard">
-  <span class="MoyCard__title">
+  <span class="MoyCard__title" [ngClass]="{ expandable: config.type === MoyCardType.Expandable }">
     <span class="MoyCard__title-text">
       {{ config.title }}
     </span>
@@ -21,5 +21,5 @@
     <ng-content></ng-content>
   </div>
 
-  <ng-template #singleLine> <hr class="MoyCard__divider"/></ng-template>
+  <ng-template #singleLine> <hr class="MoyCard__divider" /></ng-template>
 </article>

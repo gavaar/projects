@@ -1,5 +1,5 @@
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
-import { AbstractMoyCard, ExpandableMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
+import { AbstractMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
 import { MoyInput, MoyInputNumber } from '@libs/moy-input/moy-input.models';
 import { MergeStrategy } from '@libs/moy-table/moy-table.abstract';
 import { MoyTable } from '@libs/moy-table/moy-table.models';
@@ -7,7 +7,7 @@ import { Income } from '../transaction/transaction.models';
 
 const cards: { [card: string]: AbstractMoyCard } = {
   add: new MoyCard({ title: 'Add Income' }),
-  recently_added: new ExpandableMoyCard({
+  recently_added: new MoyCard({
     title: 'Recent Movements',
     suffixButtons: [
       new MoyButtonRound({

@@ -1,26 +1,32 @@
 import { AbstractMoyButton } from '@libs/moy-button/moy-button.models';
 
-export enum MoyCardType {
+interface AbstractMoyCardConfig {
+  title: string;
+  suffixButtons?: AbstractMoyButton[];
+  showContent?: true | null;
+}
+
+enum MoyCardType {
   Expandable = 'expandable',
 }
 
-export abstract class AbstractMoyCard {
+abstract class AbstractMoyCard {
   title: string;
   readonly type: MoyCardType;
 
   suffixButtons?: AbstractMoyButton[] = [];
   showContent?: boolean | null;
-  toggleView?(): void | null;
+  toggleView?(): void;
 
-  constructor(config: Partial<AbstractMoyCard>) {
+  constructor(config: Partial<AbstractMoyCardConfig>) {
     this.title = config.title || '';
     this.suffixButtons = config.suffixButtons;
   }
 }
 
-export class MoyCard extends AbstractMoyCard {}
+class MoyCard extends AbstractMoyCard {}
 
-export class ExpandableMoyCard extends AbstractMoyCard {
+class ExpandableMoyCard extends AbstractMoyCard {
   type = MoyCardType.Expandable;
 
   private _showContent = true;
@@ -29,7 +35,7 @@ export class ExpandableMoyCard extends AbstractMoyCard {
     return this._showContent;
   }
 
-  constructor(config: Partial<ExpandableMoyCard>) {
+  constructor(config: Partial<AbstractMoyCardConfig>) {
     super(config);
   }
 
@@ -37,3 +43,5 @@ export class ExpandableMoyCard extends AbstractMoyCard {
     this._showContent = !this._showContent;
   }
 }
+
+export { MoyCardType, AbstractMoyCard, MoyCard, ExpandableMoyCard };

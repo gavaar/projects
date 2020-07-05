@@ -7,6 +7,8 @@ import { Auth } from './auth';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 
+const MOYNEY_VERSION = '0.15.5';
+
 @Component({
   selector: 'moy-root',
   template: `
@@ -14,7 +16,12 @@ import { ProfileComponent } from './profile/profile.component';
     <div class="Moyney">
       <router-outlet></router-outlet>
     </div>
-    <moy-footer [config]="{ message: 'Created by F. Santorelli ' + currentYear, links: footerLinks }"></moy-footer>
+    <moy-footer
+      [config]="{
+        message: 'Created by F. Santorelli ' + currentYear,
+        links: footerLinks
+      }"
+    ></moy-footer>
   `,
   styles: [
     `
@@ -40,7 +47,10 @@ export class AppComponent {
 
   title = 'moyney';
   currentYear = new Date().getFullYear();
-  footerLinks = [{ label: 'privacy', link: '/privacy' }];
+  footerLinks = [
+    { label: MOYNEY_VERSION, link: '#' },
+    { label: 'privacy', link: '/privacy' },
+  ];
 
   constructor(public dialog: MatDialog, private store: Auth, private router: Router) {
     this.store.state = JSON.parse(localStorage.getItem('state')) || { user: { uid: '~~default~~' } };

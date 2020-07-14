@@ -7,7 +7,6 @@ import * as config from './home.config';
 import { HomeStore } from './home.store';
 
 @Component({
-  selector: 'moy-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

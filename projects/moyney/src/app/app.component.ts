@@ -1,13 +1,14 @@
-import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
+import { CHANGELOG } from '../assets/static/changelog';
 import { Auth } from './auth';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 
-const MOYNEY_VERSION = '0.16.2';
+const MOYNEY_VERSION = CHANGELOG[0].version;
 
 @Component({
   selector: 'moy-root',
@@ -50,6 +51,7 @@ export class AppComponent {
   footerLinks = [
     { label: MOYNEY_VERSION, link: '#' },
     { label: 'privacy', link: '/privacy' },
+    { label: 'changelog', link: '/changelog' },
   ];
 
   constructor(public dialog: MatDialog, private store: Auth, private router: Router) {

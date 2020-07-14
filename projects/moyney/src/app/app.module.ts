@@ -14,11 +14,8 @@ import { MoyHeaderModule } from '@libs/moy-header/moy-header.module';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
-import { ProfileComponent } from './profile/profile.component';
 import { ProfileModule } from './profile/profile.module';
-import { StaticModule } from './_static/static.modules';
 
 @NgModule({
   declarations: [AppComponent],
@@ -37,7 +34,6 @@ import { StaticModule } from './_static/static.modules';
     MoyFooterModule,
     LoginModule,
     ProfileModule,
-    StaticModule,
   ],
   providers: [
     AngularFireAuth,

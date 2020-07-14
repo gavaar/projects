@@ -23,4 +23,8 @@ body {
   overflow: hidden;
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
+
+  & > moy-root > .Moyney > ng-component > section {
+    max-height: calc(100vh - 5.5rem);
+  }
 }

@@ -5,16 +5,26 @@ import { MergeStrategy } from '@libs/moy-table/moy-table.abstract';
 import { MoyTable } from '@libs/moy-table/moy-table.models';
 import { Income } from '../transaction/transaction.models';
 
+enum MovementSummaryTitles {
+  Summary = 'Summary',
+  RecentMovements = 'Recent Movements',
+}
+
+function recentlyAddedToSummary() {
+  const { icon } = cards.recently_added_and_summary.suffixButtons[0];
+  cards.recently_added_and_summary.suffixButtons[0].icon = icon === 'view_list' ? 'timeline' : 'view_list';
+  cards.recently_added_and_summary.title =
+    icon === 'view_list' ? MovementSummaryTitles.Summary : MovementSummaryTitles.RecentMovements;
+}
+
 const cards: { [card: string]: AbstractMoyCard } = {
   add: new MoyCard({ title: 'Add Income' }),
-  recently_added: new MoyCard({
-    title: 'Recent Movements',
+  recently_added_and_summary: new MoyCard({
+    title: MovementSummaryTitles.Summary,
     suffixButtons: [
       new MoyButtonRound({
         icon: 'timeline',
-        click() {
-          this.icon = this.icon === 'view_list' ? 'timeline' : 'view_list';
-        },
+        click: recentlyAddedToSummary,
       }),
     ],
   }),
@@ -50,4 +60,4 @@ const table = delCallback =>
     maxRows: 10,
   });
 
-export { cards, table };
+export { cards, table, MovementSummaryTitles };

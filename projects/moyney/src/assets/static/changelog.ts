@@ -1,5 +1,9 @@
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.16.4',
+    changes: ['Added summary view as default view'],
+  },
+  {
     version: '0.16.3',
     changes: [
       'Added changelog to project. This is the first version of it',

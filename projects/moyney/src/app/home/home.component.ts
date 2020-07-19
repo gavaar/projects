@@ -4,20 +4,20 @@ import { debounceTime, filter, switchMap } from 'rxjs/operators';
 import { Income } from '../transaction/transaction.models';
 import { TransactionService } from '../transaction/transaction.service';
 import * as config from './home.config';
-import { HomeStore } from './home.store';
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [HomeStore],
   viewProviders: [TransactionService],
 })
 export class HomeComponent {
   cards = config.cards;
   recentlyAdded = config.table(row => this.onDelete(row));
 
-  constructor(public store: HomeStore, private _service: TransactionService, private _snack: MatSnackBar) {}
+  MovementSummaryTitles = config.MovementSummaryTitles;
+
+  constructor(private _service: TransactionService, private _snack: MatSnackBar) {}
 
   ngOnInit() {
     this.recentlyAdded.setLoading();

@@ -1,5 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { AbstractMoyButton } from '@libs/moy-button/moy-button.models';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AbstractMoyCard, MoyCardType } from './moy-card.models';
 
 @Component({
@@ -10,7 +9,6 @@ import { AbstractMoyCard, MoyCardType } from './moy-card.models';
 })
 export class MoyCardComponent {
   @Input() config: AbstractMoyCard;
-  @Output() buttonClick = new EventEmitter<AbstractMoyButton>();
 
   MoyCardType = MoyCardType;
 

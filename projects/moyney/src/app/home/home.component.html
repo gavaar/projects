@@ -4,15 +4,6 @@
   </moy-card>
 
   <moy-card [config]="cards.recently_added_and_summary">
-    <ng-container *ngIf="cards.recently_added_and_summary.title === MovementSummaryTitles.Summary">
-      <span>I will give you a summary here! :D</span>
-    </ng-container>
-
-    <ng-container *ngIf="cards.recently_added_and_summary.title === MovementSummaryTitles.RecentMovements">
-      <moy-table [config]="recentlyAdded"></moy-table>
-      <aside *ngIf="!(recentlyAdded.matrix$ | async).length" class="Home__empty-list">
-        Hey! you haven't added anything yet!
-      </aside>
-    </ng-container>
+    <router-outlet></router-outlet>
   </moy-card>
 </section>

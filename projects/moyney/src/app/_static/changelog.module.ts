@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, NgModule } from '@angular/core';
+import { ChangeDetectionStrategy, Component, NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { CHANGELOG } from '../../assets/static/changelog';
 
@@ -31,6 +31,7 @@ import { CHANGELOG } from '../../assets/static/changelog';
       }
     `,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 class ChangelogStaticComponent {
   changelog = CHANGELOG;

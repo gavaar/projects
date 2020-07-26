@@ -1,5 +1,12 @@
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.16.5',
+    changes: [
+      'Created loading bar reusable component',
+      'Made summary and recently added views, to be loaded when requested, instead of eagerly',
+    ],
+  },
+  {
     version: '0.16.4',
     changes: ['Added summary view as default view'],
   },

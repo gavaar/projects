@@ -1,58 +1,64 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { debounceTime, filter, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
+import { AbstractMoyCard, MoyCard } from '@libs/moy-card/moy-card.models';
 import { Income } from '../transaction/transaction.models';
 import { TransactionService } from '../transaction/transaction.service';
-import * as config from './home.config';
+import { HomeStore } from './home.store';
+
+enum MovementSummaryTitles {
+  Summary = 'Summary',
+  RecentMovements = 'Recent Movements',
+}
+
+enum CardIcons {
+  Summary = 'timeline',
+  RecentMovements = 'view_list',
+}
 
 @Component({
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   viewProviders: [TransactionService],
+  providers: [HomeStore],
 })
 export class HomeComponent {
-  cards = config.cards;
-  recentlyAdded = config.table(row => this.onDelete(row));
+  recentlyAddedToSummary = () => {
+    const icon = this.currentCardIcon;
+    const _newIcon = icon === CardIcons.RecentMovements ? CardIcons.Summary : CardIcons.RecentMovements;
+    const _newTitle =
+      icon === CardIcons.RecentMovements ? MovementSummaryTitles.Summary : MovementSummaryTitles.RecentMovements;
+    const _newRoute = icon === CardIcons.RecentMovements ? '' : 'recent-movements';
 
-  MovementSummaryTitles = config.MovementSummaryTitles;
+    this.cards.recently_added_and_summary.suffixButtons[0].setIcon(_newIcon);
+    this.cards.recently_added_and_summary.title = _newTitle;
+    this.router.navigate([_newRoute], { skipLocationChange: true });
+  };
 
-  constructor(private _service: TransactionService, private _snack: MatSnackBar) {}
-
-  ngOnInit() {
-    this.recentlyAdded.setLoading();
-    this._service.get().subscribe(recentRows => {
-      this.recentlyAdded.addRows(recentRows.reverse());
-    });
-    this.recentlyAdded
-      .rowChanges()
-      .pipe(
-        debounceTime(1000),
-        filter(changes => {
-          const emptyValues = Object.values(changes).filter(value => !value);
-          if (emptyValues.length) {
-            this._snack.open(`Can't update: don't leave blank values for ${changes.__prevState__.description}`);
-            return false;
-          }
-          return true;
+  cards: { [card: string]: AbstractMoyCard } = {
+    add: new MoyCard({ title: 'Add Income' }),
+    recently_added_and_summary: new MoyCard({
+      title: MovementSummaryTitles.Summary,
+      suffixButtons: [
+        new MoyButtonRound({
+          icon: 'timeline',
+          click: this.recentlyAddedToSummary,
         }),
-        switchMap(this._service.patch),
-      )
-      .subscribe(income => {
-        this.recentlyAdded.addRows([]);
-        this._snack.open(`Successfully updated ${income.description}`);
-      });
+      ],
+    }),
+  };
+
+  get currentCardIcon(): string {
+    return this.cards.recently_added_and_summary.suffixButtons[0].icon;
   }
 
-  recentFn = index => index;
+  constructor(private router: Router, private store: HomeStore, private _snack: MatSnackBar) {}
 
   pushToRecentlyAdded(income: Income): void {
-    this.recentlyAdded.addRows([income]);
+    this.store.state.recentlyAddedTable.addRows([income]);
     this._snack.open(`Successfully added ${income.description}`);
-  }
-
-  onDelete(income: Income) {
-    this.recentlyAdded.removeRows([income]);
-    this._service.delete(income).subscribe(_ => this._snack.open(`Deleted ${income.description}`));
+    if (this.currentCardIcon === CardIcons.Summary) this.recentlyAddedToSummary();
   }
 }

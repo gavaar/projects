@@ -1,5 +1,13 @@
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.16.6',
+    changes: [
+      'Created Logo and favicon',
+      'Added Logo to Home Screen',
+      'Fixed a bug in which loading prompted a confirmation dialog',
+    ],
+  },
+  {
     version: '0.16.5',
     changes: [
       'Created loading bar reusable component',

@@ -1,22 +1,23 @@
 <aside class="MoyLoadingBar" *ngIf="config">
   <div class="MoyLoadingBar__title">{{ config.title }}</div>
-  <div class="MoyLoadingBar__bar">
-    <span class="MoyLoadingBar__loaded" [ngStyle]="{ flex: config.proportions.loaded + ' 0 0' }"> </span>
+  <ng-content select="[loadingHeader]" *ngIf="!config.title"></ng-content>
+  <div class="MoyLoadingBar__bar" *ngIf="config.proportion$ | async as proportions">
+    <span class="MoyLoadingBar__loaded" [ngStyle]="{ flex: proportions.loaded + ' 0 0' }"> </span>
     <span
       class="MoyLoadingBar__loading"
-      [ngStyle]="{ flex: config.proportions.loading + ' 0 0' }"
+      [ngStyle]="{ flex: proportions.loading + ' 0 0' }"
       [ngClass]="{ overflow: config.loading < 0 }"
     >
     </span>
     <span
       class="MoyLoadingBar__rest"
-      [ngStyle]="{ flex: config.proportions.rest + ' 0 0' }"
+      [ngStyle]="{ flex: proportions.rest + ' 0 0' }"
       [ngClass]="{ overflow: config.loaded > config.total }"
     >
     </span>
   </div>
   <div class="MoyLoadingBar__total full-center">
-    <span class="MoyLoadingBar__total-text"> {{ config.total }}</span>
+    <span class="MoyLoadingBar__total-text"> {{ config.total | number }}</span>
     <div class="MoyLoadingBar__total-line"></div>
   </div>
 </aside>

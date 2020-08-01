@@ -1,7 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { parseDateReadable } from '@common/transform';
-import { tap } from 'rxjs/operators';
 import { Income } from '../transaction.models';
 import { TransactionService } from '../transaction.service';
 import * as config from './transaction-add.config';
@@ -12,8 +10,9 @@ import * as config from './transaction-add.config';
   styleUrls: ['./transaction-add.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TransactionAddComponent {
+export class TransactionAddComponent implements OnInit {
   @Output() incomeAdded = new EventEmitter<Income>();
+  @Output() valueChanges = new EventEmitter<Partial<Income>>();
 
   inputs = config.inputs;
   buttons = config.buttons;
@@ -31,17 +30,24 @@ export class TransactionAddComponent {
 
   constructor(private _service: TransactionService) {}
 
+  ngOnInit() {
+    this._form.valueChanges.subscribe(changes => this.valueChanges.emit(changes));
+  }
+
   onAdd() {
     if (this.formValid) {
       const formValue = { ...this._form.value };
       this._service.create(formValue).subscribe(
-        newIncome => this.incomeAdded.emit(newIncome),
+        newIncome => {
+          this.incomeAdded.emit(newIncome);
+          this.inputs.description.setFocus();
+        },
         err => {
           this._form.patchValue(formValue);
           console.log({ err });
         },
       );
+      this._form.reset();
     }
-    this._form.reset();
   }
 }

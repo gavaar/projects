@@ -1,4 +1,10 @@
-<span>I will give you a summary here! :D</span>
-<moy-loading-bar [config]="totalsSummary"></moy-loading-bar>
-<moy-loading-bar [config]="totalsSummary2"></moy-loading-bar>
-<moy-loading-bar [config]="totalsSummary3"></moy-loading-bar>
+<moy-loading-bar *ngIf="store.summaryCharts.monthly as _monthly" [config]="_monthly" class="Summary__monthly">
+  <div loadingHeader [ngClass]="{ debt: _monthly.total - _monthly.loaded < 0 }">
+    <strong>Monthly Balance: </strong>
+    <strong class="balance">
+      {{ _monthly.total - _monthly.loaded | number }}
+    </strong>
+  </div>
+</moy-loading-bar>
+
+<moy-loading-bar [config]="store.summaryCharts.accumulated_index"></moy-loading-bar>

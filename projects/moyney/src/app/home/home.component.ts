@@ -54,11 +54,26 @@ export class HomeComponent {
     return this.cards.recently_added_and_summary.suffixButtons[0].icon;
   }
 
-  constructor(private router: Router, private store: HomeStore, private _snack: MatSnackBar) {}
+  constructor(
+    private router: Router,
+    private store: HomeStore,
+    private _snack: MatSnackBar,
+    private transactionService: TransactionService,
+  ) {}
+
+  ngOnInit() {
+    this.transactionService.get().subscribe(incomes => {
+      this.store.incomes = incomes;
+    });
+  }
+
+  onChangeForm({ amount }) {
+    this.store.summaryCharts.monthly.setLoading(-amount);
+  }
 
   pushToRecentlyAdded(income: Income): void {
-    this.store.state.recentlyAddedTable.addRows([income]);
+    this.store.incomes = [income, ...this.store.incomes];
+    this.store.summaryCharts.monthly.setLoading(0);
     this._snack.open(`Successfully added ${income.description}`);
-    if (this.currentCardIcon === CardIcons.Summary) this.recentlyAddedToSummary();
   }
 }

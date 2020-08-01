@@ -3,6 +3,7 @@
     {{ config.label }}
   </label>
   <input
+    #inputElement
     class="MoyInput__input"
     autocapitalize="none"
     (keydown.enter)="config.control.updateOn === 'blur' && $event.target.blur()"

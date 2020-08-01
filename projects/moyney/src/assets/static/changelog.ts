@@ -5,6 +5,10 @@ export const CHANGELOG: Changelog[] = [
       'Created Logo and favicon',
       'Added Logo to Home Screen',
       'Fixed a bug in which loading prompted a confirmation dialog',
+      'Created Horizontal Loading Bar graphs',
+      'Graphs interact with the Add Income form',
+      'Fixed bug that left a big empty space below table',
+      'Adding incomes now autofocuses on next field when hitting enter, or comes back to first field if successfully added',
     ],
   },
   {

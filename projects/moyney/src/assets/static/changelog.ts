@@ -1,5 +1,9 @@
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.16.7',
+    changes: ['Fixed showing wrong values for overflowing loadings', 'Added mock spend-per-day-index'],
+  },
+  {
     version: '0.16.6',
     changes: [
       'Created Logo and favicon',

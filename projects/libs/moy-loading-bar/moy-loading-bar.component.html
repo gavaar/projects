@@ -12,7 +12,7 @@
     <span
       class="MoyLoadingBar__rest"
       [ngStyle]="{ flex: proportions.rest + ' 0 0' }"
-      [ngClass]="{ overflow: config.loaded > config.total }"
+      [ngClass]="{ overflow: config.loaded + config.loading >= config.total }"
     >
     </span>
   </div>

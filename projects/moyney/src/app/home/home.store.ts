@@ -8,7 +8,7 @@ import { Income } from '../transaction/transaction.models';
 
 const summaries = {
   monthly: new MoyLoadingBar(),
-  accumulated_index: new MoyLoadingBar({ title: 'Placeholder' }),
+  accumulated_index: new MoyLoadingBar(),
 };
 
 export interface HomeState {

@@ -9,9 +9,9 @@ interface LoadingBarConfig {
 
 class AbstractMoyLoadingBar {
   title?: string;
-  total?: number;
+  total: number;
   loaded: number;
-  loading?: number;
+  loading: number;
   proportion$ = new BehaviorSubject<{ [key: string]: number }>({});
 
   constructor(config: LoadingBarConfig = {}) {
@@ -33,7 +33,8 @@ class AbstractMoyLoadingBar {
   }
 
   setLoading(newL: number) {
-    this.loading = newL;
+    const _rest = this.total - this.loaded;
+    this.loading = newL > _rest ? _rest : newL;
     this.calculateProportions();
   }
 

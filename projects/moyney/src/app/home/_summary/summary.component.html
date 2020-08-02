@@ -7,4 +7,13 @@
   </div>
 </moy-loading-bar>
 
-<moy-loading-bar [config]="store.summaryCharts.accumulated_index"></moy-loading-bar>
+<moy-loading-bar
+  *ngIf="store.summaryCharts.accumulated_index as _accumulated"
+  [config]="store.summaryCharts.accumulated_index"
+  class="Summary__accumulated"
+>
+  <div loadingHeader [ngClass]="{ debt: _accumulated.loading < 0 }">
+    <strong>Available Spend: </strong>
+    <strong class="balance"> {{ _accumulated.loading | number }} </strong>
+  </div>
+</moy-loading-bar>

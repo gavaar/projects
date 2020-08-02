@@ -1,13 +1,15 @@
-import { ChangeDetectionStrategy, Component, HostListener, Injectable } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { MoyButtonRound } from '@libs/moy-button/moy-button.models';
 import { MoyHeaderConfig } from '@libs/moy-header/moy-header.models';
+import { delay } from 'rxjs/operators';
+import { CHANGELOG } from '../assets/static/changelog';
 import { Auth } from './auth';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 
-const MOYNEY_VERSION = '0.15.5';
+const MOYNEY_VERSION = CHANGELOG[0].version;
 
 @Component({
   selector: 'moy-root',
@@ -50,6 +52,7 @@ export class AppComponent {
   footerLinks = [
     { label: MOYNEY_VERSION, link: '#' },
     { label: 'privacy', link: '/privacy' },
+    { label: 'changelog', link: '/changelog' },
   ];
 
   constructor(public dialog: MatDialog, private store: Auth, private router: Router) {
@@ -58,7 +61,7 @@ export class AppComponent {
 
   headerConfig = new MoyHeaderConfig({
     title: 'Moyney',
-    titleIcon: 'home',
+    titleImgURI: 'assets/icons/logo.png',
     onTitleClick: () => {
       this.router.navigateByUrl('');
     },
@@ -71,6 +74,7 @@ export class AppComponent {
           this.dialog
             .open(<any>component)
             .afterClosed()
+            .pipe(delay(500))
             .subscribe(_ => {
               if (this.store.state.user.uid !== prevUser) location.reload();
             });

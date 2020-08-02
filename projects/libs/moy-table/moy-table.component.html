@@ -70,7 +70,7 @@
 <ng-template #expandedInnerCell let-row="row" let-columns="columns">
   <div class="MoyTable__row-content" [@verticalExpandCollapse]="row.expanded ? 'expanded' : 'collapsed'">
     <table mat-table [dataSource]="row.innerRows">
-      <ng-container [matColumnDef]="_column" *ngFor="let _column of columns; trackBy: columnFn">
+      <ng-container [matColumnDef]="_column" *ngFor="let _column of columns; trackBy: innerColumnFn">
         <td mat-cell *matCellDef="let innerRow">
           <ng-container *ngTemplateOutlet="defaultCell; context: { row: innerRow, column: _column }"></ng-container>
         </td>

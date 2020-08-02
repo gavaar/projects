@@ -17,7 +17,8 @@
     "typeRoots": ["node_modules/@types"],
     "paths": {
       "@libs/*": ["./projects/libs/*"],
-      "@common/*": ["./projects/moyney/src/app/_common/*"]
+      "@common/*": ["./projects/moyney/src/app/_common/*"],
+      "@assets/*": ["./projects/moyney/assets/*"]
     },
     "lib": ["es2020", "dom"],
     "allowJs": true

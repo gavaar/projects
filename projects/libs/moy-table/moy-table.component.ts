@@ -21,4 +21,5 @@ export class MoyTableComponent {
   MoyButtonType = MoyButtonType;
 
   columnFn = (index: number) => index;
+  innerColumnFn = (index: number) => index;
 }

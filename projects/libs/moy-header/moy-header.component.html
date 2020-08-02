@@ -1,6 +1,7 @@
 <header class="MoyHeader full-center" *ngIf="config">
   <span class="MoyHeader__title" (click)="config.onTitleClick()">
-    <mat-icon class="MoyHeader__title-icon" *ngIf="config.titleIcon">{{ config.titleIcon }}</mat-icon>
+    <mat-icon *ngIf="config.titleIcon" class="MoyHeader__title-icon">{{ config.titleIcon }}</mat-icon>
+    <img *ngIf="config.titleImgURI" class="MoyHeader__title-icon" [src]="config.titleImgURI" />
     {{ config.title }}
   </span>
   <div class="MoyHeader__suffix-buttons">

@@ -5,19 +5,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconRegistry } from '@angular/material/icon';
-import { MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBarModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { BrowserModule, DomSanitizer } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { MoyFooterModule } from '@libs/moy-footer/moy-footer.module';
 import { MoyHeaderModule } from '@libs/moy-header/moy-header.module';
 import { environment } from '../environments/environment';
-import { StaticModule } from './_static/static.modules';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { LoginModule } from './login/login.module';
-import { ProfileComponent } from './profile/profile.component';
 import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
@@ -37,11 +34,10 @@ import { ProfileModule } from './profile/profile.module';
     MoyFooterModule,
     LoginModule,
     ProfileModule,
-    StaticModule,
   ],
   providers: [
     AngularFireAuth,
-    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'top' } },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'bottom' } },
   ],
   bootstrap: [AppComponent],
 })

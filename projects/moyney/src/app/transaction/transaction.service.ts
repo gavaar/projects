@@ -30,7 +30,7 @@ export class TransactionService {
     description: this.db.collection(`incomes/${this.uid}/description`),
     tag: this.db.collection(`incomes/${this.uid}/tag`),
     date: (from?: Date) => {
-      const _date = from || new Date();
+      const _date = from ? new Date(from) : new Date();
       return this.db.doc(`incomes/${this.uid}/yearly/${_date.getFullYear()}/monthly/${_date.getMonth()}`);
     },
   };

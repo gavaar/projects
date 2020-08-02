@@ -1,0 +1,10 @@
+.Summary__monthlym,
+.Summary__accumulated {
+  .debt {
+    --main-loading: brown;
+  }
+
+  .balance {
+    color: var(--main-loading);
+  }
+}

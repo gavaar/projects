@@ -23,6 +23,10 @@ abstract class AbstractMoyButton {
     this.click = opts.click || (() => {});
     this.blur = opts.blur || (() => {});
   }
+
+  setIcon(icon: string) {
+    this.icon = icon;
+  }
 }
 
 class MoyButton extends AbstractMoyButton {

@@ -1,12 +1,12 @@
 <section class="Home">
   <moy-card [config]="cards.add">
-    <moy-transaction-add (incomeAdded)="pushToRecentlyAdded($event)"></moy-transaction-add>
+    <moy-transaction-add
+      (incomeAdded)="pushToRecentlyAdded($event)"
+      (valueChanges)="onChangeForm($event)"
+    ></moy-transaction-add>
   </moy-card>
 
-  <moy-card [config]="cards.recently_added">
-    <moy-table [config]="recentlyAdded"></moy-table>
-    <aside *ngIf="!(recentlyAdded.matrix$ | async).length" class="Home__empty-list">
-      Hey! you haven't added anything yet!
-    </aside>
+  <moy-card [config]="cards.recently_added_and_summary">
+    <router-outlet></router-outlet>
   </moy-card>
 </section>

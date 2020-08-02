@@ -45,6 +45,8 @@ abstract class AbstractMoyInput<T> {
   onBlur() {
     this.floatingLabel = this.control.value;
   }
+
+  setFocus() {}
 }
 
 class MoyInput extends AbstractMoyInput<string> {

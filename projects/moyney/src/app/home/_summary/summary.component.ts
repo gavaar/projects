@@ -30,10 +30,10 @@ export class SummaryComponent implements OnInit, OnDestroy {
     });
 
     this.store.summaryCharts.accumulated_index.setNewTotal(220.54);
-    this.store.summaryCharts.accumulated_index.setLoaded(13.88);
+    this.store.summaryCharts.accumulated_index.setLoaded(64.52);
     const _daysInMonth = new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0).getDate();
     const _dayOfToday = new Date().getDate();
-    this.store.summaryCharts.accumulated_index.setLoading((220.54 / _daysInMonth) * _dayOfToday - 13.88);
+    this.store.summaryCharts.accumulated_index.setLoading((220.54 / _daysInMonth) * _dayOfToday - 64.52);
   }
 
   ngOnDestroy() {

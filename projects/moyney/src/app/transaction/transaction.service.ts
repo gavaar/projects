@@ -4,32 +4,40 @@ import {
   AngularFirestoreCollection,
   AngularFirestoreDocument,
   CollectionReference,
+  QuerySnapshot,
 } from '@angular/fire/firestore';
 import * as firebase from 'firebase/app';
 import { from, Observable } from 'rxjs';
-import { map, switchMap, take, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import { Auth } from '../auth';
 import { CollectionIncome, Income } from './transaction.models';
 
 class IncomeRefs {
   income: AngularFirestoreCollection<CollectionIncome>;
   income_ordered: AngularFirestoreCollection<CollectionIncome>;
-  incomes_by_id: (ids: string[]) => AngularFirestoreCollection<CollectionIncome>;
+  incomes_by_date: (year?: number, month?: number, day?: number) => AngularFirestoreCollection<CollectionIncome>;
   description: AngularFirestoreCollection<CollectionIncome>;
   tag: AngularFirestoreCollection<CollectionIncome>;
   date: (from?: Date) => AngularFirestoreDocument<CollectionIncome>;
 }
 
+function refToIncome(i: QuerySnapshot<firebase.firestore.DocumentData>): Income[] {
+  return i.docChanges().map(i => new Income({ ...i.doc.data(), id: i.doc.id } as CollectionIncome));
+}
+
 const orderByDate = (i: CollectionReference) => i.orderBy('date_added', 'desc');
-const findParticularIds = (ids: string[]) => {
-  return (i: CollectionReference) => i.where(firebase.firestore.FieldPath.documentId(), 'in', ids);
+const customDate = (date: Date) => {
+  return (i: CollectionReference) => i.orderBy('date_added', 'desc').endAt(date);
 };
+
 @Injectable()
 export class TransactionService {
   private uid = this.auth.uid;
   private refs: IncomeRefs = {
     income_ordered: this.db.collection(`incomes/${this.uid}/income`, orderByDate),
-    incomes_by_id: (ids: string[]) => this.db.collection(`incomes/${this.uid}/income`, findParticularIds(ids)),
+    incomes_by_date: (year = new Date().getFullYear(), month = new Date().getMonth(), day = 1) => {
+      return this.db.collection(`incomes/${this.uid}/income`, customDate(new Date(year, month, day)));
+    },
     income: this.db.collection(`incomes/${this.uid}/income`),
     description: this.db.collection(`incomes/${this.uid}/description`),
     tag: this.db.collection(`incomes/${this.uid}/tag`),
@@ -41,24 +49,9 @@ export class TransactionService {
 
   constructor(private auth: Auth, private db: AngularFirestore) {}
 
-  get(): Observable<Income[]> {
-    return this.refs.income_ordered.valueChanges({ idField: 'id' }).pipe(
-      take(1),
-      map(incomes => incomes.map(i => new Income(i))),
-    );
-  }
-
-  getThisMonth(): Observable<any> {
-    const _dateRefGet = this.refs.date().get();
-    const _incomesRef = this.refs.incomes_by_id;
-    return _dateRefGet.pipe(
-      switchMap(idMapRef => {
-        const _idArray = Object.keys(idMapRef.data());
-        return _incomesRef(_idArray)
-          .get()
-          .pipe(map(ref => ref.docChanges().map(r => new Income(<CollectionIncome>{ ...r.doc.data(), id: r.doc.id }))));
-      }),
-    );
+  get(): Observable<any> {
+    const _dateRefGet = this.refs.incomes_by_date().get();
+    return _dateRefGet.pipe(map(incomeRef => refToIncome(incomeRef)));
   }
 
   create(income: Income): Observable<Income> {

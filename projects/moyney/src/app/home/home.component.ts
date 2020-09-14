@@ -62,7 +62,7 @@ export class HomeComponent {
   ) {}
 
   ngOnInit() {
-    this.transactionService.getThisMonth().subscribe(incomes => {
+    this.transactionService.get().subscribe(incomes => {
       this.store.incomes = incomes;
     });
   }

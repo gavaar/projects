@@ -5,6 +5,7 @@ export const CHANGELOG: Changelog[] = [
       'Fixed showing wrong values for overflowing loadings',
       'Added mock spend-per-day-index',
       'Now only queries for current month',
+      'Improved the way queries are made',
     ],
   },
   {

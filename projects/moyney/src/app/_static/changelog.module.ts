@@ -5,14 +5,7 @@ import { CHANGELOG } from '../../assets/static/changelog';
 
 @Component({
   template: `
-    <section class="Changelog">
-      <div *ngFor="let change of changelog; trackBy: changeFn">
-        <h3 class="Changelog__title">{{ change.version }}</h3>
-        <ul class="Changelog__list">
-          <li *ngFor="let point of change.changes; trackBy: pointFn">{{ point }}</li>
-        </ul>
-      </div>
-    </section>
+    <moy-changelog [changelog]="changelog"></moy-changelog>
   `,
   styles: [
     `

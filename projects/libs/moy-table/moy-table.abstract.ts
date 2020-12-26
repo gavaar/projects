@@ -7,6 +7,7 @@ type MergeStrategyConfig<T> = { [column in keyof MoyTableConfig<T>['columns']]: 
 
 interface MoyTableConfig<T> {
   columns: { [column: string]: Column };
+  noDataMessage?: string;
   customColumnText?: { [column: string]: string };
   editableRows?: boolean;
   maxRows?: number;
@@ -17,6 +18,7 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
   columns: string[];
   customColumnText?: { [column: string]: string };
   mergeStrategy: { pivot: string; config: MergeStrategyConfig<T> };
+  noDataMessage = 'No data found';
 
   private destroy$ = new Subject();
   private _loadingRows: AbstractRow<T>[];
@@ -35,6 +37,7 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
     this._columnConfig = config.columns;
     this.customColumnText = config.customColumnText || {};
     this._rowLimit = config.maxRows;
+    if (config.noDataMessage) this.noDataMessage = config.noDataMessage;
     if (config.mergeStrategy) {
       this.mergeStrategy = {
         pivot: Object.keys(config.mergeStrategy).find(key => config.mergeStrategy[key] === MergeStrategy.Pivot),

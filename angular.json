@@ -159,7 +159,8 @@
             "aot": true,
             "assets": [
               "projects/call-analyzer/src/favicon.ico",
-              "projects/call-analyzer/src/assets"
+              "projects/call-analyzer/src/assets",
+              "projects/call-analyzer/src/manifest.webmanifest"
             ],
             "styles": [
               "projects/call-analyzer/src/styles.scss"
@@ -192,7 +193,9 @@
                   "maximumWarning": "6kb",
                   "maximumError": "10kb"
                 }
-              ]
+              ],
+              "serviceWorker": true,
+              "ngswConfigPath": "projects/call-analyzer/ngsw-config.json"
             }
           }
         },

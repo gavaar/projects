@@ -22,4 +22,5 @@ export class MoyTableComponent {
 
   columnFn = (index: number) => index;
   innerColumnFn = (index: number) => index;
+  rowFn = (index: number) => index;
 }

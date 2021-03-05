@@ -1,4 +1,4 @@
-import { AbstractMoyTable } from './moy-table.abstract';
+import { AbstractMoyTable } from './table/moy-table.abstract';
 
 class MoyTable<T> extends AbstractMoyTable<T> {}
 

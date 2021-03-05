@@ -219,7 +219,7 @@
       }
     }
   },
-  "defaultProject": "moyney",
+  "defaultProject": "callAnalyzer",
   "cli": {
     "analytics": "a1dcfbfd-0e2f-4b90-9137-f0c9a322b25e"
   }

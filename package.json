@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ && firebase deploy"
+    "deploy:moyney": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ && firebase deploy",
+    "deploy:moy-call-analyzer": "ng b --project callAnalyzer --prod --baseHref=https://moy-call-analyzer.web.app/ --outputPath=./dist/ && firebase -P moy-call-analyzer deploy --only hosting"
   },
   "private": true,
   "dependencies": {
@@ -24,7 +25,6 @@
     "@angular/platform-browser-dynamic": "^10.0.14",
     "@angular/router": "^10.0.14",
     "@angular/service-worker": "^10.0.14",
-    "firebase": "^7.24.0",
     "rxjs": "^6.6.3",
     "tslib": "^2.0.3",
     "zone.js": "~0.10.2"
@@ -36,7 +36,6 @@
     "@angular/compiler-cli": "^10.0.14",
     "@angular/language-service": "^10.0.14",
     "@types/node": "^14.14.14",
-    "firebase-tools": "^8.20.0",
     "fuzzy": "^0.1.3",
     "inquirer": "^7.3.3",
     "inquirer-autocomplete-prompt": "^1.3.0",

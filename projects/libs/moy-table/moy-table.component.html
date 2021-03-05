@@ -34,7 +34,9 @@
   ></tr>
   <tr class="mat-row" *matNoDataRow>
     <td class="mat-cell" colspan="9999">
-      {{ config.noDataMessage }}
+      <span class="MoyTable__no-data-message">
+        {{ config.noDataMessage }}
+      </span>
     </td>
   </tr>
   <tr mat-row *matRowDef="let row; columns: ['__rowContent__']" class="MoyTable__expandable-content"></tr>

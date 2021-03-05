@@ -1,12 +1,12 @@
 <section class="Uploader">
-  <form [formGroup]="analyzerConfig">
-    <label for="minimumCalls">Cantidad de llamadas mínima</label>
-    <input id="minimumCalls" formControlName="minimumCalls">
+  <ng-container *ngTemplateOutlet="analyzerForm"></ng-container>
 
-    <label for="minimumCalls">Duración mínima</label>
-    <input id="minimumCalls" formControlName="minimumDuration">
-  </form>
   <input type="file" accept=".csv" (change)="onCsvUpload($event)"/>
 
   <moy-table [config]="tableConfig"></moy-table>
 </section>
+
+<!--Analyzer Form-->
+<ng-template #analyzerForm>
+
+</ng-template>

@@ -102,11 +102,17 @@
   height: 1rem;
   padding: 0.1rem;
   box-shadow: 0 0 1px black;
-  background-color: white;
+  background-color: slategray;
   font-size: 0.7rem;
-  color: black;
+  color: white;
   font-weight: 700;
   border-radius: 50%;
   width: 1rem;
   text-align: center;
+}
+
+.MoyTable__no-data-message {
+  display: block;
+  text-align: center;
+  margin: 2rem;
 }

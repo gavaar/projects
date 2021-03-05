@@ -1,7 +1,7 @@
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map, takeUntil } from 'rxjs/operators';
-import { AbstractRow, Column, RowChanges } from './row/row.abstract';
-import { ExpandableRow, MergeStrategy, Row } from './row/row.models';
+import { AbstractRow, Column, RowChanges } from '../row/row.abstract';
+import { ExpandableRow, MergeStrategy, Row } from '../row/row.models';
 
 type MergeStrategyConfig<T> = { [column in keyof MoyTableConfig<T>['columns']]: MergeStrategy };
 
@@ -9,11 +9,11 @@ interface MoyTableConfig<T> {
   columns: { [column: string]: Column };
   noDataMessage?: string;
   customColumnText?: { [column: string]: string };
-  editableRows?: boolean;
   maxRows?: number;
   mergeStrategy?: MergeStrategyConfig<T>;
 }
 
+// todo: rethink this component to work without merge, and create a component in itself that deals with merge that extends from this
 class AbstractMoyTable<T extends { [key: string]: any }> {
   columns: string[];
   customColumnText?: { [column: string]: string };
@@ -66,7 +66,7 @@ class AbstractMoyTable<T extends { [key: string]: any }> {
         this._pivotMap.set(_pivot, _newRow);
       } else if (!_existingRow.innerRows) {
         const _newExpandable = new ExpandableRow({
-          mergeStrategy: this.mergeStrategy.config,
+          mergeStrategy: (this.mergeStrategy || {}).config,
           config: this._columnConfig,
           innerRows: [_newRow, _existingRow],
         });

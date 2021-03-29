@@ -1,12 +1,7 @@
 <section class="Uploader">
-  <ng-container *ngTemplateOutlet="analyzerForm"></ng-container>
-
-  <input type="file" accept=".csv" (change)="onCsvUpload($event)"/>
-
-  <moy-table-2 *ngIf="tableConfig" [config]="tableConfig"></moy-table-2>
+  <input type="file" accept=".csv" (change)="onCsvUpload($event)" />
+  <ng-container *ngIf="(csvOutput | async) as csv">
+    <uploader-sidebar [tableFilters]="csv.tableFilters"></uploader-sidebar>
+    <moy-table-2 [config]="csv.table"></moy-table-2>
+  </ng-container>
 </section>
-
-<!--Analyzer Form-->
-<ng-template #analyzerForm>
-
-</ng-template>

@@ -1,11 +1,11 @@
-import { AsyncSubject } from 'rxjs';
+import { AsyncSubject, Observable } from 'rxjs';
 
 export interface CsvObject { [row: number]: string[] };
 
 export class CsvReader {
   private reader = new FileReader();
 
-  read(csvFile: Blob) {
+  read(csvFile: Blob): Observable<CsvObject> {
     this.reader.readAsText(csvFile);
     
     const reader$ = new AsyncSubject<CsvObject>();

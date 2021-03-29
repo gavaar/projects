@@ -1,53 +1,48 @@
-import { Component } from '@angular/core';
-import { MoyTable, MoyTableConfig } from '@libs/moy-table-2/table/moy-table';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MoyTable } from '@libs/moy-table-2/table/moy-table';
 import { CsvObject, CsvReader } from '../helpers/csv-reader';
-import { MoyInput } from '@libs/moy-input';
-import { MoyColumnConfig } from '@libs/moy-table-2/column/column';
+import { removeQuotes } from './uploader.utils';
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
-const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
+interface CsvOutput {
+  table: MoyTable<any>,
+  tableFilters: { columns: string[]; exampleRow: string[] },
+}
+
+function csvToRows(rows: CsvObject, columns: string[]): any[] {
+  return Object.keys(rows)
+    .map((rowInd) => rows[rowInd]
+      .reduce((obj: { [key: string]: string }, val: string, colInd: number) => {
+        const column = columns[colInd];
+        obj[column] = removeQuotes(val);
+        return obj;
+      }, { id: `${rowInd}` })
+    );
+}
 
 @Component({
   templateUrl: './uploader.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UploaderComponent {
-  tableConfig: MoyTable<any>;
-
-  private csvObject: CsvObject = {};
+  csvOutput: Observable<CsvOutput>;
 
   onCsvUpload(csvEvent: any) {
     const csvFile = csvEvent.target.files[0];
-    const reader = new CsvReader();
-
-    reader.read(csvFile).subscribe(csvObject => {
-      this.buildTable(csvObject[0]);
-      delete csvObject[0];
-      this.csvObject = csvObject;
-      this.addRows(this.csvObject);
-    });
+    const reader = new CsvReader().read(csvFile);
+    this.csvOutput = reader.pipe(map(this.csvObjectToCsvOutput));
   }
 
-  private buildTable(headerRow: string[]) {
-    const tableConfig = headerRow.reduce((config, column) => {
-      const nonQuotedColumn = removeQuotes(column);
-      config.columns[nonQuotedColumn] = columnDefault;
-      return config;
-    }, { columns: {} } as MoyTableConfig<any>);
-    this.tableConfig = new MoyTable(tableConfig);
-  }
+  private csvObjectToCsvOutput(csvObject: CsvObject): CsvOutput {
+    const headers = csvObject[0].map(removeQuotes);
+    const config = MoyTable.basicConfig(headers);
+    const table = new MoyTable(config);
 
-  private addRows(rows: CsvObject) {
-    const rowValues = Object.keys(rows)
-      .map((rowInd) => this.csvObject[rowInd]
-        .reduce((obj: { [key: string]: string }, val: string, colInd: number) => {
-          const column = this.tableConfig.columns[colInd];
-          obj[column] = removeQuotes(val);
-          return obj;
-        }, { id: `${rowInd}` })
-      );
-    this.tableConfig.addRows(rowValues);
+    delete csvObject[0];
+    const rows = csvToRows(csvObject, table.columns);
+    table.addRows(rows);
+    const tableFilters = { columns: table.columns, exampleRow: csvObject[1] };
+    return { table, tableFilters };
   }
-}
-
-function removeQuotes(from: string) {
-  return from.match(/(?!").+(?<!")/g)[0];
 }

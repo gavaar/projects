@@ -1,6 +1,16 @@
+import { MoyInput } from '@libs/moy-input';
 import { MoyColumnConfig } from '../column/column';
 import { MoyRow } from '../row/moy-row';
 
+const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
+
+function buildTableConfig(headerRow: string[], editableRows = false): MoyTableConfig<any> {
+  columnDefault.controlOptions.disabled = !editableRows;
+  return headerRow.reduce((config, column) => {
+    config.columns[column] = columnDefault;
+    return config;
+  }, { columns: {} } as MoyTableConfig<any>);
+}
 
 // Table
 export interface MoyTableConfig<Model> {
@@ -10,6 +20,8 @@ export interface MoyTableConfig<Model> {
 }
 
 export class MoyTable<Model> {
+  static basicConfig = buildTableConfig;
+
   columns: string[] = [];
   rows: MoyRow<Model>[] = [];
   totalRows = 0;

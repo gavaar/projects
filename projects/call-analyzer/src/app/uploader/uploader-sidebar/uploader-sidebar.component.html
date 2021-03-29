@@ -1,0 +1,15 @@
+<article class="Uploader__sidebar">
+  <div *ngFor="let column of tableFilters.columns" class="Uploader__sidebar-input">
+    <select [formControl]="typeMap[column + '::type']" (change)="onTypeChange(column)">
+      <option [value]="FilterType.String">Texto</option>
+      <option [value]="FilterType.Number">Número</option>
+      <option [value]="FilterType.Date">Fecha</option>
+    </select>
+
+    <ng-container [ngSwitch]="typeMap[column + '::type'].value">
+      <moy-input *ngSwitchCase="FilterType.String" [config]="columnMap[column]"></moy-input>
+      <moy-input *ngSwitchCase="FilterType.Number" [config]="columnMap[column]"></moy-input>
+      <moy-input *ngSwitchCase="FilterType.Date" [config]="columnMap[column]"></moy-input>
+   </ng-container>
+  </div>
+</article>

@@ -3,7 +3,7 @@
 
   <input type="file" accept=".csv" (change)="onCsvUpload($event)"/>
 
-  <moy-table [config]="tableConfig"></moy-table>
+  <moy-table-2 *ngIf="tableConfig" [config]="tableConfig"></moy-table-2>
 </section>
 
 <!--Analyzer Form-->

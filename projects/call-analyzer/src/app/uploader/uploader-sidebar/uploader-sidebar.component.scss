@@ -1,6 +1,11 @@
 .Uploader__sidebar {
   position: absolute;
+  // calculations due to base styles section header and footer sizes
   left: 0;
+  top: 3rem;
+  height: calc(100% - 5.5rem);
+  background-color: #d3d3d340;
+  border-right: 1px solid black;
 }
 
 .Uploader__sidebar-input {

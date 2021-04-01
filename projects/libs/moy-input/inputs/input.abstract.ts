@@ -1,30 +1,14 @@
-import { AbstractControlOptions, FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
+import { InputInterface, InputType } from './models';
 
-enum InputType {
-  Text = 'text',
-  Number = 'number',
-}
-
-interface InputInterface<T> {
-  value?: T;
-  placeholder?: string;
-  label?: string;
-  autofocus?: boolean;
-  controlOptions?: {
-    required?: boolean;
-    disabled?: boolean;
-    updateOn?: AbstractControlOptions['updateOn'];
-  };
-}
-
-abstract class AbstractMoyInput<T> {
+export abstract class AbstractMoyInput<T> {
   control?: FormControl;
   placeholder?: string;
   label?: string;
   floatingLabel = false;
   autofocus = false;
 
-  readonly type: InputType;
+  readonly abstract type: InputType;
 
   constructor(p: Partial<InputInterface<T>> = {}) {
     const options = p.controlOptions || {};
@@ -46,15 +30,5 @@ abstract class AbstractMoyInput<T> {
     this.floatingLabel = this.control.value;
   }
 
-  setFocus() {}
+  setFocus() { }
 }
-
-class MoyInput extends AbstractMoyInput<string> {
-  type = InputType.Text;
-}
-
-class MoyInputNumber extends AbstractMoyInput<number> {
-  type = InputType.Number;
-}
-
-export { InputType, InputInterface, AbstractMoyInput, MoyInput, MoyInputNumber };

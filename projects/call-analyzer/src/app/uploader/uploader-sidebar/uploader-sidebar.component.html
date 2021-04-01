@@ -1,4 +1,8 @@
 <article class="Uploader__sidebar">
+  <div classs="Uploader__sidebar-headers">
+    <span>Tipo</span>
+    <span>Filtros</span>
+  </div>
   <div *ngFor="let column of tableFilters.columns" class="Uploader__sidebar-input">
     <select [formControl]="typeMap[column + '::type']" (change)="onTypeChange(column)">
       <option [value]="FilterType.String">Texto</option>

@@ -1,5 +1,7 @@
+import { CsvObject } from '../helpers/csv-reader';
+
 export function removeQuotes(from: string) {
-  return from.match(/(?!").+(?<!")/g)[0];
+  return (from.match(/(?!").+(?<!")/g) || [''])[0];
 }
 
 export function checkStringType(str: string): FilterType {
@@ -14,6 +16,18 @@ export function checkStringType(str: string): FilterType {
     return FilterType.Number;
   }
   return FilterType.String;
+}
+
+
+export function csvToRows(rows: CsvObject, columns: string[]): any[] {
+  return Object.keys(rows)
+    .map((rowInd) => rows[rowInd]
+      .reduce((obj: { [key: string]: string }, val: string, colInd: number) => {
+        const column = columns[colInd];
+        obj[column] = removeQuotes(val);
+        return obj;
+      }, { id: `${rowInd}` })
+    );
 }
 
 export enum FilterType {

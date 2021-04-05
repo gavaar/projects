@@ -2,6 +2,15 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.0.3',
+    changes: [
+      'Updated table, inputs and scrollbar styles',
+      'Csv reader / uploader now merges previous table with new one. This is to be used on future saving rows instances',
+      'Csv reader now remembers what was uploaded previously. To clear table, recreate a new CsvReader',
+      'Sidebar styles and logic on uploader updated',
+    ]
+  },
+  {
     version: '0.0.2',
     changes: [
       'Created MoyTable 2 to improve table maintainability and performance',

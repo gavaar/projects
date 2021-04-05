@@ -1,19 +1,40 @@
 <article class="Uploader__sidebar">
-  <div classs="Uploader__sidebar-headers">
-    <span>Tipo</span>
-    <span>Filtros</span>
+  <div class="Uploader__sidebar-headers">
+    <span class="Uploader__left">Tipo</span>
+    <span class="Uploader__right">Filtros</span>
   </div>
   <div *ngFor="let column of tableFilters.columns" class="Uploader__sidebar-input">
-    <select [formControl]="typeMap[column + '::type']" (change)="onTypeChange(column)">
-      <option [value]="FilterType.String">Texto</option>
-      <option [value]="FilterType.Number">Número</option>
-      <option [value]="FilterType.Date">Fecha</option>
-    </select>
+    <div class="Uploader__left">
+      <moy-input
+        [config]="typeMap[column + '::' + INPUT_APPENDS.typeAppend]"
+        (onChange)="onTypeChange(column, $event)">
+      </moy-input>
+    </div>
 
-    <ng-container [ngSwitch]="typeMap[column + '::type'].value">
-      <moy-input *ngSwitchCase="FilterType.String" [config]="columnMap[column]"></moy-input>
-      <moy-input *ngSwitchCase="FilterType.Number" [config]="columnMap[column]"></moy-input>
-      <moy-input *ngSwitchCase="FilterType.Date" [config]="columnMap[column]"></moy-input>
-   </ng-container>
+    <div class="Uploader__right">
+      <ng-container [ngSwitch]="typeMap[column + '::' + INPUT_APPENDS.typeAppend]?.control.value">
+        <ng-container *ngSwitchCase="FilterType.String">
+          <moy-input [config]="columnMap[column]" (onChange)="onFilterChange(column, $event)"></moy-input>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="FilterType.Number">
+          <moy-input 
+            *ngIf="columnMap[column + '::' + INPUT_APPENDS.numberAfter] as config"
+            [config]="config"
+            (onChange)="onFilterChange(config.id, $event)">
+          </moy-input>
+          <moy-input
+            *ngIf="columnMap[column + '::' + INPUT_APPENDS.numberBefore] as config"
+            [config]="config"
+            (onChange)="onFilterChange(config.id, $event)">
+          </moy-input>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="FilterType.Date">
+          <moy-input [config]="columnMap[column + '::' + INPUT_APPENDS.dateAfter]" (onChange)="onFilterChange(column, $event)"></moy-input>
+          <moy-input [config]="columnMap[column + '::' + INPUT_APPENDS.dateBefore]" (onChange)="onFilterChange(column, $event)"></moy-input>
+        </ng-container>
+      </ng-container>
+    </div>
   </div>
 </article>

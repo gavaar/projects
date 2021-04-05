@@ -1,14 +1,27 @@
 .Uploader__sidebar {
   position: absolute;
-  // calculations due to base styles section header and footer sizes
   left: 0;
   top: 3rem;
+  // calc() equals base styles section <header> and <footer> sizes
   height: calc(100% - 5.5rem);
   background-color: #d3d3d340;
   border-right: 1px solid black;
+  max-width: 25rem;
 }
 
 .Uploader__sidebar-input {
   display: flex;
-  align-items: baseline;
+  align-items: flex-end;
+}
+
+.Uploader__sidebar-headers {
+  display: flex;
+}
+
+.Uploader__left {
+  flex: 0 0 7rem;
+}
+
+.Uploader__right {
+  flex: 1 0 0;
 }

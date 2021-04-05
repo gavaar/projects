@@ -7,6 +7,7 @@ export enum InputType {
 }
 
 export interface InputInterface<T> {
+  id?: string;
   value?: T;
   placeholder?: string;
   label?: string;

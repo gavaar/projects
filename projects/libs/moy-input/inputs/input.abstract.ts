@@ -2,6 +2,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { InputInterface, InputType } from './models';
 
 export abstract class AbstractMoyInput<T> {
+  id? = null;
   control?: FormControl;
   placeholder?: string;
   label?: string;
@@ -20,6 +21,7 @@ export abstract class AbstractMoyInput<T> {
     this.placeholder = p.placeholder || '';
     this.floatingLabel = p.value != null;
     this.autofocus = p.autofocus;
+    this.id = p.id;
   }
 
   onFocus() {

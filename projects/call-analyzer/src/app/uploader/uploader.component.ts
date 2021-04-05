@@ -1,24 +1,13 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MoyTable } from '@libs/moy-table-2/table/moy-table';
 import { CsvObject, CsvReader } from '../helpers/csv-reader';
-import { removeQuotes } from './uploader.utils';
+import { csvToRows, removeQuotes } from './uploader.utils';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 interface CsvOutput {
   table: MoyTable<any>,
   tableFilters: { columns: string[]; exampleRow: string[] },
-}
-
-function csvToRows(rows: CsvObject, columns: string[]): any[] {
-  return Object.keys(rows)
-    .map((rowInd) => rows[rowInd]
-      .reduce((obj: { [key: string]: string }, val: string, colInd: number) => {
-        const column = columns[colInd];
-        obj[column] = removeQuotes(val);
-        return obj;
-      }, { id: `${rowInd}` })
-    );
 }
 
 @Component({
@@ -28,9 +17,11 @@ function csvToRows(rows: CsvObject, columns: string[]): any[] {
 export class UploaderComponent {
   csvOutput: Observable<CsvOutput>;
 
+  private csvReader = new CsvReader();
+
   onCsvUpload(csvEvent: any) {
     const csvFile = csvEvent.target.files[0];
-    const reader = new CsvReader().read(csvFile);
+    const reader = this.csvReader.read(csvFile);
     this.csvOutput = reader.pipe(map(this.csvObjectToCsvOutput));
   }
 

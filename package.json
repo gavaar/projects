@@ -8,8 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy:moyney": "ng b --prod --baseHref=https://moyney.web.app/ --outputPath=./dist/ && firebase deploy",
-    "deploy:moy-call-analyzer": "ng b --project callAnalyzer --prod --baseHref=https://moy-call-analyzer.web.app/ --outputPath=./dist/ && firebase -P moy-call-analyzer deploy --only hosting"
+    "deploy": "ng b --prod --baseHref=https://moy-call-analyzer.web.app/ --outputPath=./dist/ && firebase deploy --project moy-call-analyzer"
   },
   "private": true,
   "dependencies": {

@@ -6,5 +6,8 @@
 */
 {
   "files": [],
-  "references": []
+  "references": [
+    { "path": "./projects/moyney/tsconfig.app.json" },
+    { "path": "./projects/call-analyzer/tsconfig.app.json" }
+  ]
 }

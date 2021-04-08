@@ -1,8 +1,7 @@
 import { FilterType } from '../uploader.utils';
 
 export const INPUT_APPENDS = {
-  dateAfter: 'despues de',
-  dateBefore: 'antes de',
+  date: 'fecha',
   numberAfter: 'mayor que',
   numberBefore: 'menor que',
   typeAppend: 'type',

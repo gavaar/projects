@@ -4,6 +4,7 @@ export enum InputType {
   Text = 'text',
   Number = 'number',
   Select = 'select',
+  Date = 'date',
 }
 
 export interface InputInterface<T> {

@@ -1,4 +1,4 @@
-import { Input, Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Input, Component, ChangeDetectionStrategy } from '@angular/core';
 import { MoySelect } from './moy-select';
 
 @Component({
@@ -10,7 +10,8 @@ import { MoySelect } from './moy-select';
         border-color: lightgrey;
         padding: 0.2rem;
     }`
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MoySelectComponent {
   @Input() config: MoySelect;

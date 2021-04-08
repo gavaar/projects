@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { MoyInput, MoyInputNumber, MoySelect } from '@libs/moy-input';
+import { MoyDatepicker, MoyInput, MoyInputNumber, MoySelect } from '@libs/moy-input';
 import { checkStringType, FilterType } from '../uploader.utils';
 import { LocalStorageManager } from '../../helpers/local-storage';
 import { INPUT_APPENDS, LS_TYPE_VALUES_TOKEN, SELECT_OPTIONS } from './uploader-sidebar.config';
@@ -76,8 +76,11 @@ export class UploaderSidebarComponent implements OnInit {
         ];
       case FilterType.Date:
         return [
-          new MoyInput({ ...opts, id: `${column}::${INPUT_APPENDS.dateAfter}`, label: INPUT_APPENDS.dateAfter }),
-          new MoyInput({ ...opts, id: `${column}::${INPUT_APPENDS.dateBefore}`, label: INPUT_APPENDS.dateBefore }),
+          new MoyDatepicker({
+            ...opts, id: `${column}::${INPUT_APPENDS.date}`,
+            label: INPUT_APPENDS.date,
+            placeholder: 'seleccione fecha',
+          }),
         ];
     }
   }

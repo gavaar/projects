@@ -1,6 +1,6 @@
 import { AbstractMoyInput } from '../input.abstract';
 import { InputType } from '../models';
 
-export class MoyInputNumber extends AbstractMoyInput<string> {
-  type = InputType.Number;
+export class MoyInput extends AbstractMoyInput<string> {
+  type = InputType.Text;
 }

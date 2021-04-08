@@ -2,7 +2,15 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
-    version: '0.0.3',
+    version: '0.4.0',
+    changes: [
+      'Added datepicker input type for moy-input',
+      'Added module-preloading to app, this improves speed and version management',
+      'Updated uploader to include datepicker type',
+    ]
+  },
+  {
+    version: '0.3.0',
     changes: [
       'Updated table, inputs and scrollbar styles',
       'Csv reader / uploader now merges previous table with new one. This is to be used on future saving rows instances',
@@ -11,7 +19,7 @@ export const CHANGELOG: Changelog[] = [
     ]
   },
   {
-    version: '0.0.2',
+    version: '0.2.0',
     changes: [
       'Created MoyTable 2 to improve table maintainability and performance',
       'Updated uploader component. Columns are gotten from the CSV now, and filters are appropiately set on left side for it',
@@ -19,11 +27,11 @@ export const CHANGELOG: Changelog[] = [
     ]
   },
   {
-    version: '0.0.1',
+    version: '0.1.0',
     changes: [
       'Created base app structure',
       'Updated table component, added a few filters',
       'Updated table and header styles'
     ],
   }
-]
+];

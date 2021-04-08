@@ -5,5 +5,6 @@
   <ng-container [ngSwitch]='config.type'>
     <moy-typed-input *ngSwitchDefault [config]="config"></moy-typed-input>
     <moy-select *ngSwitchCase="InputType.Select" [config]="config"></moy-select>
+    <moy-datepicker *ngSwitchCase="InputType.Date" [config]="config"></moy-datepicker>
   </ng-container>
 </article>

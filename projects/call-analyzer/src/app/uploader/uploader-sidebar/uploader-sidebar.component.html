@@ -31,8 +31,10 @@
         </ng-container>
 
         <ng-container *ngSwitchCase="FilterType.Date">
-          <moy-input [config]="columnMap[column + '::' + INPUT_APPENDS.dateAfter]" (onChange)="onFilterChange(column, $event)"></moy-input>
-          <moy-input [config]="columnMap[column + '::' + INPUT_APPENDS.dateBefore]" (onChange)="onFilterChange(column, $event)"></moy-input>
+          <moy-input
+            [config]="columnMap[column + '::' + INPUT_APPENDS.date]"
+            (onChange)="onFilterChange(column, $event)">
+          </moy-input>
         </ng-container>
       </ng-container>
     </div>

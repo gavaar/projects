@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.1',
+    changes: [
+      'Fixed sizing for different screens'
+    ]
+  },
+  {
     version: '0.5.0',
     changes: [
       'Table can be successfully filtered now!',

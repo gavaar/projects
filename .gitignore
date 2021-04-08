@@ -10,6 +10,7 @@
 
 # unrelated projects
 projects/moyney
+# projects/call-analyzer
 
 # dependencies
 /node_modules

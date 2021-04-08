@@ -4,7 +4,7 @@
   </button>
 
   <button *ngSwitchDefault class="MoyButton" (click)="onClick()" (blur)="onBlur()">
-    <mat-icon [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
+    <mat-icon *ngIf="config.icon" [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
     <span class="MoyButton__text">{{ config.text }}</span>
   </button>
 </ng-container>

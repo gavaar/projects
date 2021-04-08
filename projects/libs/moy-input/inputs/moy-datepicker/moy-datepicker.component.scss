@@ -1,0 +1,28 @@
+.MoyInput__datepicker {
+  display: flex;
+  align-items: flex-end;
+}
+
+// Angular Material overrides
+.MoyInput__datepicker::ng-deep {
+  .mat-date-range-input {
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  } 
+
+  .mat-datepicker-toggle .mat-icon-button {
+    color: var(--main);
+  }
+}
+
+::ng-deep {
+  .mat-calendar-body-selected {
+    background-color: var(--main);
+  }
+
+  .mat-calendar-body-in-range::before {
+    background-color: var(--main);
+    opacity: 0.2;
+  }  
+}

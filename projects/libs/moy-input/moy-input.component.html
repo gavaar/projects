@@ -2,16 +2,9 @@
   <label *ngIf="config.label" class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">
     {{ config.label }}
   </label>
-  <input
-    #inputElement
-    class="MoyInput__input"
-    autocapitalize="none"
-    (keydown.enter)="config.control.updateOn === 'blur' && $event.target.blur()"
-    [attr.autofocus]="config.autofocus ? '' : null"
-    [type]="config.type"
-    [placeholder]="config.floatingLabel || !config.label ? error || config.placeholder : ''"
-    [formControl]="config.control"
-    (focus)="config.onFocus()"
-    (blur)="config.onBlur()"
-  />
+  <ng-container [ngSwitch]='config.type'>
+    <moy-typed-input *ngSwitchDefault [config]="config"></moy-typed-input>
+    <moy-select *ngSwitchCase="InputType.Select" [config]="config"></moy-select>
+    <moy-datepicker *ngSwitchCase="InputType.Date" [config]="config"></moy-datepicker>
+  </ng-container>
 </article>

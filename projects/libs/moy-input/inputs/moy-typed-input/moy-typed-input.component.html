@@ -1,0 +1,10 @@
+<input #inputElement
+  class="MoyInput__input"
+  autocapitalize="none"
+  [type]="config.type"
+  [attr.autofocus]="config.autofocus ? '' : null"
+  [placeholder]="config.floatingLabel || !config.label ? config.placeholder : ''"
+  [formControl]="config.control"
+  (keydown.enter)="config.control.updateOn === 'blur' && $event.target.blur()"
+  (focus)="config.onFocus()"
+  (blur)="config.onBlur()" />

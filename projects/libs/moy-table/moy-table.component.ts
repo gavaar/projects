@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEn
 import { verticalExpandCollapse } from '@libs/animations';
 import { MoyButtonType } from '@libs/moy-button/moy-button.models';
 import { InputType } from '@libs/moy-input/moy-input.models';
-import { AbstractMoyTable } from './moy-table.abstract';
+import { AbstractMoyTable } from './table/moy-table.abstract';
 import { RowType } from './row/row.abstract';
 
 @Component({
@@ -22,4 +22,5 @@ export class MoyTableComponent {
 
   columnFn = (index: number) => index;
   innerColumnFn = (index: number) => index;
+  rowFn = (index: number) => index;
 }

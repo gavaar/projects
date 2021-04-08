@@ -8,6 +8,10 @@
 # Only exists if Bazel was run
 /bazel-out
 
+# unrelated projects
+projects/moyney
+projects/call_analyzer
+
 # dependencies
 /node_modules
 

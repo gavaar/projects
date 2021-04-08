@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "moyney",
+    "site": "PROJECT_ID",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [

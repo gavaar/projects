@@ -1,4 +1,4 @@
-<table class="MoyTable" mat-table multiTemplateDataRows [dataSource]="config.matrix$">
+<table class="MoyTable" mat-table multiTemplateDataRows [dataSource]="config.matrix$" [trackBy]="rowFn">
   <!-- Column Defs -->
   <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
     <th mat-header-cell *matHeaderCellDef>{{ config.customColumnText[column] || column | titlecase }}</th>
@@ -30,8 +30,15 @@
     mat-row
     [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }"
     (click)="row.click()"
-    *matRowDef="let row; let index = index; columns: config.columns"
+    *matRowDef="let row; let index = dataIndex; columns: config.columns"
   ></tr>
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="9999">
+      <span class="MoyTable__no-data-message">
+        {{ config.noDataMessage }}
+      </span>
+    </td>
+  </tr>
   <tr mat-row *matRowDef="let row; columns: ['__rowContent__']" class="MoyTable__expandable-content"></tr>
 </table>
 

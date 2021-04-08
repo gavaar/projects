@@ -23,5 +23,8 @@
 }
 
 .Uploader__right {
+  display: flex;
   flex: 1 0 0;
+
+  moy-input { width: 100%; }
 }

@@ -1,7 +1,10 @@
 <section class="Uploader">
   <input type="file" accept=".csv" (change)="onCsvUpload($event)" />
+  <p *ngIf="loading.state">
+    {{ loading.message }}
+  </p>
   <ng-container *ngIf="(csvOutput | async) as csv">
-    <uploader-sidebar [tableFilters]="csv.tableFilters"></uploader-sidebar>
+    <uploader-sidebar [tableFilters]="csv.tableFilters" (filtersUpdated)="filtersUpdate($event)"></uploader-sidebar>
     <moy-table-2 [config]="csv.table"></moy-table-2>
   </ng-container>
 </section>

@@ -1,8 +1,9 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MoyDatepicker, MoyInput, MoyInputNumber, MoySelect } from '@libs/moy-input';
 import { checkStringType, FilterType } from '../uploader.utils';
 import { LocalStorageManager } from '../../helpers/local-storage';
 import { INPUT_APPENDS, LS_TYPE_VALUES_TOKEN, SELECT_OPTIONS } from './uploader-sidebar.config';
+import { MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
 
 interface SidebarOptions {
   columns: { [column: string]: MoyInput };
@@ -17,6 +18,8 @@ interface SidebarOptions {
 })
 export class UploaderSidebarComponent implements OnInit {
   @Input() tableFilters: { columns: string[]; exampleRow: string[] };
+  @Output() filtersUpdated = new EventEmitter<MoyTableFilter<any>>();
+
   FilterType = FilterType;
   INPUT_APPENDS = INPUT_APPENDS;
 
@@ -24,6 +27,7 @@ export class UploaderSidebarComponent implements OnInit {
   typeMap: SidebarOptions['types'];
 
   private _lsManager = new LocalStorageManager(LS_TYPE_VALUES_TOKEN);
+  private _filtersForTable: MoyTableFilter<any>['columns'] = {};
 
   ngOnInit(): void {
     const { columns, types } = this.sidebarOptions();
@@ -32,7 +36,9 @@ export class UploaderSidebarComponent implements OnInit {
   }
 
   onFilterChange(column: string, value: string) {
-    console.log({ column, value, that: this });
+    const noFilterCol = column.split('::')[0];
+    this._filtersForTable[noFilterCol] = this.buildFilterFromColumn(noFilterCol, value);
+    this.filtersUpdated.emit({ columns: this._filtersForTable });
   }
 
   onTypeChange(column: string, value: FilterType): void {
@@ -41,6 +47,34 @@ export class UploaderSidebarComponent implements OnInit {
     this.inputConfig(column, value).forEach(col => {
       this.columnMap[col.id] = col;
     });
+  }
+
+  submitFilters = () => { // for testing, delete later
+    const filters = Object.keys(this.columnMap).reduce((values, col) => {
+      const typeValues = this._lsManager.get();
+      const colValue = this.columnMap[col].control.value;
+      const type = typeValues[col];
+      const noFilterCol = col.split('::')[0];
+
+      switch (type) {
+        case FilterType.Number:
+          break;
+        case FilterType.Date:
+          values[noFilterCol] = (val: string) => {
+            const valueDate = new Date(val);
+            return valueDate >= colValue.before && valueDate <= colValue.after;
+          }
+          break;
+        default:
+          values[noFilterCol] = (val: string) => {
+            return val.includes(colValue);
+          }
+          break;
+      }
+
+      return values;
+    }, {} as { [key: string]: any });
+    console.log({ filters });
   }
 
   private sidebarOptions(): SidebarOptions {
@@ -82,6 +116,34 @@ export class UploaderSidebarComponent implements OnInit {
             placeholder: 'seleccione fecha',
           }),
         ];
+    }
+  }
+
+  private buildFilterFromColumn(column: string, value: any): (val: any) => boolean | null {
+    const typeValues = this._lsManager.get();
+    const type = typeValues[`${column}::${INPUT_APPENDS.typeAppend}`];
+
+    switch (type) {
+      case FilterType.Number:
+        const numberBeforeColumn = `${column}::${INPUT_APPENDS.numberBefore}`;
+        const numberAfterColumn = `${column}::${INPUT_APPENDS.numberAfter}`;
+
+        const numberBeforeVal = this.columnMap[numberBeforeColumn].control.value;
+        const numberAfterVal = this.columnMap[numberAfterColumn].control.value;
+        if (!numberAfterVal || !numberBeforeVal) {
+          return;
+        }
+        return (val: any) => (val <= numberBeforeVal && val >= numberAfterVal);
+      case FilterType.Date:
+        const before = new Date(value.before);
+        const after = new Date(value.after);
+
+        return (val: string) => {
+          const valueDate = new Date(val);
+          return valueDate >= before && valueDate <= after;
+        }
+      default:
+        return (val: string) => val.includes(value);
     }
   }
 }

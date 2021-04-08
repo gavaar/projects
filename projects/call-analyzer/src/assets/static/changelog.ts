@@ -2,6 +2,14 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.0',
+    changes: [
+      'Table can be successfully filtered now!',
+      'Minor improvements for buttons, but more is required',
+      'Table now shows 500 rows instead of 100',
+    ]
+  },
+  {
     version: '0.4.0',
     changes: [
       'Added datepicker input type for moy-input',

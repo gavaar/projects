@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.2',
+    changes: [
+      'Number is now properly searching as a number type',
+    ]
+  },
+  {
     version: '0.5.1',
     changes: [
       'Fixed sizing for different screens'

@@ -128,12 +128,16 @@ export class UploaderSidebarComponent implements OnInit {
         const numberBeforeColumn = `${column}::${INPUT_APPENDS.numberBefore}`;
         const numberAfterColumn = `${column}::${INPUT_APPENDS.numberAfter}`;
 
-        const numberBeforeVal = this.columnMap[numberBeforeColumn].control.value;
-        const numberAfterVal = this.columnMap[numberAfterColumn].control.value;
-        if (!numberAfterVal || !numberBeforeVal) {
+        const numberBeforeVal = +this.columnMap[numberBeforeColumn].control.value;
+        const numberAfterVal = +this.columnMap[numberAfterColumn].control.value;
+        if (!numberAfterVal && !numberBeforeVal) {
           return;
         }
-        return (val: any) => (val <= numberBeforeVal && val >= numberAfterVal);
+
+        return (val: string) => {
+          return (!numberBeforeVal || +val <= numberBeforeVal) && 
+            (!numberAfterVal || +val >= numberAfterVal)
+        };
       case FilterType.Date:
         const before = new Date(value.before);
         const after = new Date(value.after);

@@ -6,7 +6,7 @@
   height: calc(100% - 5.5rem);
   background-color: #d3d3d340;
   border-right: 1px solid black;
-  max-width: 25vw;
+  max-width: 25rem;
 }
 
 .Uploader__sidebar-input {
@@ -27,4 +27,11 @@
   flex: 1 0 0;
 
   moy-input { width: 100%; }
+}
+
+// media sizes
+@media only screen and (max-width: 100rem) {
+  section {
+    max-width: 25vw;
+  }
 }

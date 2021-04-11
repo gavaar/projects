@@ -2,14 +2,21 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.4',
+    changes: [
+      '(dev) Removed old moy-table and renamed moy-table-2 > moy-table',
+      'Fixed pagination error on last page of table'
+    ]
+  },
+  {
     version: '0.5.3',
     changes: [
       'Old table deprecated, new table now has pagination and works faster',
       'Added media queries for smaller than 1440px wide screens',
-      'Added paths to local project scope (dev-related only)',
-      'Updated localStorage manager to check if key exists (dev-related only)',
-      'Added index for helpers folder (dev-related only)',
-      'Encapsulated uploader component logic into handlers (dev-related only)',
+      '(dev) Added paths to local project scope',
+      '(dev) Updated localStorage manager to check if key exists',
+      '(dev) Added index for helpers folder',
+      '(dev) Encapsulated uploader component logic into handlers',
     ]
   },
   {

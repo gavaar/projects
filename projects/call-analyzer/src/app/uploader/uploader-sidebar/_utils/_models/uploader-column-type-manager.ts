@@ -1,7 +1,4 @@
-import { AbstractMoyInput, MoyDatepicker, MoyInput, MoyInputNumber } from '@libs/moy-input';
-import { MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
 import { FilterType } from 'app/uploader/uploader.utils';
-import { INPUT_APPENDS } from '../../uploader-sidebar.config';
 import { StringHandler, NumberHandler, DateHandler, AbstractUploaderHandler } from './handlers';
 
 export class UploaderColumnTypeManager {

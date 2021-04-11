@@ -1,7 +1,8 @@
 import { AbstractMoyInput, MoyDatepicker, MoyInput, MoyInputNumber } from '@libs/moy-input';
-import { MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
+import { MoyTableFilter } from '@libs/moy-table';
 import { INPUT_APPENDS } from '../../uploader-sidebar.config';
 
+// All these are only used inside the ./uploader-column-type-manager.ts
 export abstract class AbstractUploaderHandler {
   inputs: AbstractMoyInput<any>[];
 

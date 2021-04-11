@@ -3,7 +3,7 @@ import { verticalExpandCollapse } from '@libs/animations';
 import { MoyTable } from './table/moy-table';
 
 @Component({
-  selector: 'moy-table-2',
+  selector: 'moy-table',
   templateUrl: 'moy-table.component.html',
   styleUrls: ['moy-table.component.scss'],
   animations: [verticalExpandCollapse],

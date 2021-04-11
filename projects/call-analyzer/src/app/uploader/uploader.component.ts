@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
-import { MoyTable, MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
+import { MoyTable, MoyTableFilter } from '@libs/moy-table';
 import { CsvObject, CsvReader } from '../helpers/csv-reader';
 import { csvToRows, removeQuotes } from './uploader.utils';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';

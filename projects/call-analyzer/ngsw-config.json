@@ -26,5 +26,13 @@
         ]
       }
     }
-  ]
+  ],
+  "dataGroups": [{
+    "name": "lib-assets",
+    "urls": ["*.js", ".css", ".woff2"],
+    "cacheConfig": {
+      "maxSize": 3,
+      "maxAge": "7d"
+    }
+  }]
 }

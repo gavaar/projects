@@ -5,7 +5,6 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
 
 const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
-const pageSize = 50;
 
 function buildTableConfig(headerRow: string[], editableRows = false): MoyTableConfig<any> {
   columnDefault.controlOptions.disabled = !editableRows;
@@ -35,6 +34,8 @@ export class MoyTable<Model> {
   totalRows = 0;
 
   row$: Observable<MoyRow<Model>[]>;
+
+  readonly pageSize = 30;
 
   private _pageIndex = 0;
   private _rows = new BehaviorSubject<MoyRow<Model>[]>([]);
@@ -76,7 +77,7 @@ export class MoyTable<Model> {
 
   private setBody(rows = this._allRows, page = this._pageIndex) {
     this.totalRows = rows.length;
-    this._rows.next(rows.slice(page * pageSize, (page + 1) * pageSize));
+    this._rows.next(rows.slice(page * this.pageSize, (page + 1) * this.pageSize));
   }
 
   private buildRows(rows: Model[]): MoyRow<Model>[] {

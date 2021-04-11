@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FilterType } from '../uploader.utils';
 import { INPUT_APPENDS } from './uploader-sidebar.config';
-import { MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
+import { MoyTableFilter } from '@libs/moy-table';
 import { UploaderFilterManager } from './_utils/uploader-filter-manager';
 @Component({
   selector: 'uploader-sidebar',

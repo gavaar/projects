@@ -2,7 +2,7 @@ import { MoyInput, MoySelect } from '@libs/moy-input';
 import { LocalStorageManager } from '@helpers';
 import { checkStringType, FilterType } from 'app/uploader/uploader.utils';
 import { INPUT_APPENDS, LS_TYPE_VALUES_TOKEN, SELECT_OPTIONS } from '../uploader-sidebar.config';
-import { MoyTableFilter } from '@libs/moy-table-2/table/moy-table';
+import { MoyTableFilter } from '@libs/moy-table';
 import { UploaderColumnTypeManager  } from './_models';
 
 export class UploaderFilterManager {

@@ -1,36 +1,10 @@
 .MoyTable {
   width: 100%;
   cursor: default;
-
-  ::ng-deep .mat-table {
-    background-color: transparent;
-  }
-
-  ::ng-deep .MoyInput {
-    border: 0;
-    padding: 0;
-    height: auto;
-    margin: 0;
-
-    .MoyInput__input {
-      padding: 0;
-      border: 0;
-    }
-  }
-
-  ::ng-deep .MoyButton {
-    height: 1.2rem;
-    width: 1rem;
-    opacity: 0.1;
-
-    .mat-icon {
-      font-size: 1rem;
-    }
-  }
 }
 
 .MoyTable .mat-header-row {
-  height: 1.2rem;
+  height: 2.5rem;
 
   .mat-header-cell {
     color: black;
@@ -66,54 +40,91 @@
     }
   }
 
-  &.MoyTable__expandable-content {
-    height: 0;
+  // &.MoyTable__expandable-content {
+  //   height: 0;
 
-    .mat-cell {
-      padding: 0;
-      height: 0;
-      border: 0;
-      min-height: 0;
-    }
-  }
+  //   .mat-cell {
+  //     padding: 0;
+  //     height: 0;
+  //     border: 0;
+  //     min-height: 0;
+  //   }
+  // }
 
-  &:hover ::ng-deep .MoyButton {
-    opacity: 1;
-    transition: 0.25s;
-  }
-}
-
-.MoyTable__row-content {
-  padding: 0.2rem 0.5rem;
-  background-color: #5f9ea03b;
-  overflow: hidden;
-}
-
-.MoyTable__expandable ::ng-deep.MoyInput__input {
-  font-weight: 700;
-  color: black;
-}
-
-.MoyTable__expandable-counter {
-  position: absolute;
-  left: -0.5rem;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  height: 1rem;
-  padding: 0.1rem;
-  box-shadow: 0 0 1px black;
-  background-color: slategray;
-  font-size: 0.7rem;
-  color: white;
-  font-weight: 700;
-  border-radius: 50%;
-  width: 1rem;
-  text-align: center;
+  // &:hover ::ng-deep .MoyButton {
+  //   opacity: 1;
+  //   transition: 0.25s;
+  // }
 }
 
 .MoyTable__no-data-message {
   display: block;
   text-align: center;
   margin: 2rem;
+}
+
+// .MoyTable__row-content {
+//   padding: 0.2rem 0.5rem;
+//   background-color: #5f9ea03b;
+//   overflow: hidden;
+// }
+
+// .MoyTable__expandable ::ng-deep.MoyInput__input {
+//   font-weight: 700;
+//   color: black;
+// }
+
+// .MoyTable__expandable-counter {
+//   position: absolute;
+//   left: -0.5rem;
+//   bottom: 0;
+//   top: 0;
+//   margin: auto;
+//   height: 1rem;
+//   padding: 0.1rem;
+//   box-shadow: 0 0 1px black;
+//   background-color: slategray;
+//   font-size: 0.7rem;
+//   color: white;
+//   font-weight: 700;
+//   border-radius: 50%;
+//   width: 1rem;
+//   text-align: center;
+// }
+
+// Style overrides
+.MoyTable::ng-deep {
+ .mat-table {
+    background-color: transparent;
+  }
+
+  .mat-paginator-range-actions {
+    width: 100%;
+
+    .mat-paginator-range-label {
+      margin: 0 auto 0 0;
+    }
+  }
+
+  .MoyInput {
+    border: 0;
+    padding: 0;
+    height: auto;
+    margin: 0;
+
+    .MoyInput__input {
+      padding: 0;
+      border: 0;
+    }
+  }
+
+  .MoyButton {
+    height: 1.2rem;
+    width: 1rem;
+    opacity: 0.1;
+
+    .mat-icon {
+      font-size: 1rem;
+    }
+  }
 }

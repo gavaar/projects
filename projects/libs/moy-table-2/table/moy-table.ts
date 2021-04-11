@@ -2,8 +2,10 @@ import { MoyInput } from '@libs/moy-input';
 import { MoyColumnConfig } from '../column/column';
 import { MoyRow } from '../row/moy-row';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { PageEvent } from '@angular/material/paginator';
 
 const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
+const pageSize = 50;
 
 function buildTableConfig(headerRow: string[], editableRows = false): MoyTableConfig<any> {
   columnDefault.controlOptions.disabled = !editableRows;
@@ -34,8 +36,10 @@ export class MoyTable<Model> {
 
   row$: Observable<MoyRow<Model>[]>;
 
+  private _pageIndex = 0;
   private _rows = new BehaviorSubject<MoyRow<Model>[]>([]);
   private _allRows: MoyRow<Model>[] = [];
+  private _filteredRows: MoyRow<Model>[] = [];
 
   constructor(private config: MoyTableConfig<Model>) {
     this.columns = Object.keys(config.columns);
@@ -43,12 +47,13 @@ export class MoyTable<Model> {
   }
 
   addRows(rows: Model[]) {
+    this.clearFilters();
     this._allRows = [...this._rows.value, ...this.buildRows(rows)];
     this.setBody();
   }
 
   setFilters({ columns }: MoyTableFilter<Model>) {
-    const filteredRows = this._allRows.filter(row => {
+    this._filteredRows = this._allRows.filter(row => {
       return row.columns.find(col => {
         const { value } = row.cellMap[col].content.control;
         const valueShouldGo = columns[col] && !columns[col](value);
@@ -56,12 +61,22 @@ export class MoyTable<Model> {
       }) == null;
     });
 
-    this.setBody(filteredRows);
+    this.setBody(this._filteredRows);
   }
 
-  private setBody(rows = this._allRows) {
+  setPage({ pageIndex }: PageEvent) {
+    this._pageIndex = pageIndex;
+    this.setBody(this._filteredRows);
+  }
+
+  private clearFilters() {
+    this._pageIndex = 0;
+    this._filteredRows = [];
+  }
+
+  private setBody(rows = this._allRows, page = this._pageIndex) {
     this.totalRows = rows.length;
-    this._rows.next(rows.slice(0, 500));
+    this._rows.next(rows.slice(page * pageSize, (page + 1) * pageSize));
   }
 
   private buildRows(rows: Model[]): MoyRow<Model>[] {

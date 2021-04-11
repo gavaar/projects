@@ -27,7 +27,6 @@ export class UploaderSidebarComponent implements OnInit {
 
   onFilterChange(column: string, value: string) {
     const noFilterCol = column.split('::')[0];
-    // this._filtersForTable[noFilterCol] = this.filterManager.buildFilter(noFilterCol, value);
     this._filtersForTable[noFilterCol] = this.filterManager.buildFilter(noFilterCol);
     this.filtersUpdated.emit({ columns: this._filtersForTable });
   }

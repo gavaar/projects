@@ -2,8 +2,8 @@ import { FilterType } from '../uploader.utils';
 
 export const INPUT_APPENDS = {
   date: 'fecha',
-  numberAfter: 'mayor que',
-  numberBefore: 'menor que',
+  numberHigherThan: 'mayor que',
+  numberLowerThan: 'menor que',
   typeAppend: 'type',
 };
 export const LS_TYPE_VALUES_TOKEN = 'type_values';

@@ -30,8 +30,8 @@
 }
 
 // media sizes
-@media only screen and (max-width: 100rem) {
-  section {
+@media only screen and (max-width: 90rem) {
+  .Uploader__sidebar {
     max-width: 25vw;
   }
 }

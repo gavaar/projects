@@ -13,4 +13,8 @@ export class LocalStorageManager {
     const object = { ...this.get(), ...resource };
     this.set(object);
   }
+
+  exists(): boolean {
+    return localStorage.getItem(this.uri) != null;
+  }
 }

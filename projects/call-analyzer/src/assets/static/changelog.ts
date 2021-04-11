@@ -2,6 +2,17 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.3',
+    changes: [
+      'Old table deprecated, new table now has pagination and works faster',
+      'Added media queries for smaller than 1440px wide screens',
+      'Added paths to local project scope (dev-related only)',
+      'Updated localStorage manager to check if key exists (dev-related only)',
+      'Added index for helpers folder (dev-related only)',
+      'Encapsulated uploader component logic into handlers (dev-related only)',
+    ]
+  },
+  {
     version: '0.5.2',
     changes: [
       'Number is now properly searching as a number type',

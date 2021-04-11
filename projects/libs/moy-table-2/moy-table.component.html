@@ -11,7 +11,13 @@
 
     <ng-container matColumnDef="totalColumns">
       <td mat-footer-cell *matFooterCellDef [attr.colspan]="config.columns.length">
-        Showing: {{ rows.length }} / {{ config.totalRows }}
+        <mat-paginator
+          hidePageSize="true"
+          showFirstLastButtons="true"
+          [length]="config.totalRows"
+          [pageSize]="rows.length"
+          (page)="config.setPage($event)">
+        </mat-paginator>
       </td>
     </ng-container>
 

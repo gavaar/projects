@@ -3,40 +3,44 @@
     <span class="Uploader__left">Tipo</span>
     <span class="Uploader__right">Filtros</span>
   </div>
-  <div *ngFor="let column of tableFilters.columns" class="Uploader__sidebar-input">
-    <div class="Uploader__left">
-      <moy-input
-        [config]="typeMap[column + '::' + INPUT_APPENDS.typeAppend]"
-        (onChange)="onTypeChange(column, $event)">
-      </moy-input>
-    </div>
+  <div *ngFor="let column of tableFilters.columns; trackBy: inputColumnFn" class="Uploader__sidebar-input">
+    <ng-container *ngIf="filterManager.types[column + '::' + INPUT_APPENDS.typeAppend] as inputType">
+      <div class="Uploader__left">
+        <moy-input [config]="inputType" (onChange)="onTypeChange(column, $event)">
+        </moy-input>
+      </div>
 
-    <div class="Uploader__right">
-      <ng-container [ngSwitch]="typeMap[column + '::' + INPUT_APPENDS.typeAppend]?.control.value">
-        <ng-container *ngSwitchCase="FilterType.String">
-          <moy-input [config]="columnMap[column]" (onChange)="onFilterChange(column, $event)"></moy-input>
-        </ng-container>
+      <div class="Uploader__right">
+        <ng-container [ngSwitch]="inputType.control.value">
+          <ng-container *ngSwitchCase="FilterType.String">
+            <ng-container *ngTemplateOutlet="input; context: { name: column }">
+            </ng-container>
+          </ng-container>
 
-        <ng-container *ngSwitchCase="FilterType.Number">
-          <moy-input 
-            *ngIf="columnMap[column + '::' + INPUT_APPENDS.numberAfter] as config"
-            [config]="config"
-            (onChange)="onFilterChange(config.id, $event)">
-          </moy-input>
-          <moy-input
-            *ngIf="columnMap[column + '::' + INPUT_APPENDS.numberBefore] as config"
-            [config]="config"
-            (onChange)="onFilterChange(config.id, $event)">
-          </moy-input>
-        </ng-container>
+          <ng-container *ngSwitchCase="FilterType.Number">
+            <ng-container
+              *ngTemplateOutlet="input; context: { name: column + '::' + INPUT_APPENDS.numberHigherThan }">
+            </ng-container>
 
-        <ng-container *ngSwitchCase="FilterType.Date">
-          <moy-input
-            [config]="columnMap[column + '::' + INPUT_APPENDS.date]"
-            (onChange)="onFilterChange(column, $event)">
-          </moy-input>
+            <ng-container
+              *ngTemplateOutlet="input; context: { name: column + '::' + INPUT_APPENDS.numberLowerThan }">
+            </ng-container>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="FilterType.Date">
+            <ng-container
+              *ngTemplateOutlet="input; context: { name: column + '::' + INPUT_APPENDS.date }">
+            </ng-container>
+          </ng-container>
         </ng-container>
-      </ng-container>
-    </div>
+      </div>
+    </ng-container>
   </div>
 </article>
+
+<!-- Input Form -->
+<ng-template #input let-name="name">
+  <moy-input *ngIf="filterManager.columns[name] as config" [config]="config"
+    (onChange)="onFilterChange(config.id, $event)">
+  </moy-input>
+</ng-template>

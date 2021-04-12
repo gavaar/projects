@@ -15,7 +15,7 @@
           hidePageSize="true"
           showFirstLastButtons="true"
           [length]="config.totalRows"
-          [pageSize]="rows.length"
+          [pageSize]="config.pageSize"
           (page)="config.setPage($event)">
         </mat-paginator>
       </td>

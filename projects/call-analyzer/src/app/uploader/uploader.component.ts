@@ -46,10 +46,10 @@ export class UploaderComponent implements OnDestroy {
     this._table = new MoyTable(config);
 
     delete csvObject[0];
-    const rows = csvToRows(csvObject, this._table.columns);
+    const rows = csvToRows(csvObject, this._table.columns.body);
     this._table.addRows(rows);
     this.listenForFilters();
-    const tableFilters = { columns: this._table.columns, exampleRow: csvObject[1] };
+    const tableFilters = { columns: this._table.columns.body, exampleRow: csvObject[1] };
     this.loading.state = false;
     return { table: this._table, tableFilters };
   }

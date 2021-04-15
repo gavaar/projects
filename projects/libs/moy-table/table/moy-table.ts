@@ -1,5 +1,6 @@
 import { MoyInput } from '@libs/moy-input';
 import { MoyColumnConfig } from '../column/column';
+import { MoyColumnManager, TableSettings } from '../column/column-manager';
 import { MoyRow } from '../row/moy-row';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PageEvent } from '@angular/material/paginator';
@@ -11,14 +12,15 @@ function buildTableConfig(headerRow: string[], editableRows = false): MoyTableCo
   return headerRow.reduce((config, column) => {
     config.columns[column] = columnDefault;
     return config;
-  }, { columns: {} } as MoyTableConfig<any>);
+  }, { columns: {}, settings: {} } as MoyTableConfig<any>);
 }
 
 // Table
 export interface MoyTableConfig<Model> {
   columns: {
     [column in keyof Model]: MoyColumnConfig;
-  }
+  },
+  settings?: TableSettings;
 }
 
 export interface MoyTableFilter<Model> {
@@ -30,7 +32,7 @@ export interface MoyTableFilter<Model> {
 export class MoyTable<Model> {
   static basicConfig = buildTableConfig;
 
-  columns: string[] = [];
+  columns: MoyColumnManager;
   totalRows = 0;
 
   row$: Observable<MoyRow<Model>[]>;
@@ -43,7 +45,9 @@ export class MoyTable<Model> {
   private _filteredRows: MoyRow<Model>[] = [];
 
   constructor(private config: MoyTableConfig<Model>) {
-    this.columns = Object.keys(config.columns);
+    const { settings } = config;
+    const columnNames = Object.keys(config.columns);
+    this.columns = new MoyColumnManager(columnNames, settings);
     this.row$ = this._rows.asObservable();
   }
 

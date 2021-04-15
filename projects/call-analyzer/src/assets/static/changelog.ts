@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.5.5',
+    changes: [
+      '(dev) Improved table creation logic. Expandability of features is simpler now.',
+    ]
+  },
+  {
     version: '0.5.4',
     changes: [
       '(dev) Removed old moy-table and renamed moy-table-2 > moy-table',

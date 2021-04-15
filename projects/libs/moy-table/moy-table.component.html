@@ -1,16 +1,14 @@
 <ng-container *ngIf="(config.row$ | async) as rows">
-  <table class="MoyTable" [dataSource]="rows" mat-table multiTemplateDataRows [trackBy]="rowFn">
-    <!-- Column Defs -->
-    <ng-container [matColumnDef]="column" *ngFor="let column of config.columns; trackBy: columnFn">
-      <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+  <mat-table class="MoyTable" [dataSource]="rows" multiTemplateDataRows [trackBy]="rowFn">
+    <!-- Column Defs: [Arbitrary by input] -->
+    <ng-container [matColumnDef]="column" *ngFor="let column of config.columns.all; trackBy: columnFn">
+      <mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</mat-header-cell>
 
-      <td mat-cell *matCellDef="let row; let index = dataIndex">
+      <mat-cell *matCellDef="let row; let index = dataIndex">
         <moy-input [config]="row.cellMap[column].content"></moy-input>
-      </td>
-    </ng-container>
+      </mat-cell>
 
-    <ng-container matColumnDef="totalColumns">
-      <td mat-footer-cell *matFooterCellDef [attr.colspan]="config.columns.length">
+      <mat-footer-cell *matFooterCellDef [attr.colspan]="config.columns.body.length">
         <mat-paginator
           hidePageSize="true"
           showFirstLastButtons="true"
@@ -18,14 +16,20 @@
           [pageSize]="config.pageSize"
           (page)="config.setPage($event)">
         </mat-paginator>
-      </td>
+      </mat-footer-cell>
     </ng-container>
 
-    <!-- Row Defs -->
-    <tr mat-header-row *matHeaderRowDef="config.columns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; let index = dataIndex; columns: config.columns"
+    <!-- Row Defs: [header, row, footer, noData] -->
+    <ng-container *ngIf="config.columns.headers">
+      <mat-header-row *matHeaderRowDef="config.columns.headers; sticky: true"></mat-header-row>
+    </ng-container>
+
+    <mat-row *matRowDef="let row; let index = dataIndex; columns: config.columns.body"
       [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }">
-    </tr>
-    <tr mat-footer-row *matFooterRowDef="['totalColumns']; sticky: true"></tr>
-  </table>
+    </mat-row>
+
+    <ng-container *ngIf="config.columns.footers">
+      <mat-footer-row *matFooterRowDef="config.columns.footers; sticky: true"></mat-footer-row>
+    </ng-container>
+  </mat-table>
 </ng-container>

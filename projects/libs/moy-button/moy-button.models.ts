@@ -1,12 +1,11 @@
 interface MoyButtonConfig {
   icon?: string;
   svgIcon?: string;
-  click?: () => any;
-  blur?: () => any;
 }
 
 enum MoyButtonType {
   Round = 'button_round',
+  Toggle = 'button_toggle',
 }
 
 abstract class AbstractMoyButton {
@@ -20,8 +19,6 @@ abstract class AbstractMoyButton {
   constructor(opts: MoyButtonConfig) {
     this.icon = opts.icon || '';
     this.svgIcon = opts.svgIcon || '';
-    this.click = opts.click || (() => {});
-    this.blur = opts.blur || (() => {});
   }
 
   setIcon(icon: string) {
@@ -46,4 +43,17 @@ class MoyButtonRound extends AbstractMoyButton {
   }
 }
 
-export { MoyButtonConfig, MoyButtonType, AbstractMoyButton, MoyButton, MoyButtonRound };
+class MoyButtonToggle extends MoyButton {
+  type = MoyButtonType.Toggle;
+  pressed = false;
+
+  constructor(opts) {
+    super(opts);
+  }
+
+  click = () => {
+    this.pressed = !this.pressed;
+  }
+}
+
+export { MoyButtonConfig, MoyButtonType, AbstractMoyButton, MoyButton, MoyButtonRound, MoyButtonToggle };

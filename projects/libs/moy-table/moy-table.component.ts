@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { verticalExpandCollapse } from '@libs/animations';
-import { MoyTable } from './table/moy-table';
+import { MoyTable } from './table';
 
 @Component({
   selector: 'moy-table',

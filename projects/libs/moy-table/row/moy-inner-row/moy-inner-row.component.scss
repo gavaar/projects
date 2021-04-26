@@ -1,0 +1,74 @@
+.MoyInnerTable {
+  display: flex;
+  margin: 0 -1rem;
+}
+
+.MoyInnerTable__side {
+  width: 1.5rem;
+  background-color: #fff;
+  display: flex;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #20668667;
+    transition: 0.2s;
+
+    .arrow {
+      border-color: #fff;
+    }
+  }
+
+  &.disabled {
+    cursor: default;
+    background-color: #d3d3d340;
+    .arrow {
+      border-color: #d3d3d340;
+    }
+  }
+}
+
+.MoyInnerTable__table .mat-row {
+  max-height: 2rem;
+  min-height: 2rem;
+  padding: 0 0.5rem;
+  background-color: #20668652;
+
+  &.pair {
+    background-color: #20668667;
+  }
+
+  &.inner-row {
+    max-height: none;
+  }
+
+  .mat-cell {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    position: relative;
+    overflow: visible;
+
+    &:first-of-type {
+      padding-left: 0;
+    }
+
+    &:last-of-type {
+      padding-right: 0;
+    }
+  }
+}
+
+.arrow {
+  border: solid #20668667;
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  padding: 3px;
+  margin: auto;
+
+  &.left {
+    transform: rotate(135deg);
+  }
+
+  &.right {
+    transform: rotate(-45deg);  
+  }
+}

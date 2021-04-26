@@ -3,8 +3,20 @@
     <mat-icon [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
   </button>
 
+  <button
+    *ngSwitchCase="MoyButtonType.Toggle"
+    class="MoyButton toggle"
+    [ngClass]="{ pressed: config['pressed'] }"
+    (click)="onClick()">
+    <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
+  </button>
+
   <button *ngSwitchDefault class="MoyButton" (click)="onClick()" (blur)="onBlur()">
-    <mat-icon *ngIf="config.icon" [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
-    <span class="MoyButton__text">{{ config.text }}</span>
+    <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
   </button>
 </ng-container>
+
+<ng-template #defaultButton let-config>
+  <mat-icon *ngIf="config.icon" [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
+  <span class="MoyButton__text">{{ config.text }}</span>
+</ng-template>

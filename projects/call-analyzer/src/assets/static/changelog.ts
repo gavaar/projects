@@ -2,6 +2,14 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.6.1',
+    changes: [],
+    techChanges: [
+      'Updated previous versions of this changelog to reflect the tech changes update',
+      'Removed and destroyed completely old table. Unsupported now',
+    ]
+  },
+  {
     version: '0.6.0',
     changes: [
       'Added table grouping option. This way, rows can hold several values inside by grouping strategy',
@@ -18,15 +26,19 @@ export const CHANGELOG: Changelog[] = [
   {
     version: '0.5.5',
     changes: [
-      '(dev) Improved table creation logic. Expandability of features is simpler now.',
+    ],
+    techChanges: [
+      'Improved table creation logic. Expandability of features is simpler now.',
     ]
   },
   {
     version: '0.5.4',
     changes: [
-      '(dev) Removed old moy-table and renamed moy-table-2 > moy-table',
       'Fixed pagination error on last page of table'
-    ]
+    ],
+    techChanges: [
+      'Removed old moy-table and renamed moy-table-2 > moy-table',
+    ],
   },
   {
     version: '0.5.3',
@@ -57,16 +69,20 @@ export const CHANGELOG: Changelog[] = [
     version: '0.5.0',
     changes: [
       'Table can be successfully filtered now!',
-      'Minor improvements for buttons, but more is required',
       'Table now shows 500 rows instead of 100',
+    ],
+    techChanges: [
+      'Minor improvements for buttons, but more is required',
     ]
   },
   {
     version: '0.4.0',
     changes: [
+      'Updated uploader to include datepicker type',
+    ],
+    techChanges: [
       'Added datepicker input type for moy-input',
       'Added module-preloading to app, this improves speed and version management',
-      'Updated uploader to include datepicker type',
     ]
   },
   {
@@ -74,8 +90,10 @@ export const CHANGELOG: Changelog[] = [
     changes: [
       'Updated table, inputs and scrollbar styles',
       'Csv reader / uploader now merges previous table with new one. This is to be used on future saving rows instances',
-      'Csv reader now remembers what was uploaded previously. To clear table, recreate a new CsvReader',
       'Sidebar styles and logic on uploader updated',
+    ],
+    techChanges: [
+      'Csv reader now remembers what was uploaded previously. To clear table, recreate a new CsvReader',
     ]
   },
   {

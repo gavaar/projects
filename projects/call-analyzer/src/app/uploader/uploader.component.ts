@@ -3,7 +3,7 @@ import { MoyTable, MoyTableFilter } from '@libs/moy-table';
 import { CsvObject, CsvReader } from '../helpers/csv-reader';
 import { csvToRows, removeQuotes } from './uploader.utils';
 import { debounceTime, map, takeUntil } from 'rxjs/operators';
-import { AsyncSubject, BehaviorSubject, Observable, pipe } from 'rxjs';
+import { AsyncSubject, Observable, Subject } from 'rxjs';
 
 interface CsvOutput {
   table: MoyTable<any>,
@@ -20,7 +20,7 @@ export class UploaderComponent implements OnDestroy {
 
   private csvReader = new CsvReader();
   private _table: MoyTable<any>;
-  private _filter$ = new BehaviorSubject({ columns: {} });
+  private _filter$ = new Subject<MoyTableFilter<any>>();
   private _destroy$ = new AsyncSubject();
 
   ngOnDestroy() {
@@ -38,6 +38,10 @@ export class UploaderComponent implements OnDestroy {
   filtersUpdate(filters: MoyTableFilter<any>) {
     this.loading.state = true;
     this._filter$.next(filters);
+  }
+
+  groupingsUpdate({ column, value }: { column: string, value: boolean}) {
+    this._table.setGrouping(column, value);
   }
 
   private csvObjectToCsvOutput(csvObject: CsvObject): CsvOutput {

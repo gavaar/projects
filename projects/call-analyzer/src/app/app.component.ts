@@ -48,11 +48,6 @@ export class AppComponent {
     onTitleClick: () => {
       this.router.navigateByUrl('');
     },
-    suffixButtons: [
-      new MoyButtonRound({
-        icon: 'person',
-        click: () => {},
-      }),
-    ],
+    suffixButtons: [new MoyButtonRound({ icon: 'person' })],
   });
 }

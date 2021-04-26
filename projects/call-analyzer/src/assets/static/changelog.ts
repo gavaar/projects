@@ -2,6 +2,20 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.6.0',
+    changes: [
+      'Added table grouping option. This way, rows can hold several values inside by grouping strategy',
+      'Fixed a bug in which removing number filters broke table filtering',
+    ],
+    techChanges: [
+      'Created toggle button component',
+      'Updated changelog component to now be able to include technical changes',
+      'Only grouping strategy right now is to group those with equal names, needs expansion',
+      'Updated filterManager and created pageManager and rowManager for table component. Trying to SOLID',
+      'Improved button components to be easier to initialize',
+    ],
+  },
+  {
     version: '0.5.5',
     changes: [
       '(dev) Improved table creation logic. Expandability of features is simpler now.',
@@ -19,11 +33,13 @@ export const CHANGELOG: Changelog[] = [
     changes: [
       'Old table deprecated, new table now has pagination and works faster',
       'Added media queries for smaller than 1440px wide screens',
-      '(dev) Added paths to local project scope',
-      '(dev) Updated localStorage manager to check if key exists',
-      '(dev) Added index for helpers folder',
-      '(dev) Encapsulated uploader component logic into handlers',
-    ]
+    ],
+    techChanges: [
+      'Added paths to local project scope',
+      'Updated localStorage manager to check if key exists',
+      'Added index for helpers folder',
+      'Encapsulated uploader component logic into handlers',
+    ],
   },
   {
     version: '0.5.2',

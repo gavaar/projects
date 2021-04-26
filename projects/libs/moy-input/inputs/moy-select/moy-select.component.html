@@ -4,7 +4,8 @@
   [formControl]="config.control"
   (focus)="config.onFocus()"
   (blur)="config.onBlur()">
-  <option *ngFor="let option of config.selectOptions; trackBy: selectOptionFn"
+  <option
+    *ngFor="let option of config.selectOptions; trackBy: selectOptionFn"
     [value]="option.value">
     {{ option.label }}
   </option>

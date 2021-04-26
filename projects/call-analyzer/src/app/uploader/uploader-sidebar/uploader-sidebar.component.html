@@ -1,16 +1,16 @@
-<article class="Uploader__sidebar">
-  <div class="Uploader__sidebar-headers">
-    <span class="Uploader__left">Tipo</span>
-    <span class="Uploader__right">Filtros</span>
+<article class="UploaderSidebar">
+  <div class="UploaderSidebar__headers">
+    <span class="UploaderSidebar__left">Tipo</span>
+    <span class="UploaderSidebar__right">Filtros</span>
   </div>
-  <div *ngFor="let column of tableFilters.columns; trackBy: inputColumnFn" class="Uploader__sidebar-input">
+  <div *ngFor="let column of tableFilters.columns; trackBy: inputColumnFn" class="UploaderSidebar__input">
     <ng-container *ngIf="filterManager.types[column + '::' + INPUT_APPENDS.typeAppend] as inputType">
-      <div class="Uploader__left">
+      <div class="UploaderSidebar__left">
         <moy-input [config]="inputType" (onChange)="onTypeChange(column, $event)">
         </moy-input>
       </div>
 
-      <div class="Uploader__right">
+      <div class="UploaderSidebar__right">
         <ng-container [ngSwitch]="inputType.control.value">
           <ng-container *ngSwitchCase="FilterType.String">
             <ng-container *ngTemplateOutlet="input; context: { name: column }">
@@ -36,11 +36,38 @@
       </div>
     </ng-container>
   </div>
+
+  <hr>
+
+  <div>
+    <div class="UploaderSidebar__groupings-title">Agrupar por:</div>
+    <div class="UploaderSidebar__groupings-buttons">   
+      <moy-button
+        *ngFor="let column of tableFilters.columns; trackBy: inputColumnFn"
+        [config]="filterManager.groupings[column]"
+        (click)="onButtonClick(column, filterManager.groupings[column].pressed)">
+      </moy-button>
+    </div>
+
+    <hr>
+
+    <ng-container *ngIf="showFrequency">
+      <div class="UploaderSidebar__groupings-title">Frecuencia: </div>
+      <div class="UploaderSidebar__right">
+        <ng-container
+          *ngTemplateOutlet="input; context: { name: frequencyKey + '::' + INPUT_APPENDS.numberHigherThan }">
+        </ng-container>
+        <ng-container
+          *ngTemplateOutlet="input; context: { name: frequencyKey + '::' + INPUT_APPENDS.numberLowerThan }">
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
 </article>
 
 <!-- Input Form -->
 <ng-template #input let-name="name">
   <moy-input *ngIf="filterManager.columns[name] as config" [config]="config"
-    (onChange)="onFilterChange(config.id, $event)">
+    (onChange)="onFilterChange(config.id)">
   </moy-input>
 </ng-template>

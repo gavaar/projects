@@ -1,22 +1,30 @@
 .MoyButton {
+  cursor: pointer;
   border: 0;
   border-radius: 0.5rem;
-  padding: 0.25rem;
   height: 2rem;
   width: auto;
   background-color: transparent;
-  display: flex;
-  flex-flow: row nowrap;
-  justify-content: center;
-  align-items: center;
+  margin: 0.5rem;
+  box-shadow: 0 0 2px 1px dimgray;
 }
 
 .MoyButton__text {
-  margin: auto auto auto 1rem;
+  margin: auto 0.5rem;
 }
 
 .MoyButton.round {
   border-radius: 5rem;
   padding: 0;
   width: 2rem;
+}
+
+.MoyButton.toggle {
+  &.pressed,
+  &:hover {
+    box-shadow: 0 0 0 0;
+    background-color: dimgray;
+    color: #fff;
+    transition: ease-in 0.25s;
+  }
 }

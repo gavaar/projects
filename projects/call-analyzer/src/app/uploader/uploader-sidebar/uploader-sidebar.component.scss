@@ -1,37 +1,49 @@
-.Uploader__sidebar {
+.UploaderSidebar {
   position: absolute;
   left: 0;
   top: 3rem;
-  // calc() equals base styles section <header> and <footer> sizes
+  //5.5rem comes from styles section <header> and <footer> sizes
   height: calc(100% - 5.5rem);
   background-color: #d3d3d340;
   border-right: 1px solid black;
   max-width: 25rem;
+  padding: 1rem;
 }
 
-.Uploader__sidebar-input {
+.UploaderSidebar__input {
   display: flex;
   align-items: flex-end;
 }
 
-.Uploader__sidebar-headers {
+.UploaderSidebar__headers {
   display: flex;
 }
 
-.Uploader__left {
+.UploaderSidebar__left {
   flex: 0 0 7rem;
 }
 
-.Uploader__right {
+.UploaderSidebar__right {
   display: flex;
   flex: 1 0 0;
 
   moy-input { width: 100%; }
 }
 
+.UploaderSidebar__groupings-title {
+  text-align: center;
+  margin: 1rem;
+}
+
+.UploaderSidebar__groupings-buttons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
 // media sizes
 @media only screen and (max-width: 90rem) {
-  .Uploader__sidebar {
+  .UploaderSidebar {
     max-width: 25vw;
   }
 }

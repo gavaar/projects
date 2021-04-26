@@ -1,0 +1,27 @@
+<div class="MoyInnerTable">
+  <div
+    class="MoyInnerTable__side"
+    [ngClass]="{ disabled: !pageManager.currentPage }"
+    (click)="pageManager.setPage(-1)">
+      <span class="arrow left"></span>
+  </div>
+  <mat-table class="MoyInnerTable__table" multiTemplateDataRows [dataSource]="(pageManager.row$ | async)" [trackBy]="rowFn">
+    <!-- Column Defs -->
+    <ng-container [matColumnDef]="column" *ngFor="let column of config.row.columns; trackBy: columnFn">
+      <mat-cell *matCellDef="let row; let index = dataIndex">
+        <moy-input [config]="row.cellMap[column].content"></moy-input>
+      </mat-cell>
+    </ng-container>
+
+    <!-- Row Defs -->
+    <mat-row *matRowDef="let row; let index = dataIndex; columns: config.row.columns"
+      [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }">
+    </mat-row>
+  </mat-table>
+  <div
+    class="MoyInnerTable__side"
+    [ngClass]="{ disabled: pageManager.currentPage >= pageManager.lastPage }"
+    (click)="pageManager.setPage(+1)">
+    <span class="arrow right"></span>
+  </div>
+</div>

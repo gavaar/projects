@@ -33,7 +33,7 @@ export class NumberHandler extends AbstractUploaderHandler {
     const lowerThanVal = +this.inputs[0].control.value;
     const higherThanVal = +this.inputs[1].control.value;
     if (!higherThanVal && !lowerThanVal) {
-      return;
+      return () => true;
     }
 
     return (val: string) => {

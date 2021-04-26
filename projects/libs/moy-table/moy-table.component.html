@@ -1,10 +1,13 @@
-<ng-container *ngIf="(config.row$ | async) as rows">
+<ng-container *ngIf="(config.pageManager.row$ | async) as rows">
   <mat-table class="MoyTable" [dataSource]="rows" multiTemplateDataRows [trackBy]="rowFn">
     <!-- Column Defs: [Arbitrary by input] -->
-    <ng-container [matColumnDef]="column" *ngFor="let column of config.columns.all; trackBy: columnFn">
+    <ng-container [matColumnDef]="column" *ngFor="let column of config.columns.all; let colIndex = index; trackBy: columnFn">
       <mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</mat-header-cell>
 
       <mat-cell *matCellDef="let row; let index = dataIndex">
+        <span class="MoyTable__row-counter" *ngIf="row.innerValues?.length && !colIndex">
+          {{ row.innerValues.length }}
+        </span>
         <moy-input [config]="row.cellMap[column].content"></moy-input>
       </mat-cell>
 
@@ -12,11 +15,21 @@
         <mat-paginator
           hidePageSize="true"
           showFirstLastButtons="true"
-          [length]="config.totalRows"
+          [length]="config.pageManager.totalRows"
           [pageSize]="config.pageSize"
           (page)="config.setPage($event)">
         </mat-paginator>
       </mat-footer-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="__innerRows__">
+      <mat-cell
+        *matCellDef="let row; let index = dataIndex"
+        [attr.colspan]="config.columns.body.length">
+        <ng-container>
+          <moy-inner-row *ngIf="row.innerValues && row.open" [config]="{ row: row, tableConfig: config.config }"></moy-inner-row>
+        </ng-container>
+      </mat-cell>
     </ng-container>
 
     <!-- Row Defs: [header, row, footer, noData] -->
@@ -25,7 +38,13 @@
     </ng-container>
 
     <mat-row *matRowDef="let row; let index = dataIndex; columns: config.columns.body"
-      [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0 }">
+      [ngClass]="{ pair: index % 2 === 0, 'not-pair': index % 2 !== 0, grouped: row.innerValues }"
+      (click)="row.innerValues && row.open = !row.open">
+    </mat-row>
+    <mat-row
+      *matRowDef="let row; columns: ['__innerRows__']"
+      class="inner-row"
+      [@verticalExpandCollapse]="row.open ? 'expanded' : 'collapsed'">
     </mat-row>
 
     <ng-container *ngIf="config.columns.footers">

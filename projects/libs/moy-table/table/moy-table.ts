@@ -1,13 +1,14 @@
 import { MoyInput } from '@libs/moy-input';
 import { MoyColumnConfig } from '../column/column';
-import { MoyColumnManager, TableSettings } from '../column/column-manager';
-import { MoyRow } from '../row/moy-row';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { MoyColumnManager } from '../column/column-manager';
 import { PageEvent } from '@angular/material/paginator';
+import { MoyTableConfig, MoyTableFilter } from './interfaces';
+import { MoyRowManager } from '../_utils/row-manager';
+import { PageManager } from '../_utils/page-manager';
 
-const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
-
+const pageSize = 30;
 function buildTableConfig(headerRow: string[], editableRows = false): MoyTableConfig<any> {
+  const columnDefault: MoyColumnConfig = { class: MoyInput, controlOptions: { disabled: true } };
   columnDefault.controlOptions.disabled = !editableRows;
   return headerRow.reduce((config, column) => {
     config.columns[column] = columnDefault;
@@ -15,79 +16,44 @@ function buildTableConfig(headerRow: string[], editableRows = false): MoyTableCo
   }, { columns: {}, settings: {} } as MoyTableConfig<any>);
 }
 
-// Table
-export interface MoyTableConfig<Model> {
-  columns: {
-    [column in keyof Model]: MoyColumnConfig;
-  },
-  settings?: TableSettings;
-}
-
-export interface MoyTableFilter<Model> {
-  columns: {
-    [column in keyof Model]: (value: Model[column]) => boolean;
-  }
-}
-
 export class MoyTable<Model> {
   static basicConfig = buildTableConfig;
 
   columns: MoyColumnManager;
-  totalRows = 0;
+  pageManager = new PageManager([], { pageSize });
 
-  row$: Observable<MoyRow<Model>[]>;
+  readonly pageSize = pageSize;
 
-  readonly pageSize = 30;
+  private _rowManager: MoyRowManager<Model>;
+  private _grouping: { [c in keyof Model]?: boolean } = {};
 
-  private _pageIndex = 0;
-  private _rows = new BehaviorSubject<MoyRow<Model>[]>([]);
-  private _allRows: MoyRow<Model>[] = [];
-  private _filteredRows: MoyRow<Model>[] = [];
-
-  constructor(private config: MoyTableConfig<Model>) {
+  constructor(public config: MoyTableConfig<Model>) {
     const { settings } = config;
     const columnNames = Object.keys(config.columns);
     this.columns = new MoyColumnManager(columnNames, settings);
-    this.row$ = this._rows.asObservable();
+    this._rowManager = new MoyRowManager(config);
+    this.columns.headers.forEach(c => this._grouping[c] = false);
   }
 
   addRows(rows: Model[]) {
-    this.clearFilters();
-    this._allRows = [...this._rows.value, ...this.buildRows(rows)];
-    this.setBody();
+    const allRows = this._rowManager.addRows(rows);
+    this.pageManager.reset(allRows);
   }
 
-  setFilters({ columns }: MoyTableFilter<Model>) {
-    this._filteredRows = this._allRows.filter(row => {
-      return row.columns.find(col => {
-        const { value } = row.cellMap[col].content.control;
-        const valueShouldGo = columns[col] && !columns[col](value);
-        return valueShouldGo;
-      }) == null;
-    });
-
-    this.setBody(this._filteredRows);
+  setFilters({ columns, frequency }: MoyTableFilter<Model>) {
+    const filteredRows = this._rowManager.setFilters({ columns, frequency });
+    this.pageManager.reset(filteredRows);
   }
 
   setPage({ pageIndex }: PageEvent) {
-    this._pageIndex = pageIndex;
-    this.setBody(this._filteredRows);
+    const modif = pageIndex - this.pageManager.currentPage;
+    this.pageManager.setPage(modif);
   }
 
-  private clearFilters() {
-    this._pageIndex = 0;
-    this._filteredRows = [];
-  }
-
-  private setBody(rows = this._allRows, page = this._pageIndex) {
-    this.totalRows = rows.length;
-    this._rows.next(rows.slice(page * this.pageSize, (page + 1) * this.pageSize));
-  }
-
-  private buildRows(rows: Model[]): MoyRow<Model>[] {
-    return rows.map(row => {
-      const rowConfig = { ...this.config, value: row };
-      return new MoyRow(rowConfig);
-    });
+  setGrouping(column: keyof Model, value: boolean) {
+    if (this._grouping[column] === value) return;
+    this._grouping[column] = value;
+    const filteredRows = this._rowManager.setGrouping(this._grouping);
+    this.pageManager.reset(filteredRows);
   }
 }

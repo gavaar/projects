@@ -4,7 +4,10 @@
     {{ loading.message }}
   </p>
   <ng-container *ngIf="(csvOutput | async) as csv">
-    <uploader-sidebar [tableFilters]="csv.tableFilters" (filtersUpdated)="filtersUpdate($event)"></uploader-sidebar>
+    <uploader-sidebar
+      [tableFilters]="csv.tableFilters"
+      (groupingsUpdated)="groupingsUpdate($event)"
+      (filtersUpdated)="filtersUpdate($event)"></uploader-sidebar>
     <moy-table [config]="csv.table"></moy-table>
   </ng-container>
 </section>

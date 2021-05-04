@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog/moy-changelog.module';
 
 export const CHANGELOG: Changelog[] = [
   {
+    version: '0.6.2',
+    changes: [
+      'Fixed inner table (grouping) smaller length',
+    ]
+  },
+  {
     version: '0.6.1',
     changes: [],
     techChanges: [

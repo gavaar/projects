@@ -73,10 +73,15 @@
   text-align: center;
 }
 
+.MoyTable__inner-wrapper {
+  width: 100%;
+}
+
 // Style overrides
 .MoyTable::ng-deep {
  .mat-table {
     background-color: transparent;
+    width: 100%;
   }
 
   .mat-paginator, .mat-paginator-container,

@@ -27,7 +27,7 @@
         *matCellDef="let row; let index = dataIndex"
         [attr.colspan]="config.columns.body.length">
         <ng-container>
-          <moy-inner-row *ngIf="row.innerValues && row.open" [config]="{ row: row, tableConfig: config.config }"></moy-inner-row>
+          <moy-inner-row *ngIf="row.innerValues && row.open" [config]="{ row: row, tableConfig: config.config }" class="MoyTable__inner-wrapper"></moy-inner-row>
         </ng-container>
       </mat-cell>
     </ng-container>

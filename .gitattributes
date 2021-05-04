@@ -1,5 +1,9 @@
 .gitignore merge=ours
+.gitattributes merge=ours
 firebase.json merge=ours
 angular.json merge=ours
 tsconfig.json merge=ours
 README.md merge=ours
+
+#projects
+projects/call_analyzer merge=ours

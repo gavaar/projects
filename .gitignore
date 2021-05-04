@@ -9,8 +9,8 @@
 /bazel-out
 
 # unrelated projects
-projects/moyney
-# projects/call-analyzer
+# projects/moyney
+projects/call-analyzer
 
 # dependencies
 /node_modules

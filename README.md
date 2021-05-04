@@ -1,27 +1,11 @@
-# Moyney
+# Call analyzer
+This project was created to analyze call logs for a particular use. It's UI intends to be in Spanish, but some parts are (as leftover) left in English, due to habit and shared library usage (e.g. footer of table - pagination - will be in english).
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.21.
+This analyzer evolved into basically a -csv- file analyzer, of any kind. And by "analyzer" we just mean to give tools for grouping / filtering and searching inside big amount of rows, with a simple UI.
 
-## Development server
+On the left we have column names to filter by them, with their appropriate (editable) data type.
+Under it, there are the grouping options, to be able to group rows by any o the columns, showing the grouped columns in the inner side of the table.
+It is also possible to filter by grouped frequency (e.g. grouping by column 1, and then showing only those rows that grouped more than 5 rows).
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project was created basically to improve the table component I created and to deliver something that might be of use to anyone. In any case, versioning is at the bottom of the website, and site is currently deployed on firebase = https://moy-call-analyzer.web.app/
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

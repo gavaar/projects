@@ -11,6 +11,7 @@
 # unrelated projects
 projects/moyney
 projects/call-analyzer
+projects/veritotattoo
 
 # dependencies
 /node_modules

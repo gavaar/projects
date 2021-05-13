@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng b --prod --baseHref=PROJECT_URL --outputPath=./dist/ && firebase deploy --project PROJECT_ID"
+    "deploy": "ng b --prod --baseHref=https://moy-call-analyzer.web.app/ --outputPath=./dist/ && firebase deploy --project moy-call-analyzer"
   },
   "private": true,
   "dependencies": {
@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "@angular-devkit/architect": "0.1200.0",
-    "@angular-devkit/build-angular": "^0.1102.13",
+    "@angular-devkit/build-angular": "^12.0.0",
     "@angular/cli": "^12.0.0",
     "@angular/compiler-cli": "^12.0.0",
     "@angular/language-service": "^12.0.0",

@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   template: `
     <section class="Home">
-      <h1>Inner H1</h1>
-      <div> This is the body weee </div>
+      <h1>Verito Tattoo</h1>
+      <div>Here some magical paintings and stuffies are going to appear</div>
     </section>
   `
 })

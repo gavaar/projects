@@ -14,8 +14,30 @@ import changelog from 'assets/_static/changelog';
       </div>
       <moy-footer [config]="footerConfig"></moy-footer>
     </section>
+
+    <article class="temporal-sidebar">
+      <a routerLink="">Home</a>
+      <a routerLink="about">About</a>
+      <a routerLink="contact">Contact</a>
+      <a routerLink="reserve">Reserve</a>
+      <a routerLink="changelog">Changes</a>
+    </article>
   `,
   styleUrls: ['./app.component.scss'],
+  styles: [`
+    .temporal-sidebar {
+      position: absolute;
+      display: flex;
+      flex-flow: column nowrap;
+      left: 0;
+      top: 0;
+      padding: 3rem;
+
+      a {
+        margin: 1rem;
+      }
+    }
+  `],
   encapsulation: ViewEncapsulation.None,
 })
 export class AppComponent {

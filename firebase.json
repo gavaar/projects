@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site": "PROJECT_ID",
+    "site": "verito-tattoo",
     "public": "dist",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [

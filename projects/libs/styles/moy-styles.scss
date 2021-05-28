@@ -1,9 +1,8 @@
-@import '../shared_assets/iconfont/material-icons';
 @import './positioning';
 @import './text';
 
 .moy-container {
-  width: 64rem;
+  max-width: 64rem;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -19,6 +18,7 @@
 section {
   height: 100%;
   overflow: auto;
+  overflow: overlay;
   margin: auto;
 }
 
@@ -38,12 +38,5 @@ body {
   /* Scrollbars: Chrome, Edge, and Safari */
   ::-webkit-scrollbar {
     width: 0.5rem;
-  }
-  ::-webkit-scrollbar-track {
-    background: #d3d3d340;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: var(--main);
-    border-radius: 1rem;
   }
 }

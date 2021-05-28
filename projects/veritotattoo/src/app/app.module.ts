@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MoyHeaderModule } from '@libs/moy-header';
 import { MoyFooterModule } from '@libs/moy-footer';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { PaletteModule } from './_components/palette';
+import { DynamicHeaderModule } from './_components/header/header.module';
 
 @NgModule({
   declarations: [
@@ -14,10 +15,10 @@ import { AppComponent } from './app.component';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
-    MoyHeaderModule,
     MoyFooterModule,
+    DynamicHeaderModule,
+    PaletteModule,
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

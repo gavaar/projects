@@ -2,6 +2,23 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.2',
+    changes: [
+      'Dynamic headers added',
+      'Used profile picture of instagram as profile picture for website',
+      'Updated folder names and routes, but navigation bar is still missing',
+      'Added palette component, for possible page style edition',
+      'Added header component to have a dynamic approach to the header',
+    ],
+    techChanges: [
+      'Hosting settings updated',
+      'Created directive for scrollbar styling',
+      'Added scrollbar styling to libs/styles/components',
+      'Removed scrollbar styling from projects src',
+      'Removed material iconfont from project, we must use cdn on index now (to keep up to date)',
+    ],
+  },
+  {
     version: '0.0.1',
     changes: [
       'Added "about" structural page',

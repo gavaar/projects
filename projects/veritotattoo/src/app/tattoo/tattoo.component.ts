@@ -8,4 +8,4 @@ import { Component } from '@angular/core';
     </section>
   `
 })
-export class VeroContactComponent {}
+export class TattooComponent {}

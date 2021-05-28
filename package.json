@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "deploy": "ng b --prod --baseHref=https://moy-call-analyzer.web.app/ --outputPath=./dist/ && firebase deploy --project moy-call-analyzer"
+    "deploy": "ng b --configuration production --baseHref=https://verito-tattoo.web.app/ --outputPath=./dist/ && firebase deploy --project verito-tattoo"
   },
   "private": true,
   "dependencies": {

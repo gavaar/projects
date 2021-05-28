@@ -1,0 +1,11 @@
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+.show-scrollbar {
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--scrollbar);
+  }
+}

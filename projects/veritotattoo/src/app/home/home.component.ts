@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
   template: `
     <section class="Home">
-      <h1>Verito Tattoo</h1>
+      <h1 routerLink="changelog">Verito Tattoo</h1>
       <div>
         Harum facere ut repellendus sapiente cupiditate similique impedit. Voluptas porro repellendus officia ea. Laborum consectetur et fuga. Quis vel quo nesciunt.
         Aperiam veritatis ducimus quia ut est. Eos qui omnis sunt et.

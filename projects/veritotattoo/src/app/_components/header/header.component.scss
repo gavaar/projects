@@ -3,8 +3,13 @@
   top: 0;
   color: var(--darkBlue);
   z-index: 0;
+  min-height: 7.5rem;
+}
+
+.VeroHeader__wrapper {
   display: flex;
-  justify-content: center;  
+  justify-content: center;
+  position: relative;
 }
 
 .VeroHeader__background {
@@ -12,10 +17,10 @@
   top: 0;
   right: 0;
   left: 0;
-  bottom: 40%;
+  bottom: calc(40% - 0.5rem);
   background-color: var(--blue);
-  border-radius: 0 0 50% 50%;
   z-index: -1;
+  border-bottom: 0.5rem solid var(--background);
 }
 
 .VeroHeader__content {

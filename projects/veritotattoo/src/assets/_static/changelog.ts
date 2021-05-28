@@ -2,6 +2,18 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.3',
+    changes: [
+      'Added temporal routing to changelog from Home h1 element',
+      'Changing view will now scroll page to top',
+      'Bar will also smooth edges when collapsing',
+    ],
+    techChanges: [
+      'Added temporal routing to changelog from Home h1 element',
+      'Modules preloading strategy to PreloadAllModules',
+    ]
+  },
+  {
     version: '0.0.2',
     changes: [
       'Dynamic headers added',

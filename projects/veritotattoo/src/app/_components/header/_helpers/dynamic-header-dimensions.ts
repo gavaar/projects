@@ -17,7 +17,9 @@ export class DynamicHeaderDimensions {
   }
 
   private maximumOfOneForShrinkPercentage({ headerShrinkPercentage, scrollableHeight }): number {
-    return (headerShrinkPercentage > 1 || !scrollableHeight) ? 1 : headerShrinkPercentage;
+    if (!scrollableHeight) return 0;
+    if (headerShrinkPercentage > 1) return 1;
+    return headerShrinkPercentage;
   }
 
   private borderRadiusValue(shrinkPercentage: number): string {

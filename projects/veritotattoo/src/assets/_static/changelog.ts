@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.5',
+    changes: [
+      'Header now show expanded on non scrollable pages',
+    ],
+  },
+  {
     version: '0.0.4',
     changes: [
       'Justified text on about me paragraph, also replaced Loren Ipsum',

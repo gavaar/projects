@@ -6,4 +6,10 @@ const verticalExpandCollapse = trigger('verticalExpandCollapse', [
   transition('collapsed <=> expanded', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
 ]);
 
-export { verticalExpandCollapse };
+const popOut = trigger('popOut', [
+  state('void', style({ transform: 'scale(0.25)' })),
+  state('*', style({ transform: 'scale(1)' })),
+  transition('void <=> *', animate('0.75s cubic-bezier(0.4, 0.0, 0.2, 1)')),
+]);
+
+export { verticalExpandCollapse, popOut };

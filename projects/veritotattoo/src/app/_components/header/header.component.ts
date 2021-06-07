@@ -1,26 +1,33 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
+import { popOut } from '@libs/animations';
+import { debounceTime, filter } from 'rxjs/operators';
 import { headerConfig } from './header.config';
 import { HeaderConfig } from './header.models';
+import { DynamicHeaderDimensions } from './_helpers/dynamic-header-dimensions';
 
 @Component({
   selector: 'vero-header',
   template: `
-    <header class="VeroHeader" (moyScrollbar)="onScroll($event)">
+    <header
+      class="VeroHeader"
+      (moyScrollbar)="headerDimensions.onScroll($event)">
       <div class="VeroHeader__wrapper">
-        <span [ngStyle]="{ 'border-radius': borderRadius }"
+        <span [ngStyle]="{ 'border-radius': headerDimensions.borderRadius }"
           class="VeroHeader__background">
         </span>
 
         <div class="VeroHeader__content">
           <ng-container *ngFor="let link of headerConfig; let i = index; trackBy: linkFn">
             <mat-icon *ngIf="link.icon"
-              [ngStyle]="{ 'margin-top': 0.3 + ((1 - headerShrinkPercentage) * (3.5 + i % 2)) + 'rem' }"
+              [ngStyle]="{ 'margin-top': 0.3 + ((1 - headerDimensions.headerShrinkPercentage) * (3.5 + i % 2)) + 'rem' }"
               (click)="routeToExternal(link.href)">
               {{ link.icon }}
             </mat-icon>
             <img *ngIf="link.img"
+              [@popOut]
               [src]="link.img"
-              [ngStyle]="{ height: imageHeight }"
+              [ngStyle]="{ height: headerDimensions.imageHeight }"
               class="VeroHeader__profile-picture"
               alt="verito profile picture"
               routerLink="/" />
@@ -30,27 +37,29 @@ import { HeaderConfig } from './header.models';
     </header>
   `,
   styleUrls: ['./header.component.scss'],
+  animations: [popOut],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DynamicHeaderComponent {
-  headerShrinkPercentage = 0;
-  borderRadius = '0 0 50% 50%';
-  imageHeight = '7.5rem';
+  headerDimensions = new DynamicHeaderDimensions();
   headerConfig: HeaderConfig[] = headerConfig;
   linkFn = (index: number) => index;
+
+  constructor(router: Router) {
+    router.events.pipe(
+      filter(e => e instanceof NavigationEnd),
+      debounceTime(500),
+    ).subscribe(() => {
+      this.headerDimensionsRefreshByDocument();
+    });
+  }
 
   routeToExternal(link: string): void {
     window.open(link, '_blank');
   }
 
-  onScroll(event: any) {
-    const { scrollTop, clientHeight, scrollHeight } = event.target;
-    const headerShrinkPercentage = (scrollTop * 4) / (scrollHeight - clientHeight)
-    this.headerShrinkPercentage = headerShrinkPercentage > 1 ? 1 : headerShrinkPercentage;
-    
-    const borderRadiusPercentage = 50 - 50 * this.headerShrinkPercentage;
-    this.borderRadius = `0 0 ${borderRadiusPercentage}% ${borderRadiusPercentage}%`;
-
-    this.imageHeight = `${7.5 - (4 * this.headerShrinkPercentage)}rem`;
-  }
+  private headerDimensionsRefreshByDocument() {
+    const target = document.getElementsByTagName('section')[0];
+    this.headerDimensions.onScroll({ target });
+  };
 }

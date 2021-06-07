@@ -2,6 +2,18 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.4',
+    changes: [
+      'Justified text on about me paragraph, also replaced Loren Ipsum',
+      'Added pop animation to Vero\'s image. Feedback about it required',
+      'Made document resize header on routing, and also auto calculate header on different displays',
+    ],
+    techChanges: [
+      'Separated DynamicHeaderDimensions logic to its own class',
+      'Removed 100% height default on base moy-styles stylesheet',
+    ]
+  },
+  {
     version: '0.0.3',
     changes: [
       'Added temporal routing to changelog from Home h1 element',

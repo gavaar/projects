@@ -7,6 +7,10 @@ const routes: Routes = [
   { path: 'illustrations', loadChildren: () => import('./illustrations/illustrations.module').then(m => m.IllustrationsModule) },
   { path: 'tattoo', loadChildren: () => import('./tattoo/tattoo.module').then(m => m.TattooModule) },
   { path: 'store', loadChildren: () => import('./store/store.module').then(m => m.StoreModule) },
+  // only-url-reachable paths
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
+  { path: 'privacy-policy', loadChildren: () => import('./_static/privacy-policy.module').then(m => m.PrivacyPolicyModule) },
+  { path: 'data-deletion', loadChildren: () => import('./_static/data-deletion.module').then(m => m.DataDeletionModule) },
 ];
 
 @NgModule({

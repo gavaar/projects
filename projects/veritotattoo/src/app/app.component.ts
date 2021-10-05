@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MoyFooterConfig } from '@libs/moy-footer';
 import changelog from 'assets/_static/changelog';
+import app from './firebase';
+
+console.log('initialized firebase', app);
 
 @Component({
   selector: 'vero-root',

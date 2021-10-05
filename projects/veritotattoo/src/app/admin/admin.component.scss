@@ -1,0 +1,11 @@
+.Admin {
+  height: 50vh;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.Admin__emoji {
+  font-size: 4rem;
+}

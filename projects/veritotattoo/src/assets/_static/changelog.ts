@@ -2,6 +2,13 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.6',
+    changes: [
+      'Added admin hidden page, with ability to login',
+      'Also added privacy policy and data-deletion pages for possible future use',
+    ],
+  },
+  {
     version: '0.0.5',
     changes: [
       'Header now show expanded on non scrollable pages',

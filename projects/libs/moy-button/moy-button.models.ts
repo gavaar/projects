@@ -12,8 +12,8 @@ abstract class AbstractMoyButton {
   icon?: string;
   svgIcon?: string;
   text?: string;
-  click?: () => any;
-  blur?: () => any;
+  click?: () => any = () => {};
+  blur?: () => any = () => {};
   readonly type: MoyButtonType;
 
   constructor(opts: MoyButtonConfig) {

@@ -1,0 +1,13 @@
+.MoyInput__file {
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: var(--background);
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  font-weight: 700;
+  font-size: 0.8rem;
+}
+
+.MoyInput__file-input {
+  display: none;
+}

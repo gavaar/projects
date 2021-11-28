@@ -1,0 +1,22 @@
+:host {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: flex-start;
+}
+
+.ImageOptions {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  padding: 0 0.5rem;
+  max-width: 31rem;
+}
+
+.ImageOptions__delete {
+  opacity: 0;
+}
+.ImageOptions:hover .ImageOptions__delete {
+  opacity: 1;
+  cursor: pointer;
+  transition: 0.5s;
+}

@@ -10,6 +10,6 @@
     "source.fixAll.tslint": true
   },
   "workbench.editor.openPositioning": "last",
-  "workbench.editor.enablePreview": false,
+  "workbench.editor.enablePreview": true,
   "js/ts.implicitProjectConfig.experimentalDecorators": true
 }

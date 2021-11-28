@@ -1,0 +1,15 @@
+@keyframes shine {
+  0% {
+    background-color: white;
+  }
+  50% {
+    background-color: lightgray;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+.img-loading {
+  animation: 3s shine linear infinite;
+}

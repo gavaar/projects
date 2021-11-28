@@ -1,0 +1,14 @@
+.AdminToolset {
+  border: 1px dashed var(--darkBlue);
+  border-radius: 1rem;
+  margin: 1rem;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
+
+.AdminToolset__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}

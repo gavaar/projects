@@ -1,0 +1,46 @@
+<article class="Uploader body-height">
+  <div class="Uploader__toolbar">
+    <moy-button [config]="backButton" (click)="goBack()"></moy-button>
+  </div>
+
+  <div class="Uploader__expanders" *ngIf="(filesManager.newFile$ | async) as newFiles">
+    <p *ngIf="filesManager.loading" class="Uploader__loading">loading...</p>
+
+    <div class="Uploader__new-images" [ngClass]="{ selected: filesManager.displayView === DisplayView.New }">
+      <div class="Uploader__new-images-selector"
+        *ngIf="newFiles.length"
+        (click)="filesManager.selectDisplay(DisplayView.New)">
+        <mat-icon class="selector-arrow">navigate_next</mat-icon>
+        New images ({{ newFiles.length }})
+      </div>
+      <image-manager *ngIf="newFiles.length && filesManager.displayView === DisplayView.New"
+        [images]="newFiles"
+        (updateImages)="filesManager.newFiles = $event"
+        (save)="onSaveNewFiles()"
+        (delete)="onDeleteFromNewFiles($event)"
+        (cancel)="onCancelNewUpload()">
+      </image-manager>
+    </div>
+
+    <div class="Uploader__image-list" [ngClass]="{ selected: filesManager.displayView === DisplayView.Old }">
+      <div class="Uploader__new-images-selector"
+        *ngIf="newFiles.length"
+        (click)="filesManager.selectDisplay(DisplayView.Old)">
+        <mat-icon class="selector-arrow">navigate_next</mat-icon>
+        Uploaded images
+      </div>
+      <ng-container *ngIf="filesManager.displayView === DisplayView.Old">
+        <image-manager [images]="folderImages.base | async">
+        </image-manager>
+        <image-manager [images]="folderImages.design | async">
+        </image-manager>
+        <image-manager [images]="folderImages.tattoo | async">
+        </image-manager>
+      </ng-container>
+    </div>
+  </div>
+
+  <moy-input [config]="fileInput" (onChange)="onAddPictures($event)"></moy-input>
+
+  <uploader-feedback [uploadState]="(imgStorageService.uploadState | async)"></uploader-feedback>
+</article>

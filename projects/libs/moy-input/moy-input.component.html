@@ -1,10 +1,15 @@
 <article class="MoyInput" [ngClass]="{ error: config.control.invalid && config.control.dirty }">
-  <label *ngIf="config.label" class="MoyInput__label" [ngClass]="{ floating: config.floatingLabel }">
+  <label *ngIf="config.label" class="MoyInput__label" [ngClass]="{
+      floating: config.floatingLabel,
+      'not-absolute': config.type === InputType.Toggle
+    }">
     {{ config.label }}
   </label>
-  <ng-container [ngSwitch]='config.type'>
+  <ng-container [ngSwitch]="config.type">
     <moy-typed-input *ngSwitchDefault [config]="config"></moy-typed-input>
     <moy-select *ngSwitchCase="InputType.Select" [config]="config"></moy-select>
+    <moy-file *ngSwitchCase="InputType.File" [config]="config"></moy-file>
     <moy-datepicker *ngSwitchCase="InputType.Date" [config]="config"></moy-datepicker>
+    <moy-toggle *ngSwitchCase="InputType.Toggle" [config]="config"></moy-toggle>
   </ng-container>
 </article>

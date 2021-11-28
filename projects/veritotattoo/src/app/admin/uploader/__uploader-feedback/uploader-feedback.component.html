@@ -1,0 +1,40 @@
+<div class="UploaderFeedback" *ngIf="uploadState.queue.length" [ngClass]="{ minimized: minimized }">
+  <div class="UploaderFeedback__header" (click)="minimized = !minimized">
+    <span class="UploaderFeedback__header-arrow">
+      <mat-icon class="no-border">keyboard_double_arrow_up</mat-icon>
+    </span>
+    <span>{{ uploadState.uploaded === uploadState.queue.length ? 'Uploaded' : 'Uploading' }} ({{ uploadState.uploaded }} / {{ uploadState.queue.length }})</span>
+    <span>
+      <mat-icon class="spinning no-border" *ngIf="uploadState.uploaded < uploadState.queue.length">sync</mat-icon>
+      <mat-icon class="done" *ngIf="uploadState.uploaded >= uploadState.queue.length">done</mat-icon>
+    </span>
+  </div>
+
+  <div class="UploaderFeedback__body">
+    <div class="UploaderFeedback__file" *ngFor="let file of uploadState.queue; let i = index; trackBy: uploadingFileFn">
+      <ng-container *ngTemplateOutlet="stateIcon; context: {
+          uploadedIndex: uploadState.uploaded,
+          fileIndex: i
+        }">
+      </ng-container>
+
+      <span class="UploaderFeedback__name" [ngClass]="{ faded: uploadState.uploaded < i }">{{ file.name }}</span>
+
+      <mat-progress-spinner *ngIf="uploadState.uploaded === i"
+        mode="determinate"
+        [diameter]="20"
+        [strokeWidth]="4"
+        [value]="uploadState.currentProgressPercentage">
+      </mat-progress-spinner>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #stateIcon let-uploadedIndex="uploadedIndex" let-fileIndex="fileIndex">
+  <span class="UploaderFeedback__state">
+    <mat-icon class="done" *ngIf="uploadedIndex > fileIndex">done</mat-icon>
+    <mat-icon class="spinning no-border" *ngIf="uploadedIndex === fileIndex">sync</mat-icon>
+    <mat-icon class="pending" *ngIf="uploadedIndex < fileIndex">horizontal_rule</mat-icon>
+  </span>
+</ng-template>

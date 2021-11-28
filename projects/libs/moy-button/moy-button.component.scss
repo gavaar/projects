@@ -5,6 +5,8 @@
   height: 2rem;
   width: auto;
   background-color: transparent;
+  background-color: var(--secondary);
+  color: var(--background);
   margin: 0.5rem;
   box-shadow: 0 0 2px 1px dimgray;
 }

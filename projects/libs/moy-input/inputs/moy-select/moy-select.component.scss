@@ -1,0 +1,19 @@
+.MoyInput__select {
+  width: 100%;
+  min-width: 7rem;
+  border-color: var(--secondary);
+  border-radius: 0.5rem 0.5rem 0 0;
+  padding: 0.2rem;
+}
+
+.MoyInput__select-option {
+  background-color: var(--background);
+  color: var(--secondary);
+
+  &.selected {
+    font-weight: 700;
+  }
+  &:hover {
+    background-color: var(--purple);
+  }
+}

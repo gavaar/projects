@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.0.7',
+    changes: [
+      'Added links for uploader and config views',
+    ]
+  },
+  {
     version: '0.0.6',
     changes: [
       'Added admin hidden page, with ability to login',

@@ -1,0 +1,105 @@
+@keyframes spinning {
+  0% { transform: rotate(0); }
+  25% { transform: rotate(90deg); }
+  50% { transform: rotate(180deg); }
+  75% { transform: rotate(270deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.UploaderFeedback {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 20rem;
+  max-width: 20rem;
+  bottom: 0;
+  right: 0;
+  background-color: var(--background);
+  border: 0.25rem solid var(--secondary);
+  border-radius: 2rem 2rem 0 0;
+  border-bottom: 0;
+  max-height: 20rem;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.UploaderFeedback.minimized {
+  .UploaderFeedback__body {
+    max-height: 0;
+    transition: 0.25s linear;
+  }
+  .UploaderFeedback__header-arrow {
+    transform: rotate(0deg);
+    transition: 0.25s;
+  }
+}
+
+.UploaderFeedback__header {
+  cursor: pointer;
+  user-select: none;
+  text-align: center;
+  border-bottom: 1px solid var(--secondary);
+  background-color: var(--background);
+  padding: 0.5rem 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.UploaderFeedback__header-arrow {
+  transform: rotate(180deg);
+  transition: 0.25s;
+}
+
+.UploaderFeedback__body {
+  overflow: auto;
+  max-height: 20rem;
+  transition: 0.25s linear;
+}
+
+.UploaderFeedback__name {
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &.faded {
+    opacity: 0.5;
+  }
+}
+
+.UploaderFeedback__file {
+  display: grid;
+  grid-template-columns: 2rem 1fr 2rem;
+  margin: 0.25rem 0;
+  align-items: center;
+  padding: 0 0.5rem;
+}
+
+.UploaderFeedback__state {
+  display: flex;
+  justify-content: center;
+}
+
+// mat-icons
+.mat-icon {
+  border: 1px solid;
+  border-radius: 50%;
+
+  &.no-border {
+    border: 0;
+  }
+  &.done {
+    border-color: var(--main);
+    background-color: var(--main);
+    color: var(--background);
+  }
+  &.spinning {
+    animation: spinning 2s linear infinite;
+  }
+  &.pending {
+    border-color: darkgray;
+    background-color: darkgray;
+    color: var(--secondary);
+    opacity: 0.7;
+  }
+}

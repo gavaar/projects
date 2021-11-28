@@ -24,6 +24,11 @@ export abstract class AbstractMoyInput<T> {
     this.id = p.id;
   }
 
+  patchValue(val: T) {
+    this.control.patchValue(val);
+    this.onBlur();
+  }
+
   onFocus() {
     this.floatingLabel = true;
   }

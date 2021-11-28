@@ -5,6 +5,7 @@ interface LoadingBarConfig {
   title?: string;
   loaded?: number;
   loading?: number;
+  hideTotal?: boolean;
 }
 
 class AbstractMoyLoadingBar {
@@ -12,13 +13,15 @@ class AbstractMoyLoadingBar {
   total: number;
   loaded: number;
   loading: number;
-  proportion$ = new BehaviorSubject<{ [key: string]: number }>({});
+  hideTotal: boolean;
+  proportion$ = new BehaviorSubject<{ [key in 'loading' | 'loaded' | 'rest']?: number }>({});
 
   constructor(config: LoadingBarConfig = {}) {
     this.title = config.title;
     this.total = config.total || 0;
     this.loaded = config.loaded || 0;
     this.loading = config.loading || 0;
+    this.hideTotal = config.hideTotal || false;
     this.calculateProportions();
   }
 
@@ -38,7 +41,7 @@ class AbstractMoyLoadingBar {
     this.calculateProportions();
   }
 
-  calculateProportions() {
+  private calculateProportions() {
     this.proportion$.next({
       loaded: ((this.loaded - (this.loading > 0 ? 0 : this.loading * -1)) / this.total) * 100,
       loading: ((this.loading > 0 ? this.loading : this.loading * -1) / this.total) * 100,

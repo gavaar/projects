@@ -1,0 +1,4 @@
+<label class="MoyInput__file">
+  Add pictures
+  <input class="MoyInput__file-input" [type]="config.type" [accept]="config.accept" multiple="true" (change)="onSelectFiles($event.target.files)">
+</label>

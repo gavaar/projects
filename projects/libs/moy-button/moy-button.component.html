@@ -11,7 +11,7 @@
     <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
   </button>
 
-  <button *ngSwitchDefault class="MoyButton" (click)="onClick()" (blur)="onBlur()">
+  <button *ngSwitchDefault class="MoyButton" [ngClass]="{ disabled: config.disabled }" (click)="onClick()" (blur)="onBlur()">
     <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
   </button>
 </ng-container>

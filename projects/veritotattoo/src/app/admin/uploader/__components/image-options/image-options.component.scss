@@ -14,7 +14,11 @@
 
 .ImageOptions__delete {
   opacity: 0;
+  border-radius: 50%;
+  background-color: white;
+  padding: 0.25rem;
 }
+
 .ImageOptions:hover .ImageOptions__delete {
   opacity: 1;
   cursor: pointer;

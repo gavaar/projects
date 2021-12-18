@@ -17,12 +17,11 @@ export class ImageCardComponent implements OnInit, OnDestroy {
 
   cardChanges: Observable<ImageCard['value']>;
   
-  private cardGroup: FormGroup;
   private _destroy$ = new Subject<void>();
 
   ngOnInit(): void {
-    this.cardGroup = this.buildFormGroup();
-    this.cardChanges = this.cardGroup.valueChanges.pipe(
+    const cardGroup = this.buildFormGroup();
+    this.cardChanges = cardGroup.valueChanges.pipe(
       takeUntil(this._destroy$),
       startWith(this.imageCard.value),
     );

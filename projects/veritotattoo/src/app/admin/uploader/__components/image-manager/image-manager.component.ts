@@ -13,9 +13,9 @@ import ImageOption from '../image-options/image-option';
 })
 export class ImageManagerComponent implements OnChanges {
   @Input() images: ImageData[];
+  @Input() options: { hideActions: boolean } = { hideActions: false };
   @Output() save = new EventEmitter();
   @Output() cancel = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<number>();
   @Output() updateImages = new EventEmitter<ImageData[]>();
 
   selectAll = new MoyButton({ text: 'Select all' });
@@ -28,8 +28,16 @@ export class ImageManagerComponent implements OnChanges {
 
   ngOnChanges({ images }: { images: SimpleChange }): void {
     if (images.currentValue != images.previousValue) {
-      const newOptions = images.currentValue.slice(this.imageOptions.length).map((image, i) => new ImageOption(image, this.imageOptions[i]?.selected));
-      this.imageOptions = [...this.imageOptions, ...newOptions];
+      const currentOptions = images.currentValue.map((currentImage: ImageData) => {
+        const imageExisted = this.imageOptions.find((oldImage: ImageOption) => oldImage.imageData.imageUrl === currentImage.imageUrl);
+
+        if (imageExisted) {
+          return imageExisted;
+        }
+        return new ImageOption(currentImage, false);
+      });
+
+      this.imageOptions = currentOptions;
       this.subscribeToSelectionChanges(this.imageOptions);
     }
   }

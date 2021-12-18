@@ -2,7 +2,14 @@
   flex: 1 0 0;
   display: flex;
   flex-flow: row wrap;
-  height: calc(100% - 38px);
+  justify-content: stretch;
+
+  .noSelector {
+    margin-left: 1.3rem;
+    ::ng-deep.ImageOptions__selector {
+      display: none;
+    }
+  }
 }
 
 .ImageManager__actions {

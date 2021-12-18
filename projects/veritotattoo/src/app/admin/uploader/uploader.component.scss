@@ -34,9 +34,14 @@
   position: relative;
   max-height: 100%;
   overflow: auto;
+  min-height: 2.25rem;
 
   &.selected {
     flex: 1 0 0;
+  }
+
+  ::ng-deep.ImageManager {
+    height: calc(100% - 38px);
   }
 }
 
@@ -57,10 +62,46 @@
   animation: oscilating 2s infinite;
 }
 
-.Uploader__image-list:not(.selected) {
-  margin-top: auto;
+.Uploader__image-list {
+  overflow: auto;
+
+  &:not(.selected) {
+    margin-top: auto;
+  }
 }
 
 .Uploader__no-images {
   text-align: center;
+}
+
+.Uploader__old-images-list {
+  text-align: center;
+  border-radius: 1rem;
+  border: 1px dashed;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+
+  &.base {
+    border-color: var(--gray);
+    background-color: var(--grayTransparent);
+  }
+  &.design {
+    border-color: var(--purple);
+    background-color: var(--purpleTransparent);
+  }
+  &.tattoo {
+    border-color: var(--darkBlue);
+    background-color: var(--darkBlueTransparent);
+  }
+}
+
+.Uploader__button-options {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+  height: 3rem;
+}
+
+.Uploader__button-options-save-changes ::ng-deep.MoyButton {
+  background-color: var(--purple);
 }

@@ -1,21 +1,19 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { fireStorage } from '@firebase';
 import { ref, uploadBytesResumable, deleteObject, UploadTask, list, getDownloadURL, StorageReference } from "firebase/storage";
-import { BehaviorSubject, Observable, from, combineLatest, of } from 'rxjs';
-import { catchError, concatMap, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, from, forkJoin, of } from 'rxjs';
+import { catchError, concatMap, map, take } from 'rxjs/operators';
 import { imgRegex, ImgType } from '.';
 import { FileQueueHandler } from './__models/file-queue.handler';
 import { ImageData } from './__models/image-data';
-import { PageMemory } from './__models/page-memory';
 
 const CONFIG = {
   maxResultsPerPage: 50,
 }
 
-function getNewNameForFile(file: File): { id: number; extension: string } {
-  const fileSplit = file.name.split('.');
-  const extension = fileSplit[fileSplit.length - 1];
-  return { id: new Date().getTime(), extension };
+function fileId(file: File): { id: number } {
+  const id = file['__firebaseId'] || new Date().getTime();
+  return { id };
 }
 
 type PickedImage = Pick<ImageData, 'id' | 'file' | 'imageUrl'>;
@@ -29,7 +27,6 @@ export interface UploadState {
 
 @Injectable()
 export class ImageStorageService implements OnDestroy {
-  private _pageMemory = new PageMemory<PickedImage[]>();
   private _pageTokenMap: { [folder in keyof ImgType]?: { [page: number]: string } } = {};
   private fileQueue = new FileQueueHandler();
   private currentUpload: UploadTask;
@@ -43,11 +40,12 @@ export class ImageStorageService implements OnDestroy {
     this._uploadState.complete();
   }
 
-  getList(folder: ImgType, page = 0): Observable<PickedImage[]> {
-    if (this._pageMemory.get(page)) {
-      return of(this._pageMemory.get(page));
-    }
+  downloadUrl(folder: ImgType, id: number): Observable<string> {
+    const imgRef = ref(fireStorage, `${folder}/${id}`);
+    return from(getDownloadURL(imgRef));
+  }
 
+  list(folder: ImgType, page = 0): Observable<PickedImage[]> {
     if (!this._pageTokenMap[folder]) {
       this._pageTokenMap[folder] = {};
     }
@@ -59,7 +57,6 @@ export class ImageStorageService implements OnDestroy {
     return this.imgBucketToImageData(listRef, opts).pipe(
       map(({ imageMap, nextToken }) => {
         this._pageTokenMap[folder][page + 1] = nextToken;
-        this._pageMemory.set(page, imageMap);
         return imageMap;
       }),
     );
@@ -90,21 +87,24 @@ export class ImageStorageService implements OnDestroy {
 
   delete(names: string[]) {
     const refMap = names.map(name => {
-      return from(deleteObject(ref(fireStorage, name))).pipe(catchError(e => {
-        console.error(e);
-        throw (e);
-      }));
+      return from(deleteObject(ref(fireStorage, name))).pipe(
+        take(1),
+        catchError(e => {
+          console.error(e);
+          throw (e);
+        }));
     });
 
-    return combineLatest(refMap);
+    return forkJoin([of(true), ...refMap]);
   }
 
   private getNextUpload() {
     const fileToUpload = this.fileQueue.next();
+    this.currentUpload = null;
 
     if (fileToUpload) {
-      const { id, extension } = getNewNameForFile(fileToUpload);
-      const storageReference = ref(fireStorage, `${fileToUpload['__folder']}/${id}.${extension}`);
+      const { id } = fileId(fileToUpload);
+      const storageReference = ref(fireStorage, `${fileToUpload['__folder']}/${id}`);
       this.currentUpload = uploadBytesResumable(storageReference, fileToUpload);
       this.handleCurrentUploadProgress(this.currentUpload, id);
     }
@@ -120,8 +120,7 @@ export class ImageStorageService implements OnDestroy {
     }, () => {
       this.setState({ uploaded: this._uploadState.value.uploaded + 1, uploadedId });
       this.getNextUpload();
-    }
-    );
+    });
   }
 
   private setState(p: Partial<UploadState>) {
@@ -140,7 +139,7 @@ export class ImageStorageService implements OnDestroy {
         const promiseArray = itemsRef.items.map(i => {
           const id = +i.name.split(imgRegex)[0];
           imageMap.push({ id } as PickedImage);
-          return getDownloadURL(i)
+          return getDownloadURL(i);
         });
 
         return from(Promise.all(promiseArray));

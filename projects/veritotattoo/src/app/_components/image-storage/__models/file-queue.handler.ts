@@ -6,7 +6,7 @@ export class FileQueueHandler {
     const nextFile = this.queue[this.nextIndex];
 
     if (!nextFile) {
-      return this.resetQueue();
+      return;
     }
 
     this.nextIndex += 1;

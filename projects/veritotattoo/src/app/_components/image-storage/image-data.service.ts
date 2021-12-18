@@ -4,12 +4,9 @@ import { ImageData } from './__models/image-data';
 import { doc, getDoc, getDocs, query, collection, where, setDoc, deleteDoc, DocumentReference, QuerySnapshot, DocumentData, documentId } from "firebase/firestore";
 import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { PageMemory } from './__models/page-memory';
 
 @Injectable()
 export class ImageDataService {
-  private _pageMemory = new PageMemory<{ [id: string]: ImageData }>();
-
   get(id: number): Observable<ImageData> {
     const imageRef = this.docRef(id);
 
@@ -26,12 +23,6 @@ export class ImageDataService {
       return `${img.id}`
     });
 
-    const idKeys = +ids.join('');
-
-    if (this._pageMemory.get(idKeys)) {
-      return of(this._pageMemory.get(idKeys));
-    }
-
     return from(this.collectionRef(ids)).pipe(
       map(docs => {
         docs.forEach(docList => {
@@ -41,17 +32,19 @@ export class ImageDataService {
           });
         });
 
-        this._pageMemory.set(idKeys, docMap);
-
         return docMap as { [id: string]: ImageData };
       }),
     );
   }
 
-  set(image: ImageData): Observable<void> {
+  set(image: Partial<ImageData>): Observable<void> {
     const imageRef = this.docRef(image.id);
     const { available, folder, description } = image;
-    return from(setDoc(imageRef, { available, folder, description }, { merge: true }));
+    const imageData = {} as Partial<ImageData>;
+    if (available != null) imageData.available = available;
+    if (folder != null) imageData.folder = folder;
+    if (description != null) imageData.description = description;
+    return from(setDoc(imageRef, imageData, { merge: true }));
   }
 
   delete(id: number): Observable<void> {

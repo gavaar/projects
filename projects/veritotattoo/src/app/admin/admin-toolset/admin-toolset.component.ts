@@ -16,7 +16,7 @@ import { MoyButton } from '@libs/moy-button';
   styleUrls: ['./admin-toolset.component.scss'],
 })
 export class AdminToolsetComponent {
-  uploaderButton = new MoyButton({ text: 'Upload pics' });
+  uploaderButton = new MoyButton({ text: 'Images' });
   config = new MoyButton({ text: 'Config' });
 
   constructor(private router: Router) {}

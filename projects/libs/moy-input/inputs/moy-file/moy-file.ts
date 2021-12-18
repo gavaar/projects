@@ -9,7 +9,7 @@ export class MoyFile extends AbstractMoyInput<string> {
   type = InputType.File;
   accept: string;
 
-  constructor(config: FileInterface) {
+  constructor(config: FileInterface = {}) {
     super(config);
 
     const {

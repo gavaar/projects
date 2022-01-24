@@ -1,6 +1,6 @@
 <ng-container *ngIf="cardChanges | async as inputs">
   <div class="ImageCard" [class]="inputs.folder">
-    <img class="ImageCard__img" preview="80" [src]="imageCard.imageUrl">
+    <img class="ImageCard__img" moy-preview="80" [src]="imageCard.imageUrl">
 
     <div class="ImageCard__options">
       <moy-input [config]="imageCard.folder"></moy-input>

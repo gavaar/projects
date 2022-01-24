@@ -2,11 +2,14 @@ import { AbstractControlOptions } from '@angular/forms';
 
 export enum InputType {
   Text = 'text',
+  Textarea = 'textarea',
   Number = 'number',
   Select = 'select',
+  SelectImg = 'select_image',
   Date = 'date',
   File = 'file',
   Toggle = 'toggle',
+  Color = 'color',
 }
 
 export interface InputInterface<T> {

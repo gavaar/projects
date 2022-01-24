@@ -1,0 +1,33 @@
+.MoySelectImage {
+  position: relative;
+}
+
+.MoySelectImage__selected,
+.MoySelectImage__option {
+  cursor: pointer;
+  border-radius: 1rem;
+  margin: 0.25rem;
+  user-select: none;
+}
+
+.MoySelectImage__selected {
+  height: 8rem;
+  width: 8rem;
+}
+
+.MoySelectImage__option-list {
+  position: absolute;
+  top: 0;
+  left: 9rem;
+  background-color: var(--grayTransparent);
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  border-radius: 0.5rem;
+  min-height: 10rem;
+  max-height: 20rem;
+}
+
+.MoySelectImage__option {
+  height: 4rem;
+  width: 4rem;
+}

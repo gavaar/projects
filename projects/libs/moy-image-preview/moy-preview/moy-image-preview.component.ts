@@ -4,15 +4,16 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'preview',
-  templateUrl: './image-preview.component.html',
-  styleUrls: ['./image-preview.component.scss'],
+  templateUrl: './moy-image-preview.component.html',
+  styleUrls: ['./moy-image-preview.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class PreviewComponent implements OnInit {
+export class MoyImagePreviewComponent implements OnInit {
   image: SafeUrl;
+  loaded = false;
 
   constructor(private sanitizer: DomSanitizer,
-    public dialogRef: MatDialogRef<PreviewComponent>,
+    public dialogRef: MatDialogRef<MoyImagePreviewComponent>,
     @Inject(MAT_DIALOG_DATA) private data: string) {}
 
   ngOnInit() {

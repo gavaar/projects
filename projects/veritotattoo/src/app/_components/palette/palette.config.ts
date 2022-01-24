@@ -2,6 +2,7 @@ import { CssVariableConfiguration } from './palette.models'
 
 export const defaultRGBColors: CssVariableConfiguration = {
   teal: '0 255 206',
+  tealTransparent: '0 255 206 / 0.33',
   blue: '48 140 155',
   gray: '169 169 169',
   grayTransparent: '169 169 169 / 0.33',
@@ -13,13 +14,17 @@ export const defaultRGBColors: CssVariableConfiguration = {
   darkOrange: '255 154 0',
   orange: '255 154 0',
   white: '250 250 250',
+  black: '10, 10, 10',
 };
 
 export const defaultVariableStyles: CssVariableConfiguration = {
   primary: 'teal',
+  primaryTransparent: 'tealTransparent',
   secondary: 'darkBlue',
   secondaryLight: 'darkBlueTransparent',
+  scrollbar: 'accent',
+  accent: 'purple',
+  accentLight: 'purpleTransparent',
   background: 'white',
-  accent: 'orange',
-  scrollbar: 'purple',
+  text: 'black',
 };

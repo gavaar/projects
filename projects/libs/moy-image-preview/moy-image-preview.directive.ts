@@ -1,14 +1,14 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PreviewComponent } from './preview/image-preview.component';
+import { MoyImagePreviewComponent } from './moy-preview/moy-image-preview.component';
 
 const TINY_GIF = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 
 @Directive({
-  selector: 'img[preview]',
+  selector: 'img[moy-preview]',
 })
-export class ImagePreviewDirective implements OnInit {
-  @Input('preview') previewHeight;
+export class MoyImagePreviewDirective implements OnInit {
+  @Input('moy-preview') previewHeight;
 
   private _imgSrc = '';
 
@@ -32,7 +32,7 @@ export class ImagePreviewDirective implements OnInit {
 
   @HostListener('click')
   onClick() {
-    this.dialog.open(PreviewComponent, { data: this._imgSrc, hasBackdrop: true });
+    this.dialog.open(MoyImagePreviewComponent, { data: this._imgSrc, hasBackdrop: true });
   }
 
   private createImageOnCanvas(img: HTMLImageElement): string {

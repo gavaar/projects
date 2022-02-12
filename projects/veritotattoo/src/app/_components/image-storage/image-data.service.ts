@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { firestore } from '@firebase';
 import { ImageData } from './__models/image-data';
-import { doc, getDoc, getDocs, query, collection, where, setDoc, deleteDoc, DocumentReference, QuerySnapshot, DocumentData, documentId } from "firebase/firestore";
-import { from, Observable, of } from 'rxjs';
+import { doc, getDoc, getDocs, query, collection, where, setDoc, deleteDoc, DocumentReference, QuerySnapshot, DocumentData, documentId } from 'firebase/firestore';
+import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class ImageDataService {
     const docMap: { [id: number]: ImageData } = {};
     const ids = imgList.map(img => {
       docMap[img.id] = img as ImageData;
-      return `${img.id}`
+      return `${img.id}`;
     });
 
     return from(this.collectionRef(ids)).pipe(

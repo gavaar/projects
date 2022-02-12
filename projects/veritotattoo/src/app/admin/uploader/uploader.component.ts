@@ -7,7 +7,6 @@ import { catchError, concatMap, distinctUntilKeyChanged, filter, map, mergeAll, 
 import { DisplayView, FilesManager, filesToImageData, DisplayManager } from './__helper';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { getDownloadURL } from 'firebase/storage';
 
 @Component({
   templateUrl: './uploader.component.html',
@@ -35,17 +34,13 @@ export class UploaderComponent implements OnInit {
   DisplayView = DisplayView;
 
   constructor(public imgStorageService: ImageStorageService,
-    private router: Router,
+    public router: Router,
     private sanitizer: DomSanitizer,
     private imgDataService: ImageDataService,) {}
 
   ngOnInit(): void {
     this.resetManagers();
     this.listenToImageUpload();
-  }
-
-  goBack(): void {
-    this.router.navigateByUrl('admin');
   }
 
   onAddPictures(files: File[]) {

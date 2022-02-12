@@ -16,10 +16,16 @@
   }
 }
 
+.Config__selection {
+  height: 100%;
+}
+
 .Config__elements-preview {
   flex: 1 0 15rem;
 }
 .Config__tabset {
+  display: flex;
+  flex-flow: column nowrap;
   flex: 3 0 20rem;
 }
 

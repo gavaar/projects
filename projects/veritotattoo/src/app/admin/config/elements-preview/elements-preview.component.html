@@ -1,42 +1,42 @@
-<article class="ElementsPreview" 
-  [style.--primary]="values[EditTabs.Colors].colors_primary"
-  [style.--secondary]="values[EditTabs.Colors].colors_secondary"
-  [style.--accent]="values[EditTabs.Colors].colors_accent"
-  [style.--background]="values[EditTabs.Colors].colors_background"
-  [style.--text]="values[EditTabs.Colors].colors_text">
+<article class="ElementsPreview"
+  [style.--primary]="values[AppConfigSections.Colors].primary"
+  [style.--secondary]="values[AppConfigSections.Colors].secondary"
+  [style.--accent]="values[AppConfigSections.Colors].accent"
+  [style.--background]="values[AppConfigSections.Colors].background"
+  [style.--text]="values[AppConfigSections.Colors].text">
   <div class="ElementsPreview__header b-top b-left b-right"
-    [ngClass]="{ selected: selected === EditTabs.Header }"
-    (click)="selectSection(EditTabs.Header)">
+    [ngClass]="{ selected: selected === AppConfigSections.Header }"
+    (click)="selectSection(AppConfigSections.Header)">
     <span class="ElementsPreview__header-background"></span>
-    <img class="ElementsPreview__header-picture" [src]="values[EditTabs.Header].header_picture" />
+    <img class="ElementsPreview__header-picture" [src]="values[AppConfigSections.Header].profile.src" />
   </div>
 
   <div class="ElementsPreview__body b-left b-right"
-    [ngClass]="{ selected: selected === EditTabs.Body }"
-    (click)="selectSection(EditTabs.Body)">
-    <h1 class="ElementsPreview__body-title">{{ values[EditTabs.Body].body_title }}</h1>
-    <p class="ElementsPreview__body-description">{{ values[EditTabs.Body].body_text }}</p>
+    [ngClass]="{ selected: selected === AppConfigSections.Body }"
+    (click)="selectSection(AppConfigSections.Body)">
+    <h1 class="ElementsPreview__body-title">{{ values[AppConfigSections.Body].title }}</h1>
+    <p class="ElementsPreview__body-description">{{ values[AppConfigSections.Body].text }}</p>
   </div>
 
   <div class="ElementsPreview__sections b-bottom b-left b-right"
-    [ngClass]="{ selected: selected === EditTabs.Sections }"
-    (click)="selectSection(EditTabs.Sections)">
+    [ngClass]="{ selected: selected === AppConfigSections.Sections }"
+    (click)="selectSection(AppConfigSections.Sections)">
     <div class="ElementsPreview__sections-card"
-      [ngStyle]="{ 'background-image': 'url(' + values[EditTabs.Sections].sections_design + ')' }">
+      [ngStyle]="{ 'background-image': 'url(' + values[AppConfigSections.Sections].design.src + ')' }">
       <span class="ElementsPreview__sections-title">Designs</span>
     </div>
     <div class="ElementsPreview__sections-card"
-      [ngStyle]="{ 'background-image': 'url(' + values[EditTabs.Sections].sections_tattoo + ')' }">
+      [ngStyle]="{ 'background-image': 'url(' + values[AppConfigSections.Sections].tattoo.src + ')' }">
       <span class="ElementsPreview__sections-title">Tattoos</span>
     </div>
   </div>
 
   <div class="ElementsPreview__colors b-left b-right b-bottom b-top"
-    [ngClass]="{ selected: selected === EditTabs.Colors }"
-    (click)="selectSection(EditTabs.Colors)">
+    [ngClass]="{ selected: selected === AppConfigSections.Colors }"
+    (click)="selectSection(AppConfigSections.Colors)">
     <span class="ElementsPreview__color-box"
       *ngFor="let color of ['primary', 'secondary', 'accent', 'background', 'text']"
-      [ngStyle]="{ 'background-color': values[EditTabs.Colors]['colors_' + color] }"
+      [ngStyle]="{ 'background-color': values[AppConfigSections.Colors][color] }"
     ></span>
   </div>
 </article>

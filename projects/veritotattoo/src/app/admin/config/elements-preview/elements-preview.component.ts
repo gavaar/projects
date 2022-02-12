@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { EditTabs } from '../config.config';
+import { AppConfigSections } from '@vero-components/app-config';
 
 @Component({
   selector: 'elements-preview',
@@ -8,13 +8,13 @@ import { EditTabs } from '../config.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ElementsPreviewComponent {
-  @Input() values: { [tab: string]: { [key: string]: any } };
-  @Input() selected: EditTabs;
-  @Output() onSelect = new EventEmitter<EditTabs>();
+  @Input() values: { [tab: string]: { [key: string]: any } } = {};
+  @Input() selected: AppConfigSections | null;
+  @Output() onSelect = new EventEmitter<AppConfigSections>();
 
-  EditTabs = EditTabs;
+  AppConfigSections = AppConfigSections;
 
-  selectSection(tab: EditTabs) {
+  selectSection(tab: AppConfigSections) {
     this.onSelect.emit(tab);
   }
 }

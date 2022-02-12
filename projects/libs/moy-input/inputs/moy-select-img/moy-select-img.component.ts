@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { delay, tap } from 'rxjs/operators';
+import { SelectImageInterface } from '.';
 import { MoySelectImage } from './moy-select-img';
 
 @Component({
@@ -25,8 +26,8 @@ export class MoySelectImageComponent {
     this._showOptions.next(!this._showOptions.value);
   }
 
-  onSelectOption(optionSrc: string): void {
-    this.config.control.setValue(optionSrc);
+  onSelectOption(option: SelectImageInterface['options']): void {
+    this.config.control.setValue(option);
   }
 
   private anyClickCloses(): void {

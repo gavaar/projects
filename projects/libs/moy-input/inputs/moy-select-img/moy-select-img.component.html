@@ -1,11 +1,11 @@
 <article class="MoySelectImage">
   <img class="MoySelectImage__selected"
-    [src]="config.control.value"
+    [src]="config.control.value.src"
     (click)="toggleOpen(); $event.preventDefault()" />
 
   <div class="MoySelectImage__option-list" *ngIf="showOptions | async">
-    <img class="MoySelectImage__option" *ngFor="let option of config.options; trackBy: selectOptionFn"
+    <img class="MoySelectImage__option" moy-preview no-expand="true" *ngFor="let option of config.options; trackBy: selectOptionFn"
       [src]="option.src"
-      (click)="onSelectOption(option.value)" />
+      (click)="onSelectOption(option)" />
   </div>
 </article>

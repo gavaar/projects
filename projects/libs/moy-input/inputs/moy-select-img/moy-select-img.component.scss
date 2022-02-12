@@ -1,7 +1,3 @@
-.MoySelectImage {
-  position: relative;
-}
-
 .MoySelectImage__selected,
 .MoySelectImage__option {
   cursor: pointer;
@@ -17,9 +13,13 @@
 
 .MoySelectImage__option-list {
   position: absolute;
-  top: 0;
-  left: 9rem;
-  background-color: var(--grayTransparent);
+  overflow: overlay;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  top: 1rem;
+  left: 5rem;
+  background-color: var(--secondaryLight);
   padding: 0.25rem;
   margin-top: 0.25rem;
   border-radius: 0.5rem;
@@ -30,4 +30,5 @@
 .MoySelectImage__option {
   height: 4rem;
   width: 4rem;
+  object-fit: cover;
 }

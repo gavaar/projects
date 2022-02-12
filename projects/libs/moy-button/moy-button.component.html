@@ -1,17 +1,16 @@
 <ng-container [ngSwitch]="config.type">
-  <button *ngSwitchCase="MoyButtonType.Round" class="MoyButton round" (click)="onClick()" (blur)="onBlur()">
+  <button *ngSwitchCase="MoyButtonType.Round" class="MoyButton round" >
     <mat-icon [svgIcon]="config.svgIcon">{{ config.icon }}</mat-icon>
   </button>
 
   <button
     *ngSwitchCase="MoyButtonType.Toggle"
     class="MoyButton toggle"
-    [ngClass]="{ pressed: config['pressed'] }"
-    (click)="onClick()">
+    [ngClass]="{ pressed: config['pressed'] }">
     <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
   </button>
 
-  <button *ngSwitchDefault class="MoyButton" [ngClass]="{ disabled: config.disabled }" (click)="onClick()" (blur)="onBlur()">
+  <button *ngSwitchDefault class="MoyButton" [ngClass]="{ disabled: config.disabled }" >
     <ng-container *ngTemplateOutlet="defaultButton; context: { $implicit: config }"></ng-container>
   </button>
 </ng-container>

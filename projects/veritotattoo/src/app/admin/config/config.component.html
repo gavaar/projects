@@ -1,13 +1,13 @@
-<moy-button [config]="backButton" (click)="goBack()"></moy-button>
-<article class="Config">
+<moy-button [config]="{ text: '👈 Back to admin' }" (click)="location.back()"></moy-button>
+<article class="Config" *ngIf="loaded | async">
   <elements-preview class="Config__elements-preview"
-    [values]="selectedValues"
+    [values]="settingsCache.selectedValues"
     [selected]="selectedSection"
     (onSelect)="onSelectPreview($event)"
   ></elements-preview>
 
   <div class="Config__tabset">
-    <div *ngIf="INPUT_CONFIGS[selectedSection] as selectedConfig; else: selectOneMessage">
+    <div class="Config__selection" *ngIf="settingsCache.inputConfig[selectedSection] as selectedConfig; else: selectOneMessage">
       <h1>{{ selectedConfig.title }}</h1>
       <div class="Config__inputs">
         <moy-input class="Config__single-input"
@@ -18,6 +18,10 @@
         ></moy-input>
       </div>
     </div>
+    <moy-button *ngIf="settingsCache.hasChange$ | async"
+      [config]="{ text: 'Save changes' }"
+      (confirmClick)="onSaveConfig()">
+    </moy-button>
   </div>
 </article>
 

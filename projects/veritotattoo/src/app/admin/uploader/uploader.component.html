@@ -6,7 +6,7 @@
         disableConfirm: !buttons.showSavedChanges,
         message: 'There are unsaved changes, leave the page?'
       }"
-      (confirmClick)="goBack()">
+      (confirmClick)="router.navigateByUrl('admin')">
     </moy-button>
     <span *ngIf="buttons.showSavedChanges">There are changes!</span>
   </div>

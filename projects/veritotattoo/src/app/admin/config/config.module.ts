@@ -5,6 +5,7 @@ import { ConfigComponent } from './config.component';
 import { ElementsPreviewModule } from './elements-preview/elements-preview.module';
 import { MoyButtonModule } from '@libs/moy-button';
 import { MoyInputModule } from '@libs/moy-input';
+import { MoyConfirmClickModule } from '@libs/moy-confirm-click';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { MoyInputModule } from '@libs/moy-input';
     ElementsPreviewModule,
     MoyButtonModule,
     MoyInputModule,
+    MoyConfirmClickModule,
   ],
   declarations: [
     ConfigComponent,

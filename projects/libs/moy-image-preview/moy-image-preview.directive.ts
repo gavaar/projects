@@ -9,6 +9,7 @@ const TINY_GIF = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
 })
 export class MoyImagePreviewDirective implements OnInit {
   @Input('moy-preview') previewHeight;
+  @Input('no-expand') noExpand;
 
   private _imgSrc = '';
 
@@ -32,6 +33,7 @@ export class MoyImagePreviewDirective implements OnInit {
 
   @HostListener('click')
   onClick() {
+    if (this.noExpand) return;
     this.dialog.open(MoyImagePreviewComponent, { data: this._imgSrc, hasBackdrop: true });
   }
 

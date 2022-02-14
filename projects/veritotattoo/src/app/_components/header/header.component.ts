@@ -19,7 +19,7 @@ import { DynamicHeaderDimensions } from './_helpers/dynamic-header-dimensions';
         [ngStyle]="{ height: headerDimensions.imageHeight }">
         <img [@popOut]
           [src]="headerConfig.profile.src"
-          [ngStyle]="{ height: headerDimensions.imageHeight }"
+          [ngStyle]="{ height: headerDimensions.imageHeight, width: headerDimensions.imageHeight }"
           class="VeroHeader__profile"
           alt="verito profile picture"
           routerLink="/" />

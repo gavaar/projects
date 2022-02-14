@@ -79,45 +79,48 @@
 }
 
 /* EXTERNAL OVERRIDES */
-/* HEADER */
-.VeroHeader__content {
-  mat-icon {
-    font-size: 0.75rem;
-    text-align: center;
-    padding: 0.25rem;
+.ElementsPreview {
+  /* HEADER */
+  .VeroHeader__content {
+    mat-icon {
+      font-size: 0.75rem;
+      text-align: center;
+      padding: 0.25rem;
+    }
   }
-}
 
-.VeroHeader__wrapper {
-  min-height: 5.625rem;
+  .VeroHeader__wrapper {
+    min-height: 5.625rem;
 
-  &.selected {
-    transition: 0.25s;
-    margin-bottom: 1rem;
+    &.selected {
+      transition: 0.25s;
+      margin-bottom: 1rem;
+    }
   }
-}
 
-.VeroHeader__background {
-  border-radius: 0% 0% 50% 50%;
-}
-
-.VeroHeader__space {
-  width: 5.625rem;
-}
-
-.VeroHeader__profile {
-  height: 5.625rem;
-}
-
-/* SECTIONS */
-.Home__sections {    
-  &.selected {
-    transition: 0.25s;
-    margin-top: 1rem;
+  .VeroHeader__background {
+    border-radius: 0% 0% 50% 50%;
   }
-}
 
-.Home__sections-card {
-  flex: 1 0 5rem;
-  min-height: 5rem;
+  .VeroHeader__space {
+    width: 5.625rem;
+  }
+
+  .VeroHeader__profile {
+    height: 5.625rem;
+    width: 5.625rem;
+  }
+
+  /* SECTIONS */
+  .Home__sections {    
+    &.selected {
+      transition: 0.25s;
+      margin-top: 1rem;
+    }
+  }
+
+  .Home__sections-card {
+    flex: 1 0 5rem;
+    min-height: 5rem;
+  }
 }

@@ -7,10 +7,12 @@
 
     <div class="Home__sections">
       <div class="Home__sections-card"
+        routerLink="design"
         [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].design.src +')' }">
         <span class="Home__sections-title">Designs</span>
       </div>
       <div class="Home__sections-card"
+        routerLink="tattoo"
         [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].tattoo.src +')' }">
         <span class="Home__sections-title">Tattoos</span>
       </div>

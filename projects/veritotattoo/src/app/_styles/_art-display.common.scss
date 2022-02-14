@@ -1,0 +1,17 @@
+.Art {
+  margin: 0 1rem;
+}
+
+.Art__images {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.Art__img {
+  cursor: pointer;
+  object-fit: cover;
+  margin: 0.25rem;
+  border: 1px solid var(--secondary);
+  border-radius: 0.25rem;
+}

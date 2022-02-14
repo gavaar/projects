@@ -1,9 +1,4 @@
-<article class="ElementsPreview VeroHeader"
-  [style.--primary]="values[AppConfigSections.Colors].primary"
-  [style.--secondary]="values[AppConfigSections.Colors].secondary"
-  [style.--accent]="values[AppConfigSections.Colors].accent"
-  [style.--background]="values[AppConfigSections.Colors].background"
-  [style.--text]="values[AppConfigSections.Colors].text">
+<article class="ElementsPreview VeroHeader" [veroPalette]="values[AppConfigSections.Colors]">
   <div class="VeroHeader__wrapper b-top b-left b-right"
     [ngClass]="{ selected: selected === AppConfigSections.Header }"
     (click)="selectSection(AppConfigSections.Header)">
@@ -24,7 +19,7 @@
   <div class="ElementsPreview__body b-left b-right"
     [ngClass]="{ selected: selected === AppConfigSections.Body }"
     (click)="selectSection(AppConfigSections.Body)">
-    <h1 class="ElementsPreview__body-title">{{ values[AppConfigSections.Body].title }}</h1>
+    <h1 class="ElementsPreview__body-title title">{{ values[AppConfigSections.Body].title }}</h1>
     <p class="ElementsPreview__body-description">{{ values[AppConfigSections.Body].text }}</p>
   </div>
 

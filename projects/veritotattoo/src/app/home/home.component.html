@@ -1,5 +1,5 @@
 <section class="Home" *ngIf="(config | async) as homeConfig; else: loading">
-  <h1>{{ homeConfig[AppConfigSections.Body].title }}</h1>
+  <h1 class="title">{{ homeConfig[AppConfigSections.Body].title }}</h1>
   <div class="Home__body">
     <p class="Home__about-me">
       {{ homeConfig[AppConfigSections.Body].text }}

@@ -1,29 +1,25 @@
-import { Directive, ElementRef, Input } from '@angular/core';
-import { defaultRGBColors, defaultVariableStyles } from './palette.config';
+import { Directive, ElementRef, Input, OnChanges } from '@angular/core';
+import { defaultHexColors } from './palette.config';
 import { CssVariableConfiguration } from './palette.models';
 
 @Directive({
   selector: '[veroPalette]',
 })
-export class PaletteDirective {
+export class PaletteDirective implements OnChanges {
   @Input() readonly veroPalette = {};
 
-  constructor(el: ElementRef) {
-    this.appendCssStyleToElement({ config: { ...defaultRGBColors, ...this.veroPalette }, type: 'rgb' }, el);
-    this.appendCssStyleToElement({ config: defaultVariableStyles, type: 'var' }, el);
+  constructor(private el: ElementRef) {}
+
+  ngOnChanges(): void {
+    this.appendCssStyleToElement({ ...defaultHexColors, ...this.veroPalette }, this.el);
   }
 
-  private appendCssStyleToElement(css: { config: CssVariableConfiguration; type: 'rgb' | 'var' }, el: ElementRef): void {
-    const { config, type } = css;
-
-    Object.keys(config).forEach((propKey: string) => {
-      const cssVariableValue = this.getCssValueByType(type, config[propKey]);
+  private appendCssStyleToElement(css: CssVariableConfiguration, el: ElementRef): void {
+    Object.keys(css).forEach((propKey: string) => {
       const cssVariableKey = `--${propKey}`;
-      el.nativeElement.style.setProperty(cssVariableKey, cssVariableValue);
+      const cssVariableKeyLight = `--${propKey}Light`;
+      el.nativeElement.style.setProperty(cssVariableKey, css[propKey]);
+      el.nativeElement.style.setProperty(cssVariableKeyLight, `${css[propKey]}54`);
     });
-  }
-
-  private getCssValueByType(type: 'rgb' | 'var', value: string): string {
-    return type === 'rgb' ? `rgb(${value})` : `var(--${value})`;
   }
 }

@@ -10,6 +10,8 @@ export enum AppConfigSections {
 export interface RawConfig {
   [AppConfigSections.Header]: {
     profile: string;
+    background: string;
+    icons: { icon: string; href: string }[];
   };
   [AppConfigSections.Body]: {
     title: string;
@@ -31,6 +33,8 @@ export interface RawConfig {
 export interface AppConfig {
   [AppConfigSections.Header]: {
     profile: SelectImageInterface['options'][any];
+    background: SelectImageInterface['options'][any];
+    icons: { icon: string; href: string }[];
   };
   [AppConfigSections.Body]: {
     title: string;

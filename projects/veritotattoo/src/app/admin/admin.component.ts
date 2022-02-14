@@ -43,7 +43,6 @@ export class AdminComponent {
     });
   }
 
-  // template bound logic
   onLogin(): void {
     this.adminService.onLogin();
   }
@@ -52,7 +51,6 @@ export class AdminComponent {
     this.adminService.onLogout();
   }
 
-  // private
   private updateFields(config: typeof LOGGED_IN, user = { uid: null, name: '' }): void {
     this.button = new MoyButton({ text: config.buttonText });
     this._config.next({ ...config, user });

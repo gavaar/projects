@@ -1,0 +1,40 @@
+.Home__sections {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.Home__sections-card {
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  border: 0.3rem solid var(--secondary);
+  border-radius: 0.25rem;
+  background-size: cover;
+  background-position: center;
+
+  &:after {
+    position: absolute;
+    content: ' ';
+    left: -0.25rem;
+    right: -0.25rem;
+    bottom: -0.25rem;
+    top: -0.25rem;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  &:hover {
+    transition: 0.25s;
+    box-shadow: 0 0 1rem 0.2rem var(--accent);
+    border-radius: 0.5rem;
+  }
+}
+
+.Home__sections-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--background);
+  z-index: 1;
+}

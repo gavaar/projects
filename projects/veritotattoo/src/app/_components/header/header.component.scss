@@ -1,7 +1,6 @@
 .VeroHeader {
   position: sticky;
   top: 0;
-  color: var(--darkBlue);
   z-index: 1;
   min-height: 7.5rem;
 }
@@ -9,30 +8,13 @@
 .VeroHeader__wrapper {
   display: flex;
   justify-content: center;
-  position: relative;
-}
-
-.VeroHeader__background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: calc(40% - 0.5rem);
-  background-color: var(--blue);
-  z-index: -1;
-  border-bottom: 0.5rem solid var(--background);
 }
 
 .VeroHeader__content {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
   max-width: 64rem;
   width: 100%;
-}
 
-.VeroHeader__profile-picture {
-  cursor: pointer;
-  border: 0.2rem solid var(--white);
-  border-radius: 50%;
+  mat-icon {
+    cursor: pointer;
+  }
 }

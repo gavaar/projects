@@ -12,7 +12,7 @@
       <div class="Config__inputs">
         <moy-input class="Config__single-input"
           *ngFor="let inputConfig of selectedConfig.inputs"
-          [ngClass]="{ fullWidth: inputConfig.type === 'textarea' }"
+          [ngClass]="{ fullWidth: inputConfig.type === 'textarea' || inputConfig.type === 'text', smallWidth: inputConfig.type === 'select_icon' }"
           [config]="inputConfig"
           (onChange)="onUpdateFormValues(selectedSection, inputConfig.id, $event)"
         ></moy-input>

@@ -9,10 +9,14 @@
 }
 
 .Config__single-input {
-  flex: 1 0 13rem;
+  flex: 1 0 50%;
 
   &.fullWidth {
-    min-width: 100%;
+    min-width: calc(100% - 4rem);
+  }
+
+  &.smallWidth {
+    flex: 0 0 4rem;
   }
 }
 

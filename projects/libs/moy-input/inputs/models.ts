@@ -6,6 +6,7 @@ export enum InputType {
   Number = 'number',
   Select = 'select',
   SelectImg = 'select_image',
+  SelectIcon = 'select_icon',
   Date = 'date',
   File = 'file',
   Toggle = 'toggle',

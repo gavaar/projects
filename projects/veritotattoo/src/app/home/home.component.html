@@ -1,0 +1,23 @@
+<section class="Home" *ngIf="(config | async) as homeConfig; else: loading">
+  <h1>{{ homeConfig[AppConfigSections.Body].title }}</h1>
+  <div class="Home__body">
+    <p class="Home__about-me">
+      {{ homeConfig[AppConfigSections.Body].text }}
+    </p>
+
+    <div class="Home__sections">
+      <div class="Home__sections-card"
+        [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].design.src +')' }">
+        <span class="Home__sections-title">Designs</span>
+      </div>
+      <div class="Home__sections-card"
+        [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].tattoo.src +')' }">
+        <span class="Home__sections-title">Tattoos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #loading>
+  <mat-spinner [diameter]="50"></mat-spinner>
+</ng-template>

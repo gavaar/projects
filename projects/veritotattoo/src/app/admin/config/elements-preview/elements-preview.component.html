@@ -1,14 +1,24 @@
-<article class="ElementsPreview"
+<article class="ElementsPreview VeroHeader"
   [style.--primary]="values[AppConfigSections.Colors].primary"
   [style.--secondary]="values[AppConfigSections.Colors].secondary"
   [style.--accent]="values[AppConfigSections.Colors].accent"
   [style.--background]="values[AppConfigSections.Colors].background"
   [style.--text]="values[AppConfigSections.Colors].text">
-  <div class="ElementsPreview__header b-top b-left b-right"
+  <div class="VeroHeader__wrapper b-top b-left b-right"
     [ngClass]="{ selected: selected === AppConfigSections.Header }"
     (click)="selectSection(AppConfigSections.Header)">
-    <span class="ElementsPreview__header-background"></span>
-    <img class="ElementsPreview__header-picture" [src]="values[AppConfigSections.Header].profile.src" />
+
+    <img class="VeroHeader__background" [src]="values[AppConfigSections.Header].background.src" />
+    <img class="VeroHeader__profile" [src]="values[AppConfigSections.Header].profile.src" />
+
+    <div class="VeroHeader__content">
+      <ng-container *ngFor="let link of values[AppConfigSections.Header].icons; let count =count; let i = index; trackBy: iconFn">
+        <div class="VeroHeader__space" *ngIf="i === count / 2 || i === (count - 1) / 2"></div>
+        <mat-icon [ngStyle]="{ 'margin-top': count - (i + 1 >= ((count + 1) / 2) ? i : (count - 1) - i) + 'rem' }">
+          {{ link.icon }}
+        </mat-icon>
+      </ng-container>
+    </div>
   </div>
 
   <div class="ElementsPreview__body b-left b-right"
@@ -18,16 +28,16 @@
     <p class="ElementsPreview__body-description">{{ values[AppConfigSections.Body].text }}</p>
   </div>
 
-  <div class="ElementsPreview__sections b-bottom b-left b-right"
+  <div class="Home__sections b-bottom b-left b-right"
     [ngClass]="{ selected: selected === AppConfigSections.Sections }"
     (click)="selectSection(AppConfigSections.Sections)">
-    <div class="ElementsPreview__sections-card"
+    <div class="Home__sections-card"
       [ngStyle]="{ 'background-image': 'url(' + values[AppConfigSections.Sections].design.src + ')' }">
-      <span class="ElementsPreview__sections-title">Designs</span>
+      <span class="Home__sections-title">Designs</span>
     </div>
-    <div class="ElementsPreview__sections-card"
+    <div class="Home__sections-card"
       [ngStyle]="{ 'background-image': 'url(' + values[AppConfigSections.Sections].tattoo.src + ')' }">
-      <span class="ElementsPreview__sections-title">Tattoos</span>
+      <span class="Home__sections-title">Tattoos</span>
     </div>
   </div>
 

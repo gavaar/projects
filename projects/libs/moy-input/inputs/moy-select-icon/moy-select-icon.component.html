@@ -1,0 +1,12 @@
+<article class="MoySelectIcon">
+  <mat-icon class="MoySelectIcon__selected"
+    (click)="toggleOpen(); $event.preventDefault()">
+    {{ config.control.value }}
+  </mat-icon>
+
+  <div class="MoySelectIcon__option-list" *ngIf="showOptions | async">
+    <input class="MoySelectIcon__search" type="text" placeholder="search for something?" [formControl]="searcher">
+    <mat-icon *ngFor="let option of (moySelectIconService.options | async); trackBy: selectOptionFn"
+      (click)="onSelectOption(option)">{{ option }}</mat-icon>
+  </div>
+</article>

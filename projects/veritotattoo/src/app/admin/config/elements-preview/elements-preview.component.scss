@@ -3,7 +3,6 @@
   font-size: 0.75rem;
   margin: 0 0.5rem;
   max-height: 80vh;
-  color: var(--text);
   background-color: var(--background);
 
   .b-top {
@@ -41,40 +40,6 @@
   }
 }
 
-/* HEADER */
-.ElementsPreview__header {
-  position: relative;
-  min-height: 5.625rem;
-
-  &.selected {
-    transition: 0.25s;
-    margin-bottom: 1rem;
-  }
-}
-
-.ElementsPreview__header-background {
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  bottom: calc(40% - 0.5rem);
-  background-color: var(--primary);
-  border-bottom: 0.5rem solid var(--background);
-  border-radius: 0% 0% 50% 50%;
-}
-
-.ElementsPreview__header-picture {
-  height: 5.625rem;
-  border: 0.2rem solid var(--background);
-  border-radius: 50%;
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  margin: auto;
-}
-
 /* BODY */
 .ElementsPreview__body {
   padding-bottom: 0.5rem;
@@ -97,47 +62,6 @@
   font-size: 0.75rem;
 }
 
-/* SECTIONS */
-.ElementsPreview__sections {
-  display: flex;
-      
-  &.selected {
-    transition: 0.25s;
-    margin-top: 1rem;
-  }
-}
-
-.ElementsPreview__sections-card {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1 0 5rem;
-  min-height: 5rem;
-  margin: 0.5rem;
-  border: 0.3rem solid var(--secondary);
-  border-radius: 0.25rem;
-  background-size: cover;
-  background-position: center;
-
-  &:after {
-    position: absolute;
-    content: ' ';
-    left: -0.25rem;
-    right: -0.25rem;
-    bottom: -0.25rem;
-    top: -0.25rem;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
-
-.ElementsPreview__sections-title {
-  font-size: 1rem;
-  font-weight: 700;
-  color: var(--background);
-  z-index: 1;
-}
-
 /* COLORS */
 .ElementsPreview .ElementsPreview__colors {
   margin: 1rem 0 0;
@@ -152,4 +76,48 @@
   margin: 0 0.25rem;
   border: 1px solid var(--gray);
   border-radius: 0.25rem;
+}
+
+/* EXTERNAL OVERRIDES */
+/* HEADER */
+.VeroHeader__content {
+  mat-icon {
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 0.25rem;
+  }
+}
+
+.VeroHeader__wrapper {
+  min-height: 5.625rem;
+
+  &.selected {
+    transition: 0.25s;
+    margin-bottom: 1rem;
+  }
+}
+
+.VeroHeader__background {
+  border-radius: 0% 0% 50% 50%;
+}
+
+.VeroHeader__space {
+  width: 5.625rem;
+}
+
+.VeroHeader__profile {
+  height: 5.625rem;
+}
+
+/* SECTIONS */
+.Home__sections {    
+  &.selected {
+    transition: 0.25s;
+    margin-top: 1rem;
+  }
+}
+
+.Home__sections-card {
+  flex: 1 0 5rem;
+  min-height: 5rem;
 }

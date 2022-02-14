@@ -1,6 +1,7 @@
 import { AppConfig, AppConfigForm, AppConfigSections, RawConfig } from '@vero-components/app-config';
 import { BehaviorSubject } from 'rxjs';
-import { propHasChanged, createInputConfig } from './changes-cache.helpers';
+import { propHasChanged, createInputConfig, getHeaderValue, getFreshConfig } from './changes-cache.helpers';
+
 
 export class ConfigUpdatesCache {
   originalValues: AppConfig;
@@ -13,7 +14,11 @@ export class ConfigUpdatesCache {
     return this._selectedValues;
   };
   set selectedValues(c: AppConfig) {
-    this._selectedValues = c;
+    this._selectedValues = {
+      ...c,
+      [AppConfigSections.Header]: getHeaderValue(c[AppConfigSections.Header])
+    };
+
     const changesFound = propHasChanged(this.selectedValues, this.originalValues);
     this._hasChange$.next(changesFound);
   }
@@ -22,7 +27,9 @@ export class ConfigUpdatesCache {
     return {
       ...this._selectedValues,
       [AppConfigSections.Header]: {
-        profile: this._selectedValues[AppConfigSections.Header].profile.value
+        ...this.selectedValues[AppConfigSections.Header],
+        profile: this._selectedValues[AppConfigSections.Header].profile.value,
+        background: this.selectedValues[AppConfigSections.Header].background.value,
       },
       [AppConfigSections.Sections]: {
         tattoo: this._selectedValues[AppConfigSections.Sections].tattoo.value,
@@ -35,13 +42,13 @@ export class ConfigUpdatesCache {
   readonly hasChange$ = this._hasChange$.asObservable();
 
   constructor(initValues: AppConfig) {
-    this.originalValues = initValues;
+    this.commitChanges(initValues);
     this.selectedValues = initValues;
     this.inputConfig = createInputConfig(initValues, this.imageOptions);
   }
 
-  commitChanges(): void {
-    this.originalValues = { ...this.selectedValues };
+  commitChanges(changes = this.selectedValues): void {
+    this.originalValues = getFreshConfig(changes);
     this._hasChange$.next(false);
   }
 

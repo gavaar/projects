@@ -6,6 +6,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaletteModule } from './_components/palette';
 import { DynamicHeaderModule } from './_components/header/header.module';
+import { app } from '@firebase';
+
+console.log('Firebase is up', app);
 
 @NgModule({
   declarations: [

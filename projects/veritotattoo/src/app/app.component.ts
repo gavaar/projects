@@ -1,14 +1,14 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MoyFooterConfig } from '@libs/moy-footer';
+import { AppConfig, AppConfigSections, AppConfigService } from '@vero-components/app-config';
 import changelog from 'assets/_static/changelog';
-import app from './firebase';
-
-console.log('initialized firebase', app);
+import { Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 
 @Component({
   selector: 'vero-root',
   template: `
-    <section veroPalette class="Vero">
+    <section [veroPalette]="palette | async" class="Vero">
       <vero-header></vero-header>
       <div class="moy-container">
         <router-outlet></router-outlet>
@@ -17,10 +17,15 @@ console.log('initialized firebase', app);
     </section>
   `,
   styleUrls: ['./app.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
-  footerConfig: MoyFooterConfig = {
-    message: 'Work in progress, @github: gavaar',
-    links: [{ label: `v. ${changelog[0].version}`, link: 'changelog' }],
-  };
+  palette: Observable<AppConfig[AppConfigSections.Colors]>;
+  // footerConfig: MoyFooterConfig = {
+  //   message: 'Work in progress, @github: gavaar',
+  //   links: [{ label: `v. ${changelog[0].version}`, link: 'changelog' }],
+  // };
+  constructor(config: AppConfigService) {
+    this.palette = config.get().pipe(map(c => c[AppConfigSections.Colors]));
+  }
 }

@@ -1,0 +1,38 @@
+.ImageCard {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  &.base .ImageCard__img {
+    border-color: darkgray;
+  }
+  &.design .ImageCard__img {
+    border-color: var(--purple);
+  }
+  &.tattoo .ImageCard__img {
+    border-color: var(--secondary);
+  }
+}
+
+.ImageCard__img {
+  flex-shrink: 0;
+  border: 0.25rem solid var(--secondary);
+  border-radius: 0.2rem;
+  margin-right: 1rem;
+  object-fit: cover;
+  align-self: center;
+  cursor: pointer;
+}
+
+.ImageCard__options {
+  display: flex;
+  flex-flow: row wrap;
+
+  moy-input {
+    flex: 1 0 0;
+
+    &.description {
+      flex: 1 1 20rem;
+    }
+  }
+}

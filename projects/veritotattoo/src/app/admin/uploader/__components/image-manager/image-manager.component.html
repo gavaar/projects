@@ -1,0 +1,11 @@
+<bulk-options *ngIf="!options.hideActions && showBulk | async" (onBulkChange)="bulkEdit($event)"></bulk-options>
+
+<article class="ImageManager">
+  <image-options [ngClass]="{ noSelector: options.hideActions }" [options]="imageOptions" (onUpdate)="updateOptions($event)"></image-options>
+
+  <div class="ImageManager__actions" *ngIf="!options.hideActions">
+    <moy-button [config]="selectAll" (click)="onSelectAll()"></moy-button>
+    <moy-button [config]="uploadButton" (confirmClick)="save.emit()"></moy-button>
+    <moy-button class="ImageManager__actions-cancel" [config]="cancelButton" (confirmClick)="cancel.emit()"></moy-button>
+  </div>
+</article>

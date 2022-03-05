@@ -5,7 +5,9 @@
   (focus)="config.onFocus()"
   (blur)="config.onBlur()">
   <option
+    class="MoyInput__select-option"
     *ngFor="let option of config.selectOptions; trackBy: selectOptionFn"
+    [ngClass]="{ selected: config.control.value ===  option.value }"
     [value]="option.value">
     {{ option.label }}
   </option>

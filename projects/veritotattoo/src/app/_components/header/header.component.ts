@@ -1,8 +1,10 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { popOut } from '@libs/animations';
-import { debounceTime, filter } from 'rxjs/operators';
-import { headerConfig } from './header.config';
+import { AppConfig, AppConfigSections, AppConfigService } from '@vero-components/app-config';
+import { AsyncSubject, Observable } from 'rxjs';
+import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
+import { headerConfig as deprecatedHeaderConfig } from './header.config';
 import { HeaderConfig } from './header.models';
 import { DynamicHeaderDimensions } from './_helpers/dynamic-header-dimensions';
 
@@ -12,50 +14,62 @@ import { DynamicHeaderDimensions } from './_helpers/dynamic-header-dimensions';
     <header
       class="VeroHeader"
       (moyScrollbar)="headerDimensions.onScroll($event)">
-      <div class="VeroHeader__wrapper">
-        <span [ngStyle]="{ 'border-radius': headerDimensions.borderRadius }"
-          class="VeroHeader__background">
-        </span>
-
+      <div class="VeroHeader__wrapper"
+        *ngIf="(config | async) as headerConfig"
+        [ngStyle]="{ height: headerDimensions.imageHeight }">
+        <img [@popOut]
+          [src]="headerConfig.profile.src"
+          [ngStyle]="{ height: headerDimensions.imageHeight, width: headerDimensions.imageHeight }"
+          class="VeroHeader__profile"
+          alt="verito profile picture"
+          routerLink="/" />
+        <img class="VeroHeader__background" [ngStyle]="{ 'border-radius': headerDimensions.borderRadius }" [src]="headerConfig.background.src" />
         <div class="VeroHeader__content">
-          <ng-container *ngFor="let link of headerConfig; let i = index; trackBy: linkFn">
-            <mat-icon *ngIf="link.icon"
-              [ngStyle]="{ 'margin-top': 0.3 + ((1 - headerDimensions.headerShrinkPercentage) * (3.5 + i % 2)) + 'rem' }"
+          <ng-container *ngFor="let link of headerConfig.icons; let count =count; let i = index; trackBy: linkFn">
+            <div class="VeroHeader__space" *ngIf="i === count / 2 || i === (count - 1) / 2"></div>
+            <mat-icon [ngStyle]="{ 'margin-top': 0.3 + (count - (i + 1 >= ((count + 1) / 2) ? i : (count - 1) - i)) * 2 * (1 - headerDimensions.headerShrinkPercentage) + 'rem' }"
               (click)="routeToExternal(link.href)">
               {{ link.icon }}
             </mat-icon>
-            <img *ngIf="link.img"
-              [@popOut]
-              [src]="link.img"
-              [ngStyle]="{ height: headerDimensions.imageHeight }"
-              class="VeroHeader__profile-picture"
-              alt="verito profile picture"
-              routerLink="/" />
           </ng-container>
         </div>
       </div>
     </header>
   `,
-  styleUrls: ['./header.component.scss'],
+  styleUrls: ['./header.component.scss', '../../_styles/_header.common.scss'],
   animations: [popOut],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DynamicHeaderComponent {
+export class DynamicHeaderComponent implements OnInit, OnDestroy {
+  config: Observable<AppConfig[AppConfigSections.Header]>;
   headerDimensions = new DynamicHeaderDimensions();
-  headerConfig: HeaderConfig[] = headerConfig;
+  deprecatedHeaderConfig: HeaderConfig[] = deprecatedHeaderConfig;
   linkFn = (index: number) => index;
 
-  constructor(router: Router) {
-    router.events.pipe(
-      filter(e => e instanceof NavigationEnd),
-      debounceTime(500),
-    ).subscribe(() => {
-      this.headerDimensionsRefreshByDocument();
-    });
+  private _destroy$ = new AsyncSubject();
+
+  constructor(private router: Router, private configService: AppConfigService) {}
+
+  ngOnInit(): void {
+    this.resetHeaderOnRouting();
+    this.config = this.configService.get().pipe(map(config => config[AppConfigSections.Header]));
+  }
+
+  ngOnDestroy(): void {
+    this._destroy$.next(null);
+    this._destroy$.complete();
   }
 
   routeToExternal(link: string): void {
     window.open(link, '_blank');
+  }
+
+  private resetHeaderOnRouting(): void {
+    this.router.events.pipe(
+      takeUntil(this._destroy$),
+      filter(e => e instanceof NavigationEnd),
+      debounceTime(500),
+    ).subscribe(() => this.headerDimensionsRefreshByDocument());
   }
 
   private headerDimensionsRefreshByDocument() {

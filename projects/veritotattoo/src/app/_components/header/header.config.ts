@@ -6,8 +6,8 @@ export const headerConfig: HeaderConfig[] = [
     href: 'https://www.instagram.com/veritotattoo/'
   },
   {
-    icon: 'facebook',
-    href: 'https://facebook.com'
+    icon: 'brush',
+    href: 'https://www.instagram.com/pintandoando/'
   },
   {
     img: 'assets/images/verito_profile.jpg',
@@ -17,7 +17,7 @@ export const headerConfig: HeaderConfig[] = [
     href: 'https://gmail.com'
   },
   {
-    icon: 'call',
-    href: 'https://whatsapp.com'
+    icon: 'whatsapp',
+    href: 'https://wa.me/584164253349'
   },
 ];

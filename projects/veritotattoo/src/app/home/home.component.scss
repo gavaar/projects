@@ -1,0 +1,20 @@
+.Home {
+  margin: 0 1rem;
+}
+
+.Home__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  user-select: none;
+}
+
+.Home__about-me {
+  text-align: justify;
+  min-height: 30vh;
+}
+
+.Home__sections-card {
+  flex: 1 0 20rem;
+  min-height: 30vh;
+}

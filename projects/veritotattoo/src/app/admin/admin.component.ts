@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MoyButton } from '@libs/moy-button';
 import { BehaviorSubject } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { AdminService } from './admin.service';
 
 const LOGGED_OUT = {
@@ -18,9 +17,13 @@ const LOGGED_IN = {
 @Component({
   template: `
     <section class="Admin" *ngIf="(config | async) as admin">
-      <span class="Admin__emoji">\uD83C{{admin.adminEmoji}}</span>
-      <p class="Admin__text">{{admin.promptText + admin.user.name}}</p>
-      <moy-button [config]="button" (click)="admin.user.uid ? onLogout() : onLogin()"></moy-button>
+      <div class="Admin__header">
+        <span class="Admin__emoji">\uD83C{{admin.adminEmoji}}</span>
+        <p class="Admin__text">{{admin.promptText + admin.user.name}}</p>
+        <moy-button [config]="button" (click)="admin.user.uid ? onLogout() : onLogin()"></moy-button>
+      </div>
+
+      <admin-toolset *ngIf="admin.user.admin"></admin-toolset>
     </section>
   `,
   styleUrls: ['./admin.component.scss'],
@@ -40,7 +43,6 @@ export class AdminComponent {
     });
   }
 
-  // template bound logic
   onLogin(): void {
     this.adminService.onLogin();
   }
@@ -49,7 +51,6 @@ export class AdminComponent {
     this.adminService.onLogout();
   }
 
-  // private
   private updateFields(config: typeof LOGGED_IN, user = { uid: null, name: '' }): void {
     this.button = new MoyButton({ text: config.buttonText });
     this._config.next({ ...config, user });

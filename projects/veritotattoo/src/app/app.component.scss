@@ -1,4 +1,13 @@
 .Vero {
+  color: var(--text);
   background-color: var(--background);
   height: 100vh;
+}
+
+::ng-deep.mat-spinner, .mat-progress-spinner {
+  margin: 2rem auto 0;
+
+  circle {
+    stroke: var(--accent);
+  }
 }

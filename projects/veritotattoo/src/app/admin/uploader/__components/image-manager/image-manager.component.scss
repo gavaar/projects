@@ -1,0 +1,32 @@
+.ImageManager {
+  flex: 1 0 0;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: stretch;
+
+  .noSelector {
+    margin-left: 1.3rem;
+    ::ng-deep.ImageOptions__selector {
+      display: none;
+    }
+  }
+}
+
+.ImageManager__actions {
+  background-color: var(--background);
+  position: sticky;
+  margin-top: auto;
+  margin-left: auto;
+  bottom: 0;
+  border: 1px solid var(--secondary);
+  border-bottom: 0;
+  border-right: 0;
+  border-radius: 1rem 0 0 0;
+  padding: 0.5rem 0 0 0.5rem;
+  box-shadow: 0 0 5px var(--purple);
+}
+
+.ImageManager__actions-cancel ::ng-deep.MoyButton {
+  color: var(--secondary);
+  background-color: transparent;
+}

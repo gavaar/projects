@@ -8,6 +8,12 @@
     "paths": {
       "@libs/*": [
         "../../libs/*"
+      ],
+      "@firebase": [
+        "app/firebase.ts"
+      ],
+      "@vero-components/*": [
+        "app/_components/*"
       ]
     }
   },

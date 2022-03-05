@@ -2,6 +2,22 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.1.0-alpha',
+    changes: [
+      'First working version of veritotattoo. Needs tweaking by the author',
+    ],
+    techChanges: [
+      'Updated to Angular 13!',
+      'Lot of updates to the moy-lib library, will make it stand alone in the near future',
+    ],
+  },
+  {
+    version: '0.0.7',
+    changes: [
+      'Added links for uploader and config views',
+    ]
+  },
+  {
     version: '0.0.6',
     changes: [
       'Added admin hidden page, with ability to login',

@@ -1,2 +1,7 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 @import '../../libs/styles/moy-styles';
 @import '../../libs/styles/components/moy-scrollbar';
+
+.body-height {
+  height: calc(100vh - 7.5rem);
+}

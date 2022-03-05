@@ -1,0 +1,29 @@
+.Art {
+  margin: 0 1rem;
+}
+
+.Art__title {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.Art__images {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+.Art__img {
+  cursor: pointer;
+  object-fit: cover;
+  margin: 0.25rem;
+  border: 1px solid var(--secondary);
+  border-radius: 0.25rem;
+
+  &:hover {
+    transition: 0.25s;
+    box-shadow: 0 0 1rem 0.2rem var(--accent);
+    border-radius: 0.5rem;
+  }
+}

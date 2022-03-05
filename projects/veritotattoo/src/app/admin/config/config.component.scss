@@ -1,0 +1,50 @@
+.Config {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.Config__inputs {
+  display: flex;
+  flex-flow: row wrap;
+}
+
+.Config__single-input {
+  flex: 1 0 50%;
+
+  &.fullWidth {
+    min-width: calc(100% - 4rem);
+  }
+
+  &.smallWidth {
+    flex: 0 0 4rem;
+  }
+}
+
+.Config__selection {
+  height: 100%;
+}
+
+.Config__elements-preview {
+  flex: 1 0 15rem;
+}
+.Config__tabset {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 3 0 20rem;
+}
+
+.Config__empty-selection {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  color: var(--accentLight);
+  font-size: 1.5rem;
+  font-weight: 700;
+  user-select: none;
+}
+
+.Config__empty-selection-arrow {
+  font-size: 15rem;
+}

@@ -5,6 +5,7 @@ export class DynamicHeaderDimensions {
   imageHeight = '7.5rem';
 
   onScroll(event: any) {
+    if (event.target.localName !== 'section') return;
     this.headerShrinkPercentage = this.headerShrinkValue(event.target);
     this.borderRadius = this.borderRadiusValue(this.headerShrinkPercentage);
     this.imageHeight = this.imageHeightValue(this.headerShrinkPercentage);

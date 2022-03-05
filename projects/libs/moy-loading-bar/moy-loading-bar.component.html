@@ -16,7 +16,7 @@
     >
     </span>
   </div>
-  <div class="MoyLoadingBar__total full-center">
+  <div class="MoyLoadingBar__total full-center" *ngIf="!config.hideTotal">
     <span class="MoyLoadingBar__total-text"> {{ config.total | number }}</span>
     <div class="MoyLoadingBar__total-line"></div>
   </div>

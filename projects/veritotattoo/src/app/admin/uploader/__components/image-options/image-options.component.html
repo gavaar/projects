@@ -1,0 +1,7 @@
+<div class="ImageOptions" *ngFor="let option of options; let i = index; trackBy: optionFn">
+  <moy-input class="ImageOptions__selector" [config]="option.selectedInput"></moy-input>
+
+  <image-card [imageCard]="option.imageCard" (cardUpdate)="onCardUpdate()"></image-card>
+
+  <span class="ImageOptions__delete" (confirmClick)="onDelete(i)">🗑️</span>
+</div>

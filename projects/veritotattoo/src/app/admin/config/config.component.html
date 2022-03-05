@@ -1,0 +1,34 @@
+<moy-button [config]="{ text: '👈 Back to admin' }" (click)="location.back()"></moy-button>
+<article class="Config" *ngIf="loaded | async">
+  <elements-preview class="Config__elements-preview"
+    [values]="settingsCache.selectedValues"
+    [selected]="selectedSection"
+    (onSelect)="onSelectPreview($event)"
+  ></elements-preview>
+
+  <div class="Config__tabset">
+    <div class="Config__selection" *ngIf="settingsCache.inputConfig[selectedSection] as selectedConfig; else: selectOneMessage">
+      <h1>{{ selectedConfig.title }}</h1>
+      <div class="Config__inputs">
+        <moy-input class="Config__single-input"
+          *ngFor="let inputConfig of selectedConfig.inputs"
+          [ngClass]="{ fullWidth: inputConfig.type === 'textarea' || inputConfig.type === 'text', smallWidth: inputConfig.type === 'select_icon' }"
+          [config]="inputConfig"
+          (onChange)="onUpdateFormValues(selectedSection, inputConfig.id, $event)"
+        ></moy-input>
+      </div>
+    </div>
+    <moy-button *ngIf="settingsCache.hasChange$ | async"
+      [config]="{ text: 'Save changes' }"
+      (confirmClick)="onSaveConfig()">
+    </moy-button>
+  </div>
+</article>
+
+<ng-template #selectOneMessage>
+  <div class="Config__empty-selection">
+    <p>Select one to edit some of its configurations.</p>
+    <small>To unselect, simply click the section again</small>
+    <span class="Config__empty-selection-arrow">&#x2936;</span>
+  </div>
+</ng-template>

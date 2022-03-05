@@ -11,11 +11,4 @@ export class MoyButtonComponent {
   @Input() config: AbstractMoyButton;
 
   MoyButtonType = MoyButtonType;
-
-  onClick() {
-    this.config.click();
-  }
-  onBlur() {
-    this.config.blur();
-  }
 }

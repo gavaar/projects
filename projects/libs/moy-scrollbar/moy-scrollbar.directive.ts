@@ -22,7 +22,8 @@ export class MoyScrollbarDirective implements OnDestroy {
   }
 
   private handleScroll(event: any): void {
-    if (!event.target.classList.contains('show-scrollbar')) {
+    const { classList } = event.target;
+    if (classList && !classList.contains('show-scrollbar')) {
       event.target.classList.add('show-scrollbar');
       setTimeout(() => event.target.classList.remove('show-scrollbar'), 500);
     }

@@ -1,9 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { MoyFooterConfig } from '@libs/moy-footer';
 import { AppConfig, AppConfigSections, AppConfigService } from '@vero-components/app-config';
-import changelog from 'assets/_static/changelog';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'vero-root',
@@ -27,6 +25,5 @@ export class AppComponent {
   // };
   constructor(config: AppConfigService) {
     this.palette = config.get().pipe(map(c => c[AppConfigSections.Colors]));
-    this.palette['--gray'] = 'darkgray';
   }
 }

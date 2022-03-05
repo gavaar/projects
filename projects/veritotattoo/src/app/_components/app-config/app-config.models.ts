@@ -27,6 +27,7 @@ export interface RawConfig {
     accent: string;
     background: string;
     text: string;
+    gray: string;
   }; 
 }
 
@@ -50,6 +51,7 @@ export interface AppConfig {
     accent: string;
     background: string;
     text: string;
+    gray: string;
   };
 }
 

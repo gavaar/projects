@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/
 import { NavigationEnd, Router } from '@angular/router';
 import { popOut } from '@libs/animations';
 import { AppConfig, AppConfigSections, AppConfigService } from '@vero-components/app-config';
+import { AdminService } from 'app/admin/admin.service';
 import { AsyncSubject, Observable } from 'rxjs';
 import { debounceTime, filter, map, takeUntil } from 'rxjs/operators';
 import { headerConfig as deprecatedHeaderConfig } from './header.config';
@@ -17,12 +18,13 @@ import { DynamicHeaderDimensions } from './_helpers/dynamic-header-dimensions';
       <div class="VeroHeader__wrapper"
         *ngIf="(config | async) as headerConfig"
         [ngStyle]="{ height: headerDimensions.imageHeight }">
-        <img [@popOut]
-          [src]="headerConfig.profile.src"
-          [ngStyle]="{ height: headerDimensions.imageHeight, width: headerDimensions.imageHeight }"
+        <img 
           class="VeroHeader__profile"
           alt="verito profile picture"
-          routerLink="/" />
+          [@popOut]
+          [src]="headerConfig.profile.src"
+          [ngStyle]="{ height: headerDimensions.imageHeight, width: headerDimensions.imageHeight }"
+          (click)="onHomeClick()" />
         <img class="VeroHeader__background" [ngStyle]="{ 'border-radius': headerDimensions.borderRadius }" [src]="headerConfig.background.src" />
         <div class="VeroHeader__content">
           <ng-container *ngFor="let link of headerConfig.icons; let count =count; let i = index; trackBy: linkFn">
@@ -48,7 +50,7 @@ export class DynamicHeaderComponent implements OnInit, OnDestroy {
 
   private _destroy$ = new AsyncSubject();
 
-  constructor(private router: Router, private configService: AppConfigService) {}
+  constructor(private router: Router, private adminService: AdminService, private configService: AppConfigService) {}
 
   ngOnInit(): void {
     this.resetHeaderOnRouting();
@@ -58,6 +60,15 @@ export class DynamicHeaderComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this._destroy$.next(null);
     this._destroy$.complete();
+  }
+
+  onHomeClick(): void {
+    let route = '';
+    if (this.adminService.currentUser.admin && !this.router.url.includes('/admin')) {
+      route = 'admin';
+    }
+
+    this.router.navigateByUrl(`/${route}`);
   }
 
   routeToExternal(link: string): void {

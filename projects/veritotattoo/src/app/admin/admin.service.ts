@@ -15,6 +15,10 @@ export class AdminService {
   private _userChange$ = new BehaviorSubject<User | null>(null);
   userChanges = this._userChange$.asObservable();
 
+  get currentUser(): User {
+    return this._userChange$.value;
+  }
+
   constructor() {
     onAuthStateChanged(getAuth(), (user) => {
       this.handleUserState(user);

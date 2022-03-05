@@ -6,4 +6,5 @@ export const defaultHexColors: CssVariableConfiguration = {
   accent: '#51025d',
   text: '#0a0a0a',
   background: '#fafafa',
+  gray: '#787878',
 };

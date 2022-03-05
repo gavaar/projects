@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy, Input, Output, EventEmitter, OnInit
 import { MoyButton } from '@libs/moy-button';
 import { MoyInput, MoySelect, MoyToggle } from '@libs/moy-input';
 import { ImageData } from '@vero-components/image-storage';
-import { Subject } from 'rxjs';
+import { AsyncSubject } from 'rxjs';
 import { debounceTime, takeUntil } from 'rxjs/operators';
 import { SELECT_OPTIONS } from '../new-images.config';
 
@@ -21,7 +21,7 @@ export class BulkOptionsComponent implements OnInit, OnDestroy {
   available = new MoyToggle({ label: 'For sale?', value: false });
   folder = new MoySelect({ label: 'Show where?', selectOptions: SELECT_OPTIONS, value: '-' });
 
-  private destroy$ = new Subject();
+  private destroy$ = new AsyncSubject<void>();
 
   ngOnInit() {
     this.subscribeToChanges();

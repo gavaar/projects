@@ -27,5 +27,6 @@ export class AppComponent {
   // };
   constructor(config: AppConfigService) {
     this.palette = config.get().pipe(map(c => c[AppConfigSections.Colors]));
+    this.palette['--gray'] = 'darkgray';
   }
 }

@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { AppConfig, AppConfigSections, AppConfigService } from '@vero-components/app-config';
 import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
 
 @Component({
   templateUrl: './home.component.html',

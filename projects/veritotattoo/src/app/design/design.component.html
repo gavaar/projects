@@ -1,4 +1,4 @@
-<section class="Art">
+<section class="Art body-height">
   <h1 class="Art__title title">Designs</h1>
   <div class="Art__images" *ngIf="(images | async) as images">
     <img class="Art__img" *ngFor="let url of images; trackBy: imgFn" moy-preview="300" [src]="url" />

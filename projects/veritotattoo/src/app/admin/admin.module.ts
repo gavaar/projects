@@ -7,10 +7,15 @@ import { AdminToolsetModule } from './admin-toolset/admin-toolset.module';
 import { AdminGuard } from './admin.guard';
 
 const routes: Routes = [
-  { path: '', component: AdminComponent },
-  { path: 'uploader', loadChildren: () => import('./uploader/uploader.module').then(m => m.UploaderModule), canActivate: [AdminGuard] },
-  { path: 'config', loadChildren: () => import('./config/config.module').then(m => m.ConfigModule), canActivate: [AdminGuard] },
-  { path: '**', pathMatch: 'full', redirectTo: '' },
+  {
+    path: '', component: AdminComponent,
+    children: [
+      { path: '', loadChildren: () => import('./options/options.module').then(m => m.OptionsModule) },
+      { path: 'uploader', loadChildren: () => import('./uploader/uploader.module').then(m => m.UploaderModule), canActivate: [AdminGuard] },
+      { path: 'config', loadChildren: () => import('./config/config.module').then(m => m.ConfigModule), canActivate: [AdminGuard] },
+      { path: '**', pathMatch: 'full', redirectTo: '' },
+    ]
+  },
 ];
 
 @NgModule({

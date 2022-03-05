@@ -48,7 +48,7 @@ export class DynamicHeaderComponent implements OnInit, OnDestroy {
   deprecatedHeaderConfig: HeaderConfig[] = deprecatedHeaderConfig;
   linkFn = (index: number) => index;
 
-  private _destroy$ = new AsyncSubject();
+  private _destroy$ = new AsyncSubject<void>();
 
   constructor(private router: Router, private adminService: AdminService, private configService: AppConfigService) {}
 
@@ -58,13 +58,13 @@ export class DynamicHeaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this._destroy$.next(null);
+    this._destroy$.next();
     this._destroy$.complete();
   }
 
   onHomeClick(): void {
     let route = '';
-    if (this.adminService.currentUser.admin && !this.router.url.includes('/admin')) {
+    if (this.adminService.currentUser.admin && this.router.url === '/') {
       route = 'admin';
     }
 

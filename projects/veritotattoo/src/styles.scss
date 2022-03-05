@@ -2,6 +2,8 @@
 @import '../../libs/styles/moy-styles';
 @import '../../libs/styles/components/moy-scrollbar';
 
-.body-height {
-  height: calc(100vh - 7.5rem);
+.Vero section.body-height {
+  height: calc(100vh - 5.5rem);
+  padding-top: 4.5rem;
+  margin-top: -4.5rem;
 }

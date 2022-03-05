@@ -2,6 +2,12 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.1.2',
+    changes: [
+      'General improvements on style behavior, headers colors and scrollbars'
+    ],
+  },
+  {
     version: '0.1.1',
     changes: [
       'Some admin improvements. So routing and config can be accessed easier. Click home while admin and you will be taken to that route',

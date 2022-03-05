@@ -8,6 +8,7 @@
   display: flex;
   flex-flow: column;
   position: relative;
+  height: 100%;
 }
 
 .Uploader__expanders {
@@ -83,15 +84,15 @@
 
   &.base {
     border-color: var(--gray);
-    background-color: var(--grayTransparent);
+    background-color: var(--grayLight);
   }
   &.design {
-    border-color: var(--purple);
-    background-color: var(--purpleTransparent);
+    border-color: var(--accent);
+    background-color: var(--accentLight);
   }
   &.tattoo {
-    border-color: var(--darkBlue);
-    background-color: var(--darkBlueTransparent);
+    border-color: var(--secondary);
+    background-color: var(--secondaryLight);
   }
 }
 
@@ -103,5 +104,5 @@
 }
 
 .Uploader__button-options-save-changes ::ng-deep.MoyButton {
-  background-color: var(--purple);
+  background-color: var(--accent);
 }

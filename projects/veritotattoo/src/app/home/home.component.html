@@ -1,23 +1,25 @@
-<section class="Home" *ngIf="(config | async) as homeConfig; else: loading">
-  <h1 class="title">{{ homeConfig[AppConfigSections.Body].title }}</h1>
-  <div class="Home__body">
-    <p class="Home__about-me">
-      {{ homeConfig[AppConfigSections.Body].text }}
-    </p>
+<section class="Home body-height">
+  <ng-container *ngIf="(config | async) as homeConfig; else: loading">
+    <h1 class="title">{{ homeConfig[AppConfigSections.Body].title }}</h1>
+    <div class="Home__body">
+      <p class="Home__about-me">
+        {{ homeConfig[AppConfigSections.Body].text }}
+      </p>
 
-    <div class="Home__sections">
-      <div class="Home__sections-card"
-        routerLink="design"
-        [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].design.src +')' }">
-        <span class="Home__sections-title">Designs</span>
-      </div>
-      <div class="Home__sections-card"
-        routerLink="tattoo"
-        [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].tattoo.src +')' }">
-        <span class="Home__sections-title">Tattoos</span>
+      <div class="Home__sections">
+        <div class="Home__sections-card"
+          routerLink="design"
+          [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].design.src +')' }">
+          <span class="Home__sections-title">Designs</span>
+        </div>
+        <div class="Home__sections-card"
+          routerLink="tattoo"
+          [ngStyle]="{ 'background-image': 'url(' + homeConfig[AppConfigSections.Sections].tattoo.src +')' }">
+          <span class="Home__sections-title">Tattoos</span>
+        </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 </section>
 
 <ng-template #loading>

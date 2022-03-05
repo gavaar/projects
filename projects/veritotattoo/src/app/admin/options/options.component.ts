@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MoyButton } from '@libs/moy-button';
 import { BehaviorSubject } from 'rxjs';
-import { AdminService } from './admin.service';
+import { AdminService } from '../admin.service';
 
 const LOGGED_OUT = {
   adminEmoji: '\uDF1A',
@@ -16,14 +16,20 @@ const LOGGED_IN = {
 
 @Component({
   template: `
-    <section class="Admin body-height" *ngIf="(config | async) as admin">
-      <router-outlet></router-outlet>
+    <section class="Options" *ngIf="(config | async) as admin">
+      <div class="Options__header">
+        <span class="Options__emoji">\uD83C{{admin.adminEmoji}}</span>
+        <p class="Options__text">{{admin.promptText + admin.user.name}}</p>
+        <moy-button [config]="button" (click)="admin.user.uid ? onLogout() : onLogin()"></moy-button>
+      </div>
+
+      <admin-toolset *ngIf="admin.user.admin"></admin-toolset>
     </section>
   `,
-  styleUrls: ['./admin.component.scss'],
+  styleUrls: ['./options.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AdminComponent {
+export class OptionsComponent {
   private _config = new BehaviorSubject<typeof LOGGED_IN & { user: { uid?: string; name: string } } | null>(null);
 
   button = new MoyButton({ text: '' });

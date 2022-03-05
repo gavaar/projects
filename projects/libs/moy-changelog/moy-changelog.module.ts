@@ -34,7 +34,7 @@ export interface Changelog {
     `
       .Changelog {
         padding: 0.5rem;
-        overflow: auto;
+        overflow: visible;
       }
 
       .Changelog__title {

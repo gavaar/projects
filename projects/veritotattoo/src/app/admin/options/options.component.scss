@@ -1,0 +1,16 @@
+.Options {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+.Options__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Options__emoji {
+  font-size: 4rem;
+}

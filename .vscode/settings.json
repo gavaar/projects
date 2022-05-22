@@ -6,12 +6,11 @@
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
   "editor.formatOnPaste": true,
-  "prettier.singleQuote": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   "editor.codeActionsOnSave": {
     "source.fixAll.tslint": true
   },
   "workbench.editor.openPositioning": "last",
-  "workbench.editor.enablePreview": false,
-  "javascript.implicitProjectConfig.experimentalDecorators": true
+  "workbench.editor.enablePreview": true,
+  "js/ts.implicitProjectConfig.experimentalDecorators": true
 }

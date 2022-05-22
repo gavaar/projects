@@ -1,0 +1,2 @@
+<span mat-dialog-content class="empty-box loading" *ngIf="!loaded"></span>
+<img mat-dialog-content class="ImagePreview" [src]="image" [hidden]="!loaded" alt="Image preview" (load)="loaded = true">

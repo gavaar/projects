@@ -1,0 +1,37 @@
+.MoySelectImage__selected,
+.MoySelectImage__option {
+  cursor: pointer;
+  border-radius: 1rem;
+  margin: 0.25rem;
+  user-select: none;
+}
+
+.MoySelectImage__selected {
+  height: 8rem;
+  width: 8rem;
+  object-fit: cover;
+}
+
+.MoySelectImage__option-list {
+  position: absolute;
+  overflow: overlay;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  top: 1rem;
+  left: 5rem;
+  background-color: var(--secondaryLight);
+  padding: 0.25rem;
+  margin-top: 0.25rem;
+  border-radius: 0.5rem;
+  min-height: 10rem;
+  max-height: 20rem;
+  min-width: 16rem;
+  z-index: 1;
+}
+
+.MoySelectImage__option {
+  height: 4rem;
+  width: 4rem;
+  object-fit: cover;
+}

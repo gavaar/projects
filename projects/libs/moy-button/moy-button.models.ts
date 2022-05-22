@@ -11,9 +11,9 @@ enum MoyButtonType {
 abstract class AbstractMoyButton {
   icon?: string;
   svgIcon?: string;
-  text?: string;
-  click?: () => any;
-  blur?: () => any;
+  disabled = false;
+  click?: () => any = () => {};
+  blur?: () => any = () => {};
   readonly type: MoyButtonType;
 
   constructor(opts: MoyButtonConfig) {

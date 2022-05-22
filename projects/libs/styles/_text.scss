@@ -1,16 +1,3 @@
-// used in loading-effect
-@keyframes periodicfading {
-  0% {
-    opacity: 0.2;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.2;
-  }
-}
-
 .small-text {
   font-size: 0.8rem;
 
@@ -19,18 +6,6 @@
   }
 }
 
-.loading-effect {
-  opacity: 0.2;
-  filter: blur(5px);
-  animation-name: periodicfading;
-  animation-duration: 1s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
-  pointer-events: none;
-}
-
-@for $i from 1 to 10 {
-  :nth-child(#{$i}) .loading-effect {
-    animation-delay: $i * 0.1s;
-  }
+.title {
+  color: var(--secondary);
 }

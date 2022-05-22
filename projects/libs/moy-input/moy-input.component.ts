@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { Subject } from 'rxjs';
+import { AsyncSubject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AbstractMoyInput } from './inputs/input.abstract';
 import { InputType } from './inputs/models';
@@ -17,7 +17,7 @@ export class MoyInputComponent implements OnInit, OnDestroy {
   error: string;
   InputType = InputType;
 
-  private _destroy$ = new Subject();
+  private _destroy$ = new AsyncSubject<void>();
 
   ngOnInit() {
     this.config.control.valueChanges.pipe(takeUntil(this._destroy$)).subscribe(value => {

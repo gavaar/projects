@@ -1,0 +1,28 @@
+// used in loading-effect
+@import './_common/keyframes';
+
+.empty-box {
+  max-width: 80vw;
+  background-color: lightgray;
+  min-width: 40vh;
+  min-height: 40vh;
+}
+
+.loading {
+  opacity: 0.2;
+  animation-name: periodicfading;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  pointer-events: none;
+
+  &.text {
+    filter: blur(5px);
+  }
+}
+
+@for $i from 1 to 10 {
+  :nth-child(#{$i}) .loading-effect {
+    animation-delay: $i * 0.1s;
+  }
+}

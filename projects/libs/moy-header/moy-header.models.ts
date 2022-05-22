@@ -1,5 +1,13 @@
 import { AbstractMoyButton } from '../moy-button/moy-button.models';
 
+const defaultConfig: MoyHeaderConfig = Object.freeze({
+  title: '',
+  titleIcon: '',
+  titleImgURI: '',
+  suffixButtons: [],
+  onTitleClick: () => {},
+});
+
 export class MoyHeaderConfig {
   title: string;
   titleIcon?: string;
@@ -7,11 +15,9 @@ export class MoyHeaderConfig {
   suffixButtons?: AbstractMoyButton[];
 
   constructor(opts: Partial<MoyHeaderConfig>) {
-    this.title = opts.title;
-    this.titleIcon = opts.titleIcon;
-    this.titleImgURI = opts.titleImgURI;
-    this.suffixButtons = opts.suffixButtons || [];
-    this.onTitleClick = opts.onTitleClick || (() => {});
+    for (let k in defaultConfig) {
+      this[k] = opts[k] || defaultConfig[k];
+    }
   }
 
   onTitleClick: () => any;

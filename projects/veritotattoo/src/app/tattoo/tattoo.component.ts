@@ -15,6 +15,7 @@ export class TattooComponent {
   constructor(private tatooService: TattooService) {}
 
   ngOnInit(): void {
-    this.images = this.tatooService.loadMore();
+    this.images = this.tatooService.listChanges();
+    this.tatooService.loadMore();
   }
 }

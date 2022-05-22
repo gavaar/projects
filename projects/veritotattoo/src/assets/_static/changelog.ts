@@ -2,6 +2,15 @@ import { Changelog } from '@libs/moy-changelog';
 
 export default <Changelog[]>[
   {
+    version: '0.1.3',
+    changes: [
+      'Improving the rendering of images. They load lazyly now. First meaningful print still a little off',
+    ],
+    techChanges: [
+      'Security updates',
+    ]
+  },
+  {
     version: '0.1.2',
     changes: [
       'General improvements on style behavior, headers colors and scrollbars'

@@ -16,6 +16,7 @@ export class DesignComponent implements OnInit {
   constructor(private designService: DesignService) {}
 
   ngOnInit(): void {
-    this.images = this.designService.loadMore();
+    this.images = this.designService.listChanges();
+    this.designService.loadMore();
   }
 }
